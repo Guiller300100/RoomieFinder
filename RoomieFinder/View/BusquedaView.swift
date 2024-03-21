@@ -29,6 +29,8 @@ struct BusquedaView: View {
                     }
                     .padding(.all, 15)
 
+
+                    Text("Prueba")
                 }
             }
         }
