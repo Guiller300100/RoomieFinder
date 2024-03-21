@@ -27,6 +27,7 @@ struct BusquedaView: View {
                         
                         Spacer()
                     }
+                    .padding(.all, 15)
 
                 }
             }
