@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "Nombre": "Juan",
+        "Edad": 30,
+        "Presupuesto": 1000,
+        "Barrio": "Salamanca",
+        "Favorito": false
+    },
+    {
+        "id": 2,
+        "Nombre": "María",
+        "Edad": 25,
+        "Presupuesto": 800,
+        "Barrio": "Chamberí",
+        "Favorito": false
+    },
+    {
+        "id": 3,
+        "Nombre": "Carlos",
+        "Edad": 28,
+        "Presupuesto": 1200,
+        "Barrio": "Malasaña",
+        "Favorito": false
+    },
+    {
+        "id": 4,
+        "Nombre": "Laura",
+        "Edad": 35,
+        "Presupuesto": 1500,
+        "Barrio": "Retiro",
+        "Favorito": false
+    }
+]

@@ -22,6 +22,9 @@
 		B318D4EE2BAB7AD00099771C /* BusquedaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B318D4ED2BAB7AD00099771C /* BusquedaView.swift */; };
 		B318D4F02BAB7AD70099771C /* MensajesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B318D4EF2BAB7AD70099771C /* MensajesView.swift */; };
 		B318D4F22BAB7ADD0099771C /* PerfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B318D4F12BAB7ADD0099771C /* PerfilView.swift */; };
+		B385FD322BACC98100A82169 /* PerfilRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD312BACC98100A82169 /* PerfilRow.swift */; };
+		B385FD342BACDDE500A82169 /* Prueba.json in Resources */ = {isa = PBXBuildFile; fileRef = B385FD332BACDDE500A82169 /* Prueba.json */; };
+		B385FD382BACDE1C00A82169 /* Perfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* Perfiles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		B318D4ED2BAB7AD00099771C /* BusquedaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusquedaView.swift; sourceTree = "<group>"; };
 		B318D4EF2BAB7AD70099771C /* MensajesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MensajesView.swift; sourceTree = "<group>"; };
 		B318D4F12BAB7ADD0099771C /* PerfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilView.swift; sourceTree = "<group>"; };
+		B385FD312BACC98100A82169 /* PerfilRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilRow.swift; sourceTree = "<group>"; };
+		B385FD332BACDDE500A82169 /* Prueba.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Prueba.json; sourceTree = "<group>"; };
+		B385FD372BACDE1C00A82169 /* Perfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Perfiles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 				B318D4BA2BAB50850099771C /* RoomieFinderApp.swift */,
 				B318D4E82BAB5DDC0099771C /* Components */,
 				B318D4CC2BAB50FB0099771C /* View */,
+				B385FD352BACDE0500A82169 /* Data */,
 				B318D4C82BAB50910099771C /* Resources */,
 				B318D4BE2BAB50870099771C /* Assets.xcassets */,
 				B318D4C02BAB50870099771C /* Preview Content */,
@@ -98,6 +105,7 @@
 			children = (
 				B318D4E32BAB539D0099771C /* Fonts */,
 				B318D4E42BAB53B00099771C /* Constants.swift */,
+				B385FD332BACDDE500A82169 /* Prueba.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -129,9 +137,26 @@
 		B318D4E82BAB5DDC0099771C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B385FD312BACC98100A82169 /* PerfilRow.swift */,
 				B318D4CF2BAB52880099771C /* TopBarView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		B385FD352BACDE0500A82169 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B385FD362BACDE0E00A82169 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B385FD362BACDE0E00A82169 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B385FD372BACDE1C00A82169 /* Perfiles.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +217,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B385FD342BACDDE500A82169 /* Prueba.json in Resources */,
 				B318D4E12BAB52CC0099771C /* Outfit-Bold.ttf in Resources */,
 				B318D4C22BAB50870099771C /* Preview Assets.xcassets in Resources */,
 				B318D4BF2BAB50870099771C /* Assets.xcassets in Resources */,
@@ -208,8 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B385FD382BACDE1C00A82169 /* Perfiles.swift in Sources */,
 				B318D4D02BAB52880099771C /* TopBarView.swift in Sources */,
 				B318D4EA2BAB5F480099771C /* PisosView.swift in Sources */,
+				B385FD322BACC98100A82169 /* PerfilRow.swift in Sources */,
 				B318D4BB2BAB50850099771C /* RoomieFinderApp.swift in Sources */,
 				B318D4EE2BAB7AD00099771C /* BusquedaView.swift in Sources */,
 				B318D4EC2BAB60930099771C /* PersonasView.swift in Sources */,

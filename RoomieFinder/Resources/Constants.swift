@@ -19,5 +19,6 @@ public struct Constants {
     static let titulo = "RoomieFinder"
 
     //MARK: - Colores
-    static let mainColor = Color("MainThemeColor")
+    static let mainColor = Color("AccentColor")
+    static let secondaryColor = Color("SecondColor")
 }

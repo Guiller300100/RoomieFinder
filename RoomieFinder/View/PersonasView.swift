@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PersonasView: View {
+
+    var PerfilList: [Perfile]?
+
     var body: some View {
 
         VStack {
@@ -18,6 +21,15 @@ struct PersonasView: View {
                         .font(.custom(Constants.mediumFont, size: 24))
                         .foregroundStyle(Constants.mainColor)
                         .padding(.top, 15)
+
+                    if let PerfilListDes = PerfilList {
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+                            ForEach(PerfilListDes) { perfil in
+                                PerfilRow(perfil: perfil)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
                 }
             }
         }

@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    
+    @State var PerfilList: [Perfile]?
     @State private var selection = 0
 
     var body: some View {
         TabView(selection: $selection) {
-            PersonasView()
+            PersonasView(PerfilList: PerfilList)
                 .tabItem {
                     Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
                         .environment(\.symbolVariants, .none)
@@ -21,7 +21,7 @@ struct MainView: View {
                         .font(.custom(Constants.mediumFont, size: 12))
                 }
                 .tag(0)
-            
+
             PisosView()
                 .tabItem {
                     Image(systemName: selection == 1 ? "house.fill" : "house")
@@ -61,9 +61,24 @@ struct MainView: View {
                 }
                 .tag(4)
         }
-        .accentColor(Constants.mainColor) // Cambia el color de los TabItems seleccionados
         .onAppear {
             UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
+        }
+        .task {
+            await self.cargarDatos()
+        }
+    }
+
+    func cargarDatos() async {
+        if let filePath = Bundle.main.url(forResource: "Prueba", withExtension: "json"){
+            do {
+                let data = try Data(contentsOf: filePath)
+                let decoder = JSONDecoder()
+                self.PerfilList = try decoder.decode([Perfile].self, from: data)
+            } catch {
+                print("Error cargando datos desde JSON: \(error)")
+                self.PerfilList = []
+            }
         }
     }
 }
