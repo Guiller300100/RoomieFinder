@@ -34,3 +34,4 @@ struct Perfile: Codable, Identifiable {
         self.favorito = favorito
     }
 }
+
