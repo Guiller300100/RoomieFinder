@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var PerfilList: [Perfile]?
+    @State var PerfilList: [Perfil]?
+    @State var Anuncios_Pisos: [AnuncioPisosModel]?
     @State private var selection = 0
 
     var body: some View {
@@ -22,9 +23,9 @@ struct MainView: View {
                 }
                 .tag(0)
 
-            PisosView()
+            PisosView(Anuncios_Pisos: Anuncios_Pisos)
                 .tabItem {
-                    Image(systemName: selection == 1 ? "house.fill" : "house")
+                    Image(systemName: selection == 1 ? "house.lodge.fill" : "house.lodge")
                         .environment(\.symbolVariants, .none)
                     Text("Casas")
                         .font(.custom(Constants.mediumFont, size: 12))
@@ -70,14 +71,25 @@ struct MainView: View {
     }
 
     func cargarDatos() async {
-        if let filePath = Bundle.main.url(forResource: "Prueba", withExtension: "json"){
+        if let filePath = Bundle.main.url(forResource: "Perfiles", withExtension: "json"){
             do {
                 let data = try Data(contentsOf: filePath)
                 let decoder = JSONDecoder()
-                self.PerfilList = try decoder.decode([Perfile].self, from: data)
+                self.PerfilList = try decoder.decode([Perfil].self, from: data)
             } catch {
                 print("Error cargando datos desde JSON: \(error)")
                 self.PerfilList = []
+            }
+        }
+
+        if let filePath = Bundle.main.url(forResource: "AnunciosPisos", withExtension: "json"){
+            do {
+                let data = try Data(contentsOf: filePath)
+                let decoder = JSONDecoder()
+                self.Anuncios_Pisos = try decoder.decode([AnuncioPisosModel].self, from: data)
+            } catch {
+                print("Error cargando datos desde JSON: \(error)")
+                self.Anuncios_Pisos = []
             }
         }
     }

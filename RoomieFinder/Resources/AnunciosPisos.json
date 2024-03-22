@@ -1,0 +1,58 @@
+[
+    {
+        "ID_Anuncio": 1,
+        "Dirección": "Calle Acera de Recoletos, 1, Valladolid",
+        "Num_habitaciones": 3,
+        "Num_Baños": 2,
+        "Precio": 800,
+        "Descripción": "Piso amplio y luminoso en el centro de Valladolid."
+    },
+    {
+        "ID_Anuncio": 2,
+        "Dirección": "Calle María de Molina, 2, Valladolid",
+        "Num_habitaciones": 2,
+        "Num_Baños": 1,
+        "Precio": 650,
+        "Descripción": "Acogedor piso cerca del parque Campo Grande."
+    },
+    {
+        "ID_Anuncio": 3,
+        "Dirección": "Calle Francisco Zarandona, 3, Valladolid",
+        "Num_habitaciones": 4,
+        "Num_Baños": 3,
+        "Precio": 950,
+        "Descripción": "Piso de lujo con excelentes vistas a la Catedral."
+    },
+    {
+        "ID_Anuncio": 4,
+        "Dirección": "Calle Panaderos, 4, Valladolid",
+        "Num_habitaciones": 1,
+        "Num_Baños": 1,
+        "Precio": 550,
+        "Descripción": "Piso ideal para una persona o pareja."
+    },
+    {
+        "ID_Anuncio": 5,
+        "Dirección": "Calle Ferrari, 5, Valladolid",
+        "Num_habitaciones": 2,
+        "Num_Baños": 2,
+        "Precio": 700,
+        "Descripción": "Piso con terraza en el corazón de Valladolid."
+    },
+    {
+        "ID_Anuncio": 6,
+        "Dirección": "Calle Labradores, 6, Valladolid",
+        "Num_habitaciones": 3,
+        "Num_Baños": 2,
+        "Precio": 850,
+        "Descripción": "Piso reformado cerca de la Plaza Mayor."
+    },
+    {
+        "ID_Anuncio": 7,
+        "Dirección": "Calle Santiago, 7, Valladolid",
+        "Num_habitaciones": 4,
+        "Num_Baños": 3,
+        "Precio": 900,
+        "Descripción": "Piso moderno con garaje en el centro de Valladolid."
+    }
+]

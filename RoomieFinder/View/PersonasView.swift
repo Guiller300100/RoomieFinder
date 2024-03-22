@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PersonasView: View {
 
-    var PerfilList: [Perfile]?
+    var PerfilList: [Perfil]?
 
     var body: some View {
 

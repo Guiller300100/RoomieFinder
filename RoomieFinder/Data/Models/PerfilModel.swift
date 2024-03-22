@@ -1,15 +1,15 @@
 //
-//  Perfiles.swift
+//  PerfilModel.swift
 //  RoomieFinder
 //
 //  Created by Guillermo Rodriguez Alonso on 21/3/24.
 //
-//   let perfiles = try? JSONDecoder().decode(Perfiles.self, from: jsonData)
+//   let Perfils = try? JSONDecoder().decode(Perfils.self, from: jsonData)
 
 import Foundation
 
-// MARK: - Perfile
-struct Perfile: Codable, Identifiable {
+// MARK: - Perfil
+struct Perfil: Codable, Identifiable {
     let id: Int?
     let nombre: String?
     let edad, presupuesto: Int?
