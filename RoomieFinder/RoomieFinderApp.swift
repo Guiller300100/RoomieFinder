@@ -24,7 +24,7 @@ struct RoomieFinderApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            LoginView()
         }
     }
 }
