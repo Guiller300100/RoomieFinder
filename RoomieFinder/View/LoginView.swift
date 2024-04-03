@@ -65,22 +65,7 @@ struct LoginView: View {
                 .frame(maxWidth: 330)
 
             Button(action: {
-                if loginViewModel.emailInput.isEmpty || loginViewModel.passwordInput.isEmpty {
-                    loginViewModel.alertTitle = "Campos vacíos"
-                    loginViewModel.alertMessage = "Por favor, completa todos los campos."
-                    loginViewModel.alertPush = true
-                } else if loginViewModel.emailForegroundStyle == .red {
-                    loginViewModel.alertTitle = "Error en el email"
-                    loginViewModel.alertMessage = "Por favor, introduce un email válido."
-                    loginViewModel.alertPush = true
-                } else if loginViewModel.passwordInput.count < 6 {
-                    loginViewModel.alertTitle = "Error en la contraseña"
-                    loginViewModel.alertMessage = "Por favor, introduce una contraseña de al menos 6 carácteres."
-                    loginViewModel.alertPush = true
-                }
-                else {
-                    loginViewModel.createUser()
-                }
+                loginViewModel.comprobarFields()
             }, label: {
                 Text("Registro")
                     .font(.custom(Constants.mediumFont, size: 15))

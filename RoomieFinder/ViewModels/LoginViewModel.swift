@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  swift
 //  RoomieFinder
 //
 //  Created by Guillermo Rodriguez Alonso on 3/4/24.
@@ -43,6 +43,27 @@ extension LoginView {
                     print(error!)
                 }
             }
+        }
+
+
+        func comprobarFields() {
+            if emailInput.isEmpty || passwordInput.isEmpty {
+                alertTitle = "Campos vacíos"
+                alertMessage = "Por favor, completa todos los campos."
+                alertPush = true
+            } else if emailForegroundStyle == .red {
+                alertTitle = "Error en el email"
+                alertMessage = "Por favor, introduce un email válido."
+                alertPush = true
+            } else if passwordInput.count < 6 {
+                alertTitle = "Error en la contraseña"
+                alertMessage = "Por favor, introduce una contraseña de al menos 6 carácteres."
+                alertPush = true
+            }
+            else {
+                createUser()
+            }
+
         }
 
     }
