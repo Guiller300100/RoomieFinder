@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 import SwiftUI
 
 extension LoginView {
@@ -19,8 +20,29 @@ extension LoginView {
         //BUTTONS
         @Published var navigationIsActive = false
 
+        //REGISTRO
+        @Published var alertPush = false
+        @Published var alertTitle: String = ""
+        @Published var alertMessage: String = ""
+
         func emailDidSubmit() {
             emailForegroundStyle = emailInput.isEmailValid() ? .blue : .red
+        }
+
+
+        func createUser() {
+
+            Auth.auth().createUser(withEmail: emailInput, password: passwordInput) { result, error in
+                if let resultDes = result, error == nil {
+                    print(resultDes)
+                    self.alertTitle = "Usuario registrado"
+                    self.alertMessage = "El usuario ha sido registrado correctamente"
+                    self.alertPush = true
+                } else {
+                    self.alertPush = true
+                    print(error!)
+                }
+            }
         }
 
     }

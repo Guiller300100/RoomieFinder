@@ -34,6 +34,7 @@
 		B385FD322BACC98100A82169 /* PerfilRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD312BACC98100A82169 /* PerfilRow.swift */; };
 		B385FD342BACDDE500A82169 /* Perfiles.json in Resources */ = {isa = PBXBuildFile; fileRef = B385FD332BACDDE500A82169 /* Perfiles.json */; };
 		B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* PerfilModel.swift */; };
+		B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D5F282BBE00DC00F3F561 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 				B31E2C652BADC62700A14662 /* FirebaseAnalyticsSwift in Frameworks */,
 				B31E2C672BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				B31E2C632BADC62700A14662 /* FirebaseAnalytics in Frameworks */,
+				B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +221,7 @@
 				B31E2C622BADC62700A14662 /* FirebaseAnalytics */,
 				B31E2C642BADC62700A14662 /* FirebaseAnalyticsSwift */,
 				B31E2C662BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				B39D5F282BBE00DC00F3F561 /* FirebaseAuth */,
 			);
 			productName = RoomieFinder;
 			productReference = B318D4B72BAB50850099771C /* RoomieFinder.app */;
@@ -545,6 +548,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		B39D5F282BBE00DC00F3F561 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
