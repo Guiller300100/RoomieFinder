@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3EF134F92BBE98580081B4BF /* HalfASheet in Frameworks */ = {isa = PBXBuildFile; productRef = 3EF134F82BBE98580081B4BF /* HalfASheet */; };
 		B318D4BB2BAB50850099771C /* RoomieFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B318D4BA2BAB50850099771C /* RoomieFinderApp.swift */; };
 		B318D4BF2BAB50870099771C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B318D4BE2BAB50870099771C /* Assets.xcassets */; };
 		B318D4C22BAB50870099771C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B318D4C12BAB50870099771C /* Preview Assets.xcassets */; };
@@ -73,7 +72,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B31E2C652BADC62700A14662 /* FirebaseAnalyticsSwift in Frameworks */,
-				3EF134F92BBE98580081B4BF /* HalfASheet in Frameworks */,
 				B31E2C672BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				B31E2C632BADC62700A14662 /* FirebaseAnalytics in Frameworks */,
 				B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */,
@@ -224,7 +222,6 @@
 				B31E2C642BADC62700A14662 /* FirebaseAnalyticsSwift */,
 				B31E2C662BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				B39D5F282BBE00DC00F3F561 /* FirebaseAuth */,
-				3EF134F82BBE98580081B4BF /* HalfASheet */,
 			);
 			productName = RoomieFinder;
 			productReference = B318D4B72BAB50850099771C /* RoomieFinder.app */;
@@ -257,6 +254,7 @@
 			packageReferences = (
 				B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3EF134F72BBE98580081B4BF /* XCRemoteSwiftPackageReference "HalfASheet" */,
+				3EF134FA2BBEC5EB0081B4BF /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = B318D4B82BAB50850099771C /* Products */;
 			projectDirPath = "";
@@ -535,6 +533,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		3EF134FA2BBEC5EB0081B4BF /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.1;
+			};
+		};
 		B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -546,11 +552,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3EF134F82BBE98580081B4BF /* HalfASheet */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3EF134F72BBE98580081B4BF /* XCRemoteSwiftPackageReference "HalfASheet" */;
-			productName = HalfASheet;
-		};
 		B31E2C622BADC62700A14662 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

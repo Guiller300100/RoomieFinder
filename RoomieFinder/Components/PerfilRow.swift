@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import HalfASheet
 
 struct PerfilRow: View {
 
