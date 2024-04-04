@@ -1,5 +1,5 @@
 {
-  "originHash" : "a1569f9895aa2be8e24832f98525d5da4eb90b5d158a82691c15b47eb72a13d7",
+  "originHash" : "b3403091386150304a93f64da49f7a922428dccef63ba8e9f94dc72976a1508b",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -71,6 +71,15 @@
       "state" : {
         "revision" : "9534039303015a84837090d20fa21cae6e5eadb6",
         "version" : "3.3.2"
+      }
+    },
+    {
+      "identity" : "halfasheet",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/franklynw/HalfASheet",
+      "state" : {
+        "revision" : "4f43296b3722082dd5735521ee0fbf25e61cd21c",
+        "version" : "1.0.2"
       }
     },
     {

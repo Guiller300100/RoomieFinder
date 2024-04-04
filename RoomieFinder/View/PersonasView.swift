@@ -10,6 +10,7 @@ import SwiftUI
 struct PersonasView: View {
 
     var PerfilList: [Perfil]?
+    @State private var isShowed: Bool = false
 
     var body: some View {
 
@@ -26,12 +27,18 @@ struct PersonasView: View {
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
                             ForEach(PerfilListDes) { perfil in
                                 PerfilRow(perfil: perfil)
+                                    .onTapGesture {
+                                        isShowed = true
+                                    }
                             }
                         }
                         .padding(.horizontal)
                     }
                 }
             }
+        }
+        .halfASheet(isPresented: $isShowed, title: "Prueba HalfSheet") {
+            Text("Me ha salido perfecto")
         }
     }
 }
