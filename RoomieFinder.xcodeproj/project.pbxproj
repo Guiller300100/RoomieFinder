@@ -35,6 +35,9 @@
 		B385FD342BACDDE500A82169 /* Perfiles.json in Resources */ = {isa = PBXBuildFile; fileRef = B385FD332BACDDE500A82169 /* Perfiles.json */; };
 		B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* PerfilModel.swift */; };
 		B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D5F282BBE00DC00F3F561 /* FirebaseAuth */; };
+		B39D5F2B2BBF017F00F3F561 /* PerfilDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */; };
+		B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2C2BBF125600F3F561 /* RegistroView.swift */; };
+		B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		B385FD312BACC98100A82169 /* PerfilRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilRow.swift; sourceTree = "<group>"; };
 		B385FD332BACDDE500A82169 /* Perfiles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Perfiles.json; sourceTree = "<group>"; };
 		B385FD372BACDE1C00A82169 /* PerfilModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilModel.swift; sourceTree = "<group>"; };
+		B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilDetailView.swift; sourceTree = "<group>"; };
+		B39D5F2C2BBF125600F3F561 /* RegistroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroView.swift; sourceTree = "<group>"; };
+		B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +151,7 @@
 				B318D4EF2BAB7AD70099771C /* MensajesView.swift */,
 				B318D4F12BAB7ADD0099771C /* PerfilView.swift */,
 				B31E2C742BAF394E00A14662 /* LoginView.swift */,
+				B39D5F2C2BBF125600F3F561 /* RegistroView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,6 +172,7 @@
 				B385FD312BACC98100A82169 /* PerfilRow.swift */,
 				B318D4CF2BAB52880099771C /* TopBarView.swift */,
 				B31E2C722BADE54500A14662 /* PisoRow.swift */,
+				B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B31E2C772BBDA72E00A14662 /* LoginViewModel.swift */,
+				B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -290,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */,
+				B39D5F2B2BBF017F00F3F561 /* PerfilDetailView.swift in Sources */,
 				B318D4D02BAB52880099771C /* TopBarView.swift in Sources */,
 				B31E2C6F2BADE1C400A14662 /* AnuncioPisosModel.swift in Sources */,
 				B318D4EA2BAB5F480099771C /* PisosView.swift in Sources */,
@@ -300,6 +310,8 @@
 				B31E2C782BBDA72E00A14662 /* LoginViewModel.swift in Sources */,
 				B31E2C752BAF394E00A14662 /* LoginView.swift in Sources */,
 				B318D4EC2BAB60930099771C /* PersonasView.swift in Sources */,
+				B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */,
+				B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */,
 				B318D4E72BAB5D040099771C /* MainView.swift in Sources */,
 				B318D4F02BAB7AD70099771C /* MensajesView.swift in Sources */,
 				B318D4F22BAB7ADD0099771C /* PerfilView.swift in Sources */,
@@ -434,6 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RoomieFinder/RoomieFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RoomieFinder/Preview Content\"";
@@ -470,6 +483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RoomieFinder/RoomieFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"RoomieFinder/Preview Content\"";

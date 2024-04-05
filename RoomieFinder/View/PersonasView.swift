@@ -32,9 +32,9 @@ struct PersonasView: View {
                                         self.perfilSeleccionado = perfil
                                         isShowed = true
                                     }
-                                    .onAppear() {
-                                        perfilSeleccionado = PerfilListDes.first
-                                    }
+                            }
+                            .onAppear() {
+                                perfilSeleccionado = PerfilListDes.first
                             }
                         }
                         .padding(.horizontal)
@@ -46,11 +46,9 @@ struct PersonasView: View {
         //MARK: - VISTA MODAL PERSONAS
         .sheet(isPresented: $isShowed) {
             if let perfil = perfilSeleccionado {
-                // Mostrar el nombre del perfil
-                Text("Nombre: \(String(describing: perfil.nombre))")
                 
-                // Mostrar la biografía del perfil
-                Text(perfil.barrio ?? "")
+                PerfilDetailView(perfil: perfil)
+                    .presentationDetents([.fraction(0.75)])
             }
         }
     }

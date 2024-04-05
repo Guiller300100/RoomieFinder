@@ -6,8 +6,12 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct TopBarView: View {
+
+    @State private var navigationLogin = false
+
     var body: some View {
 
         VStack {
@@ -18,9 +22,29 @@ struct TopBarView: View {
 
                 Button(action: {
 
+                    if Auth.auth().currentUser != nil {
+                        do {
+                            try Auth.auth().signOut()
+                            // Cerrar sesión exitosamente
+                            print("Sesión cerrada exitosamente.")
+                        } catch let error as NSError {
+                            // Manejar el error
+                            print("Error al cerrar sesión: \(error.localizedDescription)")
+                        }
+                    }
+
+                    navigationLogin.toggle()
+
                 }, label: {
-                    Text("Cerrar Sesión")
-                        .font(.custom(Constants.boldFont, size: 14))
+                    if Auth.auth().currentUser != nil {
+                        // El usuario está autenticado
+                        Text("Cerrar Sesión")
+                            .font(.custom(Constants.boldFont, size: 14))
+                    } else {
+                        // El usuario no está autenticado
+                        Text("Iniciar Sesión")
+                            .font(.custom(Constants.boldFont, size: 14))
+                    }
 
                 })
                 .frame(width: 130, height: 36)
@@ -28,6 +52,10 @@ struct TopBarView: View {
                 .background(Constants.mainColor)
                 .clipShape(RoundedRectangle(cornerRadius: 999))
 
+                .navigationDestination(isPresented: $navigationLogin) {
+                    LoginView()
+                        .navigationBarBackButtonHidden()
+                }
 
             }
             .padding(.init(top: 5, leading: 19, bottom: 0, trailing: 10))

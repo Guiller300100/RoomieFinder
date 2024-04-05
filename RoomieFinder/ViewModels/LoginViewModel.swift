@@ -18,9 +18,10 @@ extension LoginView {
         @Published var emailForegroundStyle = Color.black
 
         //BUTTONS
-        @Published var navigationIsActive = false
+        @Published var correctLogin = false
+        @Published var registreNavigation = false
 
-        //REGISTRO
+        //ALERTAS
         @Published var alertPush = false
         @Published var alertTitle: String = ""
         @Published var alertMessage: String = ""
@@ -29,23 +30,7 @@ extension LoginView {
             emailForegroundStyle = emailInput.isEmailValid() ? .blue : .red
         }
 
-
-        func createUser() {
-
-            Auth.auth().createUser(withEmail: emailInput, password: passwordInput) { result, error in
-                if let resultDes = result, error == nil {
-                    print(resultDes)
-                    self.alertTitle = "Usuario registrado"
-                    self.alertMessage = "El usuario ha sido registrado correctamente"
-                    self.alertPush = true
-                } else {
-                    self.alertPush = true
-                    print(error!)
-                }
-            }
-        }
-
-
+        
         func comprobarFields() {
             if emailInput.isEmpty || passwordInput.isEmpty {
                 alertTitle = "Campos vacíos"
@@ -61,9 +46,30 @@ extension LoginView {
                 alertPush = true
             }
             else {
-                createUser()
+                signIn()
             }
 
+        }
+
+        func signIn() {
+            Auth.auth().signIn(withEmail: emailInput, password: passwordInput) { [weak self] authResult, error in
+                guard let strongSelf = self else { return }
+
+                if let error = error {
+                    // Manejar el error
+                    print("Error al iniciar sesión: \(error.localizedDescription)")
+
+                    // Establecer incorrectoLogin en true
+                    self!.alertTitle = "Error"
+                    self!.alertMessage = "Correo o contraseña incorrectos"
+                    self!.alertPush = true
+                    return
+                }
+
+                // El inicio de sesión fue exitoso
+                // Establecer correctoLogin en true
+                self?.correctLogin = true
+            }
         }
 
     }

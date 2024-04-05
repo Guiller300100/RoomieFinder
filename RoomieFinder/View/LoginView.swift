@@ -21,7 +21,7 @@ struct LoginView: View {
                 .font(.custom(Constants.regularFont, size: 40))
 
             TextField("Correo", text: $loginViewModel.emailInput, onCommit: {
-                focusedField = .email
+                focusedField = .pass
             })
             .focused($focusedField, equals: .email)
             .padding(.all, 18)
@@ -36,18 +36,19 @@ struct LoginView: View {
             SecureField("Contraseña", text: $loginViewModel.passwordInput, onCommit: {
                 focusedField = nil
             })
-            .focused($focusedField, equals: .email)
+            .focused($focusedField, equals: .pass)
             .padding(.all, 18)
             .frame(width: 330, height: 42)
             .background(Constants.textFieldColor)
             .clipShape(RoundedRectangle(cornerRadius: 6))
 
             Button(action: {
-                loginViewModel.navigationIsActive = true
+                loginViewModel.comprobarFields()
             }, label: {
                 Text("Inicio sesión")
                     .font(.custom(Constants.mediumFont, size: 15))
                     .foregroundStyle(!(loginViewModel.emailInput.isEmpty || loginViewModel.passwordInput.isEmpty) && loginViewModel.emailForegroundStyle == .blue ?  .white : Constants.inicioSesionColor)
+                    .frame(width: 320, height: 35)
             })
             .frame(width: 330, height: 35)
             .background(!(loginViewModel.emailInput.isEmpty || loginViewModel.passwordInput.isEmpty) && loginViewModel.emailForegroundStyle == .blue ? Constants.mainColor : Constants.mainColor.opacity(0.36))
@@ -55,7 +56,7 @@ struct LoginView: View {
             .padding(.top, 30)
             .disabled((loginViewModel.emailInput.isEmpty || loginViewModel.passwordInput.isEmpty) || loginViewModel.emailForegroundStyle == .red)
 
-            .navigationDestination(isPresented: $loginViewModel.navigationIsActive) {
+            .navigationDestination(isPresented: $loginViewModel.correctLogin) {
                 MainView()
                     .navigationBarBackButtonHidden()
             }
@@ -65,7 +66,7 @@ struct LoginView: View {
                 .frame(maxWidth: 330)
 
             Button(action: {
-                loginViewModel.comprobarFields()
+                loginViewModel.registreNavigation = true
             }, label: {
                 Text("Registro")
                     .font(.custom(Constants.mediumFont, size: 15))
@@ -80,6 +81,11 @@ struct LoginView: View {
             .alert(isPresented: $loginViewModel.alertPush, content: {
                 Alert(title: Text(loginViewModel.alertTitle), message: Text(loginViewModel.alertMessage), dismissButton: .default(Text("Vale")))
             })
+
+            .navigationDestination(isPresented: $loginViewModel.registreNavigation) {
+                RegistroView()
+                    .navigationBarBackButtonHidden()
+            }
 
         }
         .onAppear() {
