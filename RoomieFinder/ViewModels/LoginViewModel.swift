@@ -53,7 +53,7 @@ extension LoginView {
 
         func signIn() {
             Auth.auth().signIn(withEmail: emailInput, password: passwordInput) { [weak self] authResult, error in
-                guard let strongSelf = self else { return }
+                guard self != nil else { return }
 
                 if let error = error {
                     // Manejar el error

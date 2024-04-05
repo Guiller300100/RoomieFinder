@@ -26,17 +26,18 @@ struct PisoRow: View {
             
             VStack(alignment: .leading, spacing: 1) {
                 Text("\(piso.precio ?? 0)€")
-                    .font(.custom(Constants.mediumFont, size: 14))
+                    .customFont(.mediumFont, size: 14)
                     .lineLimit(nil)
                 
                 Text("- \(piso.numHabitaciones ?? 0) habitaciones")
-                    .font(.custom(Constants.regularFont, size: 12))
-                
+                    .customFont(.regularFont, size: 12)
+
+
                 Text("- \(piso.numBaños ?? 0) baños")
-                    .font(.custom(Constants.regularFont, size: 12))
-                
+                    .customFont(.regularFont, size: 12)
+
                 Text("- \(removeCity(from: piso.dirección) ?? "")")
-                    .font(.custom(Constants.regularFont, size: 12))
+                    .customFont(.regularFont, size: 12)
                     .lineLimit(nil)
                 
                 Spacer()

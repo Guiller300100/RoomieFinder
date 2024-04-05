@@ -38,6 +38,7 @@
 		B39D5F2B2BBF017F00F3F561 /* PerfilDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */; };
 		B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2C2BBF125600F3F561 /* RegistroView.swift */; };
 		B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */; };
+		B39D5F332BC09FC700F3F561 /* TextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F322BC09FC700F3F561 /* TextExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilDetailView.swift; sourceTree = "<group>"; };
 		B39D5F2C2BBF125600F3F561 /* RegistroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroView.swift; sourceTree = "<group>"; };
 		B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroViewModel.swift; sourceTree = "<group>"; };
+		B39D5F322BC09FC700F3F561 /* TextExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		B318D4C82BAB50910099771C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B39D5F312BC09FBA00F3F561 /* Extensions */,
 				B318D4E32BAB539D0099771C /* Fonts */,
 				B318D4E42BAB53B00099771C /* Constants.swift */,
 				B385FD332BACDDE500A82169 /* Perfiles.json */,
@@ -208,6 +211,14 @@
 				B31E2C6E2BADE1C400A14662 /* AnuncioPisosModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B39D5F312BC09FBA00F3F561 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B39D5F322BC09FC700F3F561 /* TextExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,6 +326,7 @@
 				B318D4E72BAB5D040099771C /* MainView.swift in Sources */,
 				B318D4F02BAB7AD70099771C /* MensajesView.swift in Sources */,
 				B318D4F22BAB7ADD0099771C /* PerfilView.swift in Sources */,
+				B39D5F332BC09FC700F3F561 /* TextExtension.swift in Sources */,
 				B318D4E52BAB53B00099771C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

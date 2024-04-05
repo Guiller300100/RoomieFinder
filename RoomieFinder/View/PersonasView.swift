@@ -20,7 +20,7 @@ struct PersonasView: View {
             ScrollView {
                 VStack {
                     Text("Inicio")
-                        .font(.custom(Constants.mediumFont, size: 24))
+                        .customFont(.mediumFont, size: 24)
                         .foregroundStyle(Constants.mainColor)
                         .padding(.top, 15)
                     

@@ -23,7 +23,7 @@ struct PisosView: View {
                 Spacer()
 
                 Text("Pisos")
-                    .font(.custom(Constants.mediumFont, size: 24))
+                    .customFont(.mediumFont, size: 24)
                     .offset(x: 20)
                     .foregroundStyle(Constants.mainColor)
 

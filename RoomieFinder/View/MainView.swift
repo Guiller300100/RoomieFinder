@@ -19,7 +19,8 @@ struct MainView: View {
                     Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
                         .environment(\.symbolVariants, .none)
                     Text("Personas")
-                        .font(.custom(Constants.mediumFont, size: 12))
+                        .customFont(.mediumFont, size: 12)
+
                 }
                 .tag(0)
 
@@ -28,7 +29,8 @@ struct MainView: View {
                     Image(systemName: selection == 1 ? "house.lodge.fill" : "house.lodge")
                         .environment(\.symbolVariants, .none)
                     Text("Casas")
-                        .font(.custom(Constants.mediumFont, size: 12))
+                        .customFont(.mediumFont, size: 12)
+
                 }
                 .tag(1)
             BusquedaView()
@@ -42,7 +44,7 @@ struct MainView: View {
                             .environment(\.symbolVariants, .none)
                     }
                     Text("Busqueda")
-                        .font(.custom(Constants.mediumFont, size: 12))
+                        .customFont(.mediumFont, size: 12)
                 }
                 .tag(2)
             MensajesView()
@@ -50,7 +52,7 @@ struct MainView: View {
                     Image(systemName: selection == 3 ? "message.fill" : "message")
                         .environment(\.symbolVariants, .none)
                     Text("Mensajes")
-                        .font(.custom(Constants.mediumFont, size: 12))
+                        .customFont(.mediumFont, size: 12)
                 }
                 .tag(3)
             PerfilView()
@@ -58,7 +60,7 @@ struct MainView: View {
                     Image(systemName: selection == 4 ? "person.fill" : "person")
                         .environment(\.symbolVariants, .none)
                     Text("Perfil")
-                        .font(.custom(Constants.mediumFont, size: 12))
+                        .customFont(.mediumFont, size: 12)
                 }
                 .tag(4)
         }

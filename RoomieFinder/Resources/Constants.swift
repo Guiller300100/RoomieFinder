@@ -10,10 +10,6 @@ import SwiftUI
 
 
 public struct Constants {
-    //MARK: - Fuentes
-    static let regularFont = "Outfit"
-    static let boldFont = "Outfit-Bold"
-    static let mediumFont = "Outfit-Medium"
 
     //MARK: - Strings
     static let titulo = "RoomieFinder"

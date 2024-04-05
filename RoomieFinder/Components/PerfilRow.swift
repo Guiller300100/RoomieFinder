@@ -30,13 +30,13 @@ struct PerfilRow: View {
             HStack {
                 VStack(alignment: .leading) {
                     Text("\(perfil.nombre ?? ""), \(perfil.edad ?? 0) años")
-                        .font(.custom(Constants.mediumFont, size: 14))
+                        .customFont(.mediumFont, size: 14)
                         .lineLimit(nil)
                     Text("- Presupuesto: \(perfil.presupuesto ?? 0)€")
-                        .font(.custom(Constants.regularFont, size: 12))
+                        .customFont(.regularFont, size: 12)
                         .padding(.top, 0.5)
                     Text("- Zona \(perfil.barrio ?? "")")
-                        .font(.custom(Constants.regularFont, size: 12))
+                        .customFont(.regularFont, size: 12)
                     Spacer()
                 }
 

@@ -15,7 +15,7 @@ struct PerfilView: View {
             ScrollView {
                 VStack {
                     Text("Perfil")
-                        .font(.custom(Constants.mediumFont, size: 24))
+                        .customFont(.mediumFont, size: 24)
                         .foregroundStyle(Constants.mainColor)
                         .padding(.top, 15)
                 }

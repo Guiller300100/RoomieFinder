@@ -21,7 +21,7 @@ struct MensajesView: View {
                         
                         Spacer()
                         Text("Mensajes")
-                            .font(.custom(Constants.mediumFont, size: 24))
+                            .customFont(.mediumFont, size: 24)
                             .offset(x: 40)
                             .foregroundStyle(Constants.mainColor)
                         

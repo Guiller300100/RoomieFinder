@@ -18,7 +18,8 @@ struct LoginView: View {
     var body: some View {
         VStack {
             Text(Constants.titulo)
-                .font(.custom(Constants.regularFont, size: 40))
+                .customFont(.regularFont, size: 40)
+
 
             TextField("Correo", text: $loginViewModel.emailInput, onCommit: {
                 focusedField = .pass
@@ -46,7 +47,7 @@ struct LoginView: View {
                 loginViewModel.comprobarFields()
             }, label: {
                 Text("Inicio sesión")
-                    .font(.custom(Constants.mediumFont, size: 15))
+                    .customFont(.mediumFont, size: 15)
                     .foregroundStyle(!(loginViewModel.emailInput.isEmpty || loginViewModel.passwordInput.isEmpty) && loginViewModel.emailForegroundStyle == .blue ?  .white : Constants.inicioSesionColor)
                     .frame(width: 320, height: 35)
             })
@@ -69,7 +70,7 @@ struct LoginView: View {
                 loginViewModel.registreNavigation = true
             }, label: {
                 Text("Registro")
-                    .font(.custom(Constants.mediumFont, size: 15))
+                    .customFont(.mediumFont, size: 15)
                     .foregroundStyle(.black)
                     .frame(width: 320, height: 35)
             })

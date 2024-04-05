@@ -17,7 +17,7 @@ struct RegistroView: View {
             TopBarView()
             ScrollView {
                 Text("Registro")
-                    .font(.custom(Constants.mediumFont, size: 24))
+                    .customFont(.mediumFont, size: 14)
                     .foregroundStyle(Constants.mainColor)
                     .padding(.all, 15)
 
@@ -26,7 +26,7 @@ struct RegistroView: View {
                 VStack(alignment: .leading) {
 
                     Text("Nombre:")
-                        .font(.custom(Constants.boldFont, size: 14))
+                        .customFont(.boldFont, size: 14)
 
                     TextField("Nombre", text: $registroViewModel.nombre, onCommit: {
                         focusedField = .apellido
@@ -38,7 +38,7 @@ struct RegistroView: View {
                         .padding(.bottom, 16)
 
                     Text("Apellido:")
-                        .font(.custom(Constants.boldFont, size: 14))
+                        .customFont(.boldFont, size: 14)
 
                     TextField("Apellido", text: $registroViewModel.apellido, onCommit: {
                         focusedField = .correo
@@ -51,14 +51,14 @@ struct RegistroView: View {
 
                     DatePicker(selection: $registroViewModel.fechaNacimiento, displayedComponents: .date) {
                         Text("Fecha de nacimiento")
-                            .font(.custom(Constants.boldFont, size: 14))
+                            .customFont(.boldFont, size: 14)
                     }
 
                     Divider()
                         .padding(.bottom, 16)
 
                     Text("Correo electrónico:")
-                        .font(.custom(Constants.boldFont, size: 14))
+                        .customFont(.boldFont, size: 14)
 
                     TextField("Correo electrónico", text: $registroViewModel.correoElectronico, onCommit: {
                         focusedField = .passwordFirst
@@ -70,7 +70,7 @@ struct RegistroView: View {
                         .padding(.bottom, 16)
 
                     Text("Contraseña:")
-                        .font(.custom(Constants.boldFont, size: 14))
+                        .customFont(.boldFont, size: 14)
 
                     SecureField("Contraseña", text: $registroViewModel.passwordInput, onCommit: {
                         focusedField = nil
@@ -82,7 +82,7 @@ struct RegistroView: View {
                         .padding(.bottom, 16)
 
                     Text("¿Que tipo de usuario eres?")
-                        .font(.custom(Constants.boldFont, size: 14))
+                        .customFont(.boldFont, size: 14)
                         .padding(.bottom, 16)
 
 
@@ -95,7 +95,7 @@ struct RegistroView: View {
                             Image(systemName: registroViewModel.estudianteCheck ? "checkmark.circle.fill" : "circle")
 
                             Text("Estudiante")
-                                .font(.custom(Constants.regularFont, size: 14))
+                                .customFont(.regularFont, size: 14)
                                 .foregroundStyle(.black)
                         }
 
@@ -110,7 +110,7 @@ struct RegistroView: View {
                             Image(systemName: registroViewModel.PropietarioCheck ? "checkmark.circle.fill" : "circle")
 
                             Text("Propietario")
-                                .font(.custom(Constants.regularFont, size: 14))
+                                .customFont(.regularFont, size: 14)
                                 .foregroundStyle(.black)
                         }
 
@@ -119,10 +119,10 @@ struct RegistroView: View {
                 }
 
                 Button(action: {
-                    registroViewModel.createUser()
+                    registroViewModel.comprobarFields()
                 }) {
                     Text("Registrarse")
-                        .font(.custom(Constants.boldFont, size: 16))
+                        .customFont(.boldFont, size: 15)
                         .frame(width: 130, height: 36)
                         .foregroundStyle(.white)
                         .background(Constants.mainColor)
@@ -130,6 +130,11 @@ struct RegistroView: View {
                 }
 
             }
+
+            .alert(isPresented: $registroViewModel.alertPush, content: {
+                Alert(title: Text(registroViewModel.alertTitleRegistro), message: Text(registroViewModel.alertMessageRegistro), dismissButton: .default(Text("Vale")))
+            })
+
             .navigationDestination(isPresented: $registroViewModel.isRegistred, destination: {
                 MainView()
                     .navigationBarBackButtonHidden(true)

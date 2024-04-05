@@ -32,13 +32,9 @@ extension RegistroView {
         @Published var alertMessageRegistro: String = ""
 
         func comprobarFields() {
-            if emailInput.isEmpty || passwordInput.isEmpty {
+            if correoElectronico.isEmpty || passwordInput.isEmpty {
                 alertTitleRegistro = "Campos vacíos"
                 alertMessageRegistro = "Por favor, completa todos los campos."
-                alertPushRegistro = true
-            } else if emailForegroundStyle == .red {
-                alertTitleRegistro = "Error en el email"
-                alertMessageRegistro = "Por favor, introduce un email válido."
                 alertPushRegistro = true
             } else if passwordInput.count < 6 {
                 alertTitleRegistro = "Error en la contraseña"
@@ -58,6 +54,8 @@ extension RegistroView {
                     print(resultDes)
                     self.isRegistred = true
                 } else {
+                    self.alertTitleRegistro = "Error"
+                    self.alertMessageRegistro = "Correo o contraseña incorrectos"
                     self.alertPush = true
                     print(error!)
                 }
