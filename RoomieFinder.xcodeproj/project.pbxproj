@@ -31,6 +31,9 @@
 		B31E2C732BADE54500A14662 /* PisoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31E2C722BADE54500A14662 /* PisoRow.swift */; };
 		B31E2C752BAF394E00A14662 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31E2C742BAF394E00A14662 /* LoginView.swift */; };
 		B31E2C782BBDA72E00A14662 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31E2C772BBDA72E00A14662 /* LoginViewModel.swift */; };
+		B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B365F5952BC181B3004D08F4 /* MultiPicker.swift */; };
+		B365F5982BC1BD21004D08F4 /* CreacionAnuncioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B365F5972BC1BD21004D08F4 /* CreacionAnuncioView.swift */; };
+		B365F59A2BC1BD87004D08F4 /* CreacionAnuncioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B365F5992BC1BD87004D08F4 /* CreacionAnuncioViewModel.swift */; };
 		B385FD322BACC98100A82169 /* PerfilRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD312BACC98100A82169 /* PerfilRow.swift */; };
 		B385FD342BACDDE500A82169 /* Perfiles.json in Resources */ = {isa = PBXBuildFile; fileRef = B385FD332BACDDE500A82169 /* Perfiles.json */; };
 		B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* PerfilModel.swift */; };
@@ -68,6 +71,9 @@
 		B31E2C722BADE54500A14662 /* PisoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PisoRow.swift; sourceTree = "<group>"; };
 		B31E2C742BAF394E00A14662 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B31E2C772BBDA72E00A14662 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B365F5952BC181B3004D08F4 /* MultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPicker.swift; sourceTree = "<group>"; };
+		B365F5972BC1BD21004D08F4 /* CreacionAnuncioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreacionAnuncioView.swift; sourceTree = "<group>"; };
+		B365F5992BC1BD87004D08F4 /* CreacionAnuncioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreacionAnuncioViewModel.swift; sourceTree = "<group>"; };
 		B385FD312BACC98100A82169 /* PerfilRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilRow.swift; sourceTree = "<group>"; };
 		B385FD332BACDDE500A82169 /* Perfiles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Perfiles.json; sourceTree = "<group>"; };
 		B385FD372BACDE1C00A82169 /* PerfilModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilModel.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 				B318D4EF2BAB7AD70099771C /* MensajesView.swift */,
 				B31E2C742BAF394E00A14662 /* LoginView.swift */,
 				B39D5F2C2BBF125600F3F561 /* RegistroView.swift */,
+				B365F5972BC1BD21004D08F4 /* CreacionAnuncioView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,6 +188,7 @@
 				B31E2C722BADE54500A14662 /* PisoRow.swift */,
 				B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */,
 				B39D5F3D2BC1695B00F3F561 /* UIImagePickerController.swift */,
+				B365F5952BC181B3004D08F4 /* MultiPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -198,6 +206,7 @@
 				B31E2C772BBDA72E00A14662 /* LoginViewModel.swift */,
 				B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */,
 				B39D5F3F2BC1699200F3F561 /* CreacionPerfilViewModel.swift */,
+				B365F5992BC1BD87004D08F4 /* CreacionAnuncioViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -289,11 +298,12 @@
 			};
 			buildConfigurationList = B318D4B22BAB50850099771C /* Build configuration list for PBXProject "RoomieFinder" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = B318D4AE2BAB50850099771C;
 			packageReferences = (
@@ -332,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B365F5982BC1BD21004D08F4 /* CreacionAnuncioView.swift in Sources */,
 				B39D5F402BC1699200F3F561 /* CreacionPerfilViewModel.swift in Sources */,
 				B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */,
 				B39D5F2B2BBF017F00F3F561 /* PerfilDetailView.swift in Sources */,
@@ -347,6 +358,8 @@
 				B318D4EC2BAB60930099771C /* PersonasView.swift in Sources */,
 				B39D5F3C2BC1678800F3F561 /* CreacionPerfilView.swift in Sources */,
 				B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */,
+				B365F59A2BC1BD87004D08F4 /* CreacionAnuncioViewModel.swift in Sources */,
+				B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */,
 				B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */,
 				B318D4E72BAB5D040099771C /* MainView.swift in Sources */,
 				B318D4F02BAB7AD70099771C /* MensajesView.swift in Sources */,

@@ -63,6 +63,7 @@ struct TopBarView: View {
                 .frame(height: 1)
                 .overlay(Constants.mainColor.opacity(0.7))
         }
+        .frame(height: 45)
     }
 }
 

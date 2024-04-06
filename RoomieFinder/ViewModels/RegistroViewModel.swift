@@ -19,12 +19,11 @@ extension RegistroView {
         @Published var passwordInput: String = ""
 
         //RADIOBUTTONS
-        @Published var estudianteCheck = false
+        @Published var estudianteCheck = true
         @Published var PropietarioCheck = false
 
         //NAVIGATION STATE
         @Published var isRegistred = false
-        @Published var alertPush = false
 
         //ALERTAS
         @Published var alertPushRegistro = false
@@ -32,7 +31,7 @@ extension RegistroView {
         @Published var alertMessageRegistro: String = ""
 
         func comprobarFields() {
-            if correoElectronico.isEmpty || passwordInput.isEmpty {
+            if camposVacios() {
                 alertTitleRegistro = "Campos vacíos"
                 alertMessageRegistro = "Por favor, completa todos los campos."
                 alertPushRegistro = true
@@ -47,6 +46,16 @@ extension RegistroView {
 
         }
 
+        func camposVacios() -> Bool {
+            if nombre.isEmpty || apellido.isEmpty || correoElectronico.isEmpty || passwordInput.isEmpty {
+                return true
+            } else {
+                return false
+            }
+
+
+        }
+
         func createUser() {
 
             Auth.auth().createUser(withEmail: correoElectronico, password: passwordInput) { result, error in
@@ -56,7 +65,7 @@ extension RegistroView {
                 } else {
                     self.alertTitleRegistro = "Error"
                     self.alertMessageRegistro = "Correo o contraseña incorrectos"
-                    self.alertPush = true
+                    self.alertPushRegistro = true
                     print(error!)
                 }
             }

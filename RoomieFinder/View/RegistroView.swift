@@ -19,9 +19,8 @@ struct RegistroView: View {
                 Text("Registro")
                     .customFont(.mediumFont, size: 24)
                     .foregroundStyle(Constants.mainColor)
-                    .padding(.all, 15)
+                    .padding(.init(top: 55, leading: 15, bottom: 15, trailing: 15))
 
-                Spacer()
 
                 VStack(alignment: .leading) {
 
@@ -35,6 +34,8 @@ struct RegistroView: View {
                     .focused($focusedField, equals: .nombre)
 
                     Divider()
+                        .frame(height: 1)
+                        .overlay(Color.gray.opacity(0.7))
                         .padding(.bottom, 16)
 
                     Text("Apellido:")
@@ -47,6 +48,8 @@ struct RegistroView: View {
                     .focused($focusedField, equals: .apellido)
 
                     Divider()
+                        .frame(height: 1)
+                        .overlay(Color.gray.opacity(0.7))
                         .padding(.bottom, 16)
 
                     DatePicker(selection: $registroViewModel.fechaNacimiento, displayedComponents: .date) {
@@ -55,7 +58,9 @@ struct RegistroView: View {
                     }
 
                     Divider()
-                        .padding(.bottom, 16)
+                        .frame(height: 1)
+                        .overlay(Color.gray.opacity(0.7))
+                        .padding(.init(top: 10, leading: 0, bottom: 16, trailing: 0))
 
                     Text("Correo electrónico:")
                         .customFont(.boldFont, size: 14)
@@ -67,6 +72,8 @@ struct RegistroView: View {
                     .focused($focusedField, equals: .correo)
 
                     Divider()
+                        .frame(height: 1)
+                        .overlay(Color.gray.opacity(0.7))
                         .padding(.bottom, 16)
 
                     Text("Contraseña:")
@@ -79,6 +86,8 @@ struct RegistroView: View {
 
 
                     Divider()
+                        .frame(height: 1)
+                        .overlay(Color.gray.opacity(0.7))
                         .padding(.bottom, 16)
 
                     Text("¿Que tipo de usuario eres?")
@@ -87,7 +96,7 @@ struct RegistroView: View {
 
 
                     Button {
-                        registroViewModel.estudianteCheck.toggle()
+                        registroViewModel.estudianteCheck = true
                         registroViewModel.PropietarioCheck = !registroViewModel.estudianteCheck
 
                     } label: {
@@ -102,7 +111,7 @@ struct RegistroView: View {
                     }
 
                     Button {
-                        registroViewModel.PropietarioCheck.toggle()
+                        registroViewModel.PropietarioCheck = true
                         registroViewModel.estudianteCheck = !registroViewModel.PropietarioCheck
 
                     } label: {
@@ -131,7 +140,8 @@ struct RegistroView: View {
 
             }
 
-            .alert(isPresented: $registroViewModel.alertPush, content: {
+
+            .alert(isPresented: $registroViewModel.alertPushRegistro, content: {
                 Alert(title: Text(registroViewModel.alertTitleRegistro), message: Text(registroViewModel.alertMessageRegistro), dismissButton: .default(Text("Vale")))
             })
 
@@ -139,9 +149,7 @@ struct RegistroView: View {
                 CreacionPerfilView()
                     .navigationBarBackButtonHidden(true)
             })
-            .padding()
-
-
+            .padding(.horizontal)
 
         }
     }
