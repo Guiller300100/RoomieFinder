@@ -42,7 +42,8 @@ struct PersonasView: View {
                 }
             }
         }
-        
+
+
         //MARK: - VISTA MODAL PERSONAS
         .sheet(isPresented: $isShowed) {
             if let perfil = perfilSeleccionado {

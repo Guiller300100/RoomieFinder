@@ -17,7 +17,7 @@ struct RegistroView: View {
             TopBarView()
             ScrollView {
                 Text("Registro")
-                    .customFont(.mediumFont, size: 14)
+                    .customFont(.mediumFont, size: 24)
                     .foregroundStyle(Constants.mainColor)
                     .padding(.all, 15)
 
@@ -136,7 +136,7 @@ struct RegistroView: View {
             })
 
             .navigationDestination(isPresented: $registroViewModel.isRegistred, destination: {
-                MainView()
+                CreacionPerfilView()
                     .navigationBarBackButtonHidden(true)
             })
             .padding()

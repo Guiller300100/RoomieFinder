@@ -39,6 +39,9 @@
 		B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2C2BBF125600F3F561 /* RegistroView.swift */; };
 		B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */; };
 		B39D5F332BC09FC700F3F561 /* TextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F322BC09FC700F3F561 /* TextExtension.swift */; };
+		B39D5F3C2BC1678800F3F561 /* CreacionPerfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F3B2BC1678800F3F561 /* CreacionPerfilView.swift */; };
+		B39D5F3E2BC1695B00F3F561 /* UIImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F3D2BC1695B00F3F561 /* UIImagePickerController.swift */; };
+		B39D5F402BC1699200F3F561 /* CreacionPerfilViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39D5F3F2BC1699200F3F561 /* CreacionPerfilViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		B39D5F2C2BBF125600F3F561 /* RegistroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroView.swift; sourceTree = "<group>"; };
 		B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroViewModel.swift; sourceTree = "<group>"; };
 		B39D5F322BC09FC700F3F561 /* TextExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextExtension.swift; sourceTree = "<group>"; };
+		B39D5F3B2BC1678800F3F561 /* CreacionPerfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreacionPerfilView.swift; sourceTree = "<group>"; };
+		B39D5F3D2BC1695B00F3F561 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
+		B39D5F3F2BC1699200F3F561 /* CreacionPerfilViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreacionPerfilViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,13 +152,11 @@
 		B318D4CC2BAB50FB0099771C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B39D5F3A2BC1675800F3F561 /* Propietario */,
+				B39D5F392BC1675400F3F561 /* Estudiante */,
 				B318D4CD2BAB51290099771C /* LauchScreen.storyboard */,
 				B318D4E62BAB5D040099771C /* MainView.swift */,
-				B318D4EB2BAB60930099771C /* PersonasView.swift */,
-				B318D4E92BAB5F480099771C /* PisosView.swift */,
-				B318D4ED2BAB7AD00099771C /* BusquedaView.swift */,
 				B318D4EF2BAB7AD70099771C /* MensajesView.swift */,
-				B318D4F12BAB7ADD0099771C /* PerfilView.swift */,
 				B31E2C742BAF394E00A14662 /* LoginView.swift */,
 				B39D5F2C2BBF125600F3F561 /* RegistroView.swift */,
 			);
@@ -176,6 +180,7 @@
 				B318D4CF2BAB52880099771C /* TopBarView.swift */,
 				B31E2C722BADE54500A14662 /* PisoRow.swift */,
 				B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */,
+				B39D5F3D2BC1695B00F3F561 /* UIImagePickerController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -192,6 +197,7 @@
 			children = (
 				B31E2C772BBDA72E00A14662 /* LoginViewModel.swift */,
 				B39D5F2E2BBF1A8F00F3F561 /* RegistroViewModel.swift */,
+				B39D5F3F2BC1699200F3F561 /* CreacionPerfilViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -219,6 +225,25 @@
 				B39D5F322BC09FC700F3F561 /* TextExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B39D5F392BC1675400F3F561 /* Estudiante */ = {
+			isa = PBXGroup;
+			children = (
+				B318D4EB2BAB60930099771C /* PersonasView.swift */,
+				B318D4E92BAB5F480099771C /* PisosView.swift */,
+				B318D4ED2BAB7AD00099771C /* BusquedaView.swift */,
+				B318D4F12BAB7ADD0099771C /* PerfilView.swift */,
+				B39D5F3B2BC1678800F3F561 /* CreacionPerfilView.swift */,
+			);
+			path = Estudiante;
+			sourceTree = "<group>";
+		};
+		B39D5F3A2BC1675800F3F561 /* Propietario */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Propietario;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,8 +298,6 @@
 			mainGroup = B318D4AE2BAB50850099771C;
 			packageReferences = (
 				B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				3EF134F72BBE98580081B4BF /* XCRemoteSwiftPackageReference "HalfASheet" */,
-				3EF134FA2BBEC5EB0081B4BF /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = B318D4B82BAB50850099771C /* Products */;
 			projectDirPath = "";
@@ -309,6 +332,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B39D5F402BC1699200F3F561 /* CreacionPerfilViewModel.swift in Sources */,
 				B385FD382BACDE1C00A82169 /* PerfilModel.swift in Sources */,
 				B39D5F2B2BBF017F00F3F561 /* PerfilDetailView.swift in Sources */,
 				B318D4D02BAB52880099771C /* TopBarView.swift in Sources */,
@@ -321,6 +345,7 @@
 				B31E2C782BBDA72E00A14662 /* LoginViewModel.swift in Sources */,
 				B31E2C752BAF394E00A14662 /* LoginView.swift in Sources */,
 				B318D4EC2BAB60930099771C /* PersonasView.swift in Sources */,
+				B39D5F3C2BC1678800F3F561 /* CreacionPerfilView.swift in Sources */,
 				B39D5F2D2BBF125600F3F561 /* RegistroView.swift in Sources */,
 				B39D5F2F2BBF1A8F00F3F561 /* RegistroViewModel.swift in Sources */,
 				B318D4E72BAB5D040099771C /* MainView.swift in Sources */,
@@ -328,6 +353,7 @@
 				B318D4F22BAB7ADD0099771C /* PerfilView.swift in Sources */,
 				B39D5F332BC09FC700F3F561 /* TextExtension.swift in Sources */,
 				B318D4E52BAB53B00099771C /* Constants.swift in Sources */,
+				B39D5F3E2BC1695B00F3F561 /* UIImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -443,7 +469,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -551,22 +577,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3EF134F72BBE98580081B4BF /* XCRemoteSwiftPackageReference "HalfASheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/franklynw/HalfASheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
-			};
-		};
-		3EF134FA2BBEC5EB0081B4BF /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.1;
-			};
-		};
 		B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
