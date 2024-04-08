@@ -9,16 +9,22 @@ import SwiftUI
 
 struct PisosView: View {
 
-    var Anuncios_Pisos: [AnuncioPisosModel]?
+    var Anuncios_Pisos: [AnuncioPisos]?
+    @State private var isShowed: Bool = false
+    @State private var pisoSeleccionado: AnuncioPisos?
 
     var body: some View {
         VStack {
             TopBarView()
             HStack {
-                Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .foregroundStyle(Constants.mainColor)
+                Button(action: {
+                    
+                }) {
+                    Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                        .resizable()
+                        .frame(width: 25, height: 25)
+                        .foregroundStyle(Constants.mainColor)
+                }
 
                 Spacer()
 
@@ -52,6 +58,9 @@ struct PisosView: View {
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16)], spacing: 16) {
                         ForEach(Anuncios_PisosDes) { piso in
                             PisoRow(piso: piso)
+                                .onTapGesture {
+                                    pisoSeleccionado = piso
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -60,6 +69,14 @@ struct PisosView: View {
             }
             .frame(maxHeight: .infinity)
         }
+
+//        .sheet(isPresented: $isShowed) {
+//            if let piso = pisoSeleccionado {
+//
+//                PerfilDetailView(perfil: piso)
+//                    .presentationDetents([.fraction(0.75)])
+//            }
+//        }
 
     }
 }

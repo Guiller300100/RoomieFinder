@@ -128,7 +128,8 @@ struct RegistroView: View {
                 }
 
                 Button(action: {
-                    registroViewModel.comprobarFields()
+                    //registroViewModel.comprobarFields()
+                    registroViewModel.isRegistred = true
                 }) {
                     Text("Registrarse")
                         .customFont(.boldFont, size: 15)

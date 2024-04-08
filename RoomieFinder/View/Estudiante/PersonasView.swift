@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PersonasView: View {
-    
+
     var PerfilList: [Perfil]?
     @State private var isShowed: Bool = false
     @State private var perfilSeleccionado: Perfil?
-    
+
     var body: some View {
-        
+
         VStack {
             TopBarView()
             ScrollView {
@@ -23,7 +23,7 @@ struct PersonasView: View {
                         .customFont(.mediumFont, size: 24)
                         .foregroundStyle(Constants.mainColor)
                         .padding(.top, 15)
-                    
+
                     if let PerfilListDes = PerfilList {
                         LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
                             ForEach(PerfilListDes) { perfil in
@@ -32,9 +32,6 @@ struct PersonasView: View {
                                         self.perfilSeleccionado = perfil
                                         isShowed = true
                                     }
-                            }
-                            .onAppear() {
-                                perfilSeleccionado = PerfilListDes.first
                             }
                         }
                         .padding(.horizontal)
@@ -47,12 +44,14 @@ struct PersonasView: View {
         //MARK: - VISTA MODAL PERSONAS
         .sheet(isPresented: $isShowed) {
             if let perfil = perfilSeleccionado {
-                
+
                 PerfilDetailView(perfil: perfil)
                     .presentationDetents([.fraction(0.75)])
             }
         }
+
     }
+    
 }
 
 #Preview {

@@ -47,6 +47,7 @@ struct CreacionAnuncioView: View {
                     Button {
                         creacionAnuncioViewModel.pisoNoCheck = true
                         creacionAnuncioViewModel.pisoSiCheck = !creacionAnuncioViewModel.pisoNoCheck
+                        creacionAnuncioViewModel.numHabitaciones = ""
 
                     } label: {
                         HStack {
@@ -94,7 +95,7 @@ struct CreacionAnuncioView: View {
                     Text(creacionAnuncioViewModel.pisoNoCheck ? "¿Cuál es tu presupuesto máximo?" : "¿Cuánto vale?")
                         .customFont(.boldFont, size: 14)
 
-                    TextField("", text: $creacionAnuncioViewModel.direccion, onCommit: {
+                    TextField("", text: $creacionAnuncioViewModel.precio, onCommit: {
                         if creacionAnuncioViewModel.pisoSiCheck {
                             focusedField = .habitaciones
                         } else {
@@ -114,11 +115,20 @@ struct CreacionAnuncioView: View {
                         Text("Número de habitaciones")
                             .customFont(.boldFont, size: 14)
 
-                        TextField("", text: $creacionAnuncioViewModel.numHabitaciones, onCommit: {
-                            focusedField = nil
-                        })
-                        .textFieldStyle(.plain)
-                        .focused($focusedField, equals: .habitaciones)
+                        TextField("", text: $creacionAnuncioViewModel.numHabitaciones)
+                            .keyboardType(.numberPad)
+                            .textFieldStyle(.plain)
+                            .focused($focusedField, equals: .habitaciones)
+                            .toolbar {
+                                ToolbarItem(placement: .keyboard) {
+                                    HStack {
+                                        Button("Intro") {
+                                            focusedField = nil
+                                        }
+                                        Spacer()
+                                    }
+                                }
+                            }
 
                         Divider()
                             .frame(height: 1)
@@ -133,9 +143,9 @@ struct CreacionAnuncioView: View {
                 }
                 .padding(.init(top: 40, leading: 16, bottom: 0, trailing: 16))
 
-
+                //MARK: BOTON CREAR ANUNCIO
                 Button(action: {
-                    //TODO
+                    creacionAnuncioViewModel.comprobarFields()
                 }) {
                     Text("Crear anuncio")
                         .customFont(.boldFont, size: 15)
@@ -147,6 +157,15 @@ struct CreacionAnuncioView: View {
 
             }
         }
+
+        .alert(isPresented: $creacionAnuncioViewModel.alertPushCreacionAnuncio, content: {
+            Alert(title: Text(creacionAnuncioViewModel.alertTitleCreacionAnuncio), message: Text(creacionAnuncioViewModel.alertMessageCreacionAnuncio), dismissButton: .default(Text("Vale")))
+        })
+
+        .navigationDestination(isPresented: $creacionAnuncioViewModel.navigationCheck, destination: {
+            MainView()
+                .navigationBarBackButtonHidden(true)
+        })
     }
 }
 

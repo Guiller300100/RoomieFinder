@@ -10,9 +10,9 @@ import SwiftUI
 struct PisoRow: View {
     
     @State private var isFavorited: Bool
-    var piso : AnuncioPisosModel
+    var piso : AnuncioPisos
     
-    init(piso: AnuncioPisosModel) {
+    init(piso: AnuncioPisos) {
         self.piso = piso
         self._isFavorited = State(initialValue: false)
     }
@@ -88,7 +88,7 @@ func removeCity(from address: String?) -> String? {
 
 struct PisoCell_Previews: PreviewProvider {
     static var previews: some View {
-        PisoRow(piso: AnuncioPisosModel(idAnuncio: 1, dirección: "Calle Ciudad de la Habana, 3, Valladolid", numHabitaciones: 2, numBaños: 2, precio: 1000, descripción: "Grande"))
+        PisoRow(piso: AnuncioPisos(idAnuncio: 1, dirección: "Calle Ciudad de la Habana, 3, Valladolid", numHabitaciones: 2, numBaños: 2, precio: 1000, descripción: "Grande"))
             .previewLayout(.sizeThatFits)
     }
 }

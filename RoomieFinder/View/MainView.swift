@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var PerfilList: [Perfil]?
-    @State var Anuncios_Pisos: [AnuncioPisosModel]?
+    @State var Anuncios_Pisos: [AnuncioPisos]?
     @State private var selection = 0
 
     var body: some View {
@@ -88,7 +88,7 @@ struct MainView: View {
             do {
                 let data = try Data(contentsOf: filePath)
                 let decoder = JSONDecoder()
-                self.Anuncios_Pisos = try decoder.decode([AnuncioPisosModel].self, from: data)
+                self.Anuncios_Pisos = try decoder.decode([AnuncioPisos].self, from: data)
             } catch {
                 print("Error cargando datos desde JSON: \(error)")
                 self.Anuncios_Pisos = []

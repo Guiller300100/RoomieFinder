@@ -201,6 +201,42 @@ struct CreacionPerfilView: View {
                     }
                     .padding(.bottom, 16)
 
+                    //MARK: ¿Prefieres un ambiente tranquilo o más social en casa?
+                    Text("¿Prefieres un ambiente tranquilo o más social en casa?")
+                        .customFont(.boldFont, size: 14)
+                        .padding(.bottom, 5)
+
+                    Button {
+                        creacionViewModel.ambienteSocialCheck = true
+                        creacionViewModel.ambienteTranquiloCheck = !creacionViewModel.ambienteSocialCheck
+
+                    } label: {
+                        HStack {
+                            Image(systemName: creacionViewModel.ambienteSocialCheck ? "checkmark.circle.fill" : "circle")
+
+                            Text("Social")
+                                .customFont(.regularFont, size: 14)
+                                .foregroundStyle(.black)
+                        }
+
+                    }
+
+                    Button {
+                        creacionViewModel.ambienteTranquiloCheck = true
+                        creacionViewModel.ambienteSocialCheck = !creacionViewModel.ambienteTranquiloCheck
+
+                    } label: {
+                        HStack {
+                            Image(systemName: creacionViewModel.ambienteTranquiloCheck ? "checkmark.circle.fill" : "circle")
+
+                            Text("Tranquilo")
+                                .customFont(.regularFont, size: 14)
+                                .foregroundStyle(.black)
+                        }
+
+                    }
+                    .padding(.bottom, 16)
+
                     //MARK: ¿Qué te gusta hacer en tu tiempo libre?
                     Text("¿Qué te gusta hacer en tu tiempo libre?")
                         .customFont(.boldFont, size: 14)
@@ -306,8 +342,9 @@ struct CreacionPerfilView: View {
                 }
                 .padding(.init(top: 40, leading: 16, bottom: 0, trailing: 16))
 
-
+                //MARK: BOTON GUARDAR
                 Button(action: {
+                    //creacionViewModel.comprobarField()
                     creacionViewModel.navigationCheck = true
                 }) {
                     Text("Guardar")
@@ -322,6 +359,11 @@ struct CreacionPerfilView: View {
             }
 
         }
+
+        .alert(isPresented: $creacionViewModel.alertPushCreacionPerfil, content: {
+            Alert(title: Text(creacionViewModel.alertTitleCreacionPerfil), message: Text(creacionViewModel.alertMessageCreacionPerfil), dismissButton: .default(Text("Vale")))
+        })
+
         .sheet(isPresented: $creacionViewModel.isShowingPhotoPicker, content: {
             PhotoPicker.init(avatarImage: $creacionViewModel.avatarImage)
         })
@@ -330,7 +372,6 @@ struct CreacionPerfilView: View {
             CreacionAnuncioView()
                 .navigationBarBackButtonHidden(true)
         })
-        .padding(.horizontal)
     }
 }
 

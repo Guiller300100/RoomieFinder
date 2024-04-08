@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AnuncioPisosModel: Codable, Identifiable {
+class AnuncioPisos: Codable, Identifiable {
     let idAnuncio: Int?
     let dirección: String?
     let numHabitaciones, numBaños, precio: Int?
