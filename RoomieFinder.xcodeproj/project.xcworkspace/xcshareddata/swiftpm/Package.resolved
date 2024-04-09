@@ -1,5 +1,5 @@
 {
-  "originHash" : "adae4f2cf977c25502704e29b4a6f9efa0ed0108fe08b5d0d6a9aeeafc51aa79",
+  "originHash" : "a1569f9895aa2be8e24832f98525d5da4eb90b5d158a82691c15b47eb72a13d7",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -74,15 +74,6 @@
       }
     },
     {
-      "identity" : "halfasheet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/franklynw/HalfASheet",
-      "state" : {
-        "revision" : "4f43296b3722082dd5735521ee0fbf25e61cd21c",
-        "version" : "1.0.2"
-      }
-    },
-    {
       "identity" : "interop-ios-for-google-sdks",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
@@ -107,15 +98,6 @@
       "state" : {
         "revision" : "b7e1104502eca3a213b46303391ca4d3bc8ddec1",
         "version" : "2.30910.0"
-      }
-    },
-    {
-      "identity" : "partialsheet",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AndreaMiotto/PartialSheet",
-      "state" : {
-        "revision" : "6c61890976181274ea7baf6a4c297418346db799",
-        "version" : "3.1.1"
       }
     },
     {
