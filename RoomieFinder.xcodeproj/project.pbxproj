@@ -256,6 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				B318D4E32BAB539D0099771C /* Fonts */,
+				B318D4BE2BAB50870099771C /* Assets.xcassets */,
+				B3EA1E9C2BC591C5003EF343 /* Colors.xcassets */,
 				B385FD332BACDDE500A82169 /* Perfiles.json */,
 				B31E2C702BADE48C00A14662 /* AnunciosPisos.json */,
 			);
@@ -265,8 +267,6 @@
 		B318D4E32BAB539D0099771C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				B318D4BE2BAB50870099771C /* Assets.xcassets */,
-				B3EA1E9C2BC591C5003EF343 /* Colors.xcassets */,
 				B318D4D82BAB52CC0099771C /* Outfit-Bold.ttf */,
 				B318D4D42BAB52CC0099771C /* Outfit-Medium.ttf */,
 				B318D4C92BAB50C00099771C /* Outfit.ttf */,

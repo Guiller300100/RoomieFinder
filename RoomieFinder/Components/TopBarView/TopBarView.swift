@@ -9,19 +9,19 @@ import SwiftUI
 import Firebase
 
 struct TopBarView: View {
-    
+
     @State private var navigationLogin = false
-    
+
     var body: some View {
-        NavigationStack {
             VStack {
                 HStack {
                     Text(Constants.titulo)
                         .customFont(.mediumFont, size: 24)
-                    Spacer()
                     
+                    Spacer()
+
                     Button(action: {
-                        
+
                         if Auth.auth().currentUser != nil {
                             do {
                                 try Auth.auth().signOut()
@@ -32,9 +32,9 @@ struct TopBarView: View {
                                 print("Error al cerrar sesión: \(error.localizedDescription)")
                             }
                         }
-                        
+
                         navigationLogin.toggle()
-                        
+
                     }, label: {
                         if Auth.auth().currentUser != nil {
                             // El usuario está autenticado
@@ -45,27 +45,26 @@ struct TopBarView: View {
                             Text("Iniciar Sesión")
                                 .customFont(.boldFont, size: 14)
                         }
-                        
+
                     })
                     .frame(width: 130, height: 36)
                     .foregroundStyle(.white)
                     .background(Constants.mainColor)
                     .clipShape(RoundedRectangle(cornerRadius: 999))
-                    
+
                     .navigationDestination(isPresented: $navigationLogin) {
                         LoginView(LoginViewModel())
                             .navigationBarBackButtonHidden()
                     }
-                    
+
                 }
                 .padding(.init(top: 5, leading: 19, bottom: 0, trailing: 10))
                 Divider()
                     .frame(height: 1)
                     .overlay(Constants.mainColor.opacity(0.7))
             }
-            .frame(height: 45)
+            .frame(maxHeight: 47)
         }
-    }
 }
 
 #Preview {

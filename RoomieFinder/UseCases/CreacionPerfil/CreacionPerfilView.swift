@@ -53,7 +53,6 @@ struct CreacionPerfilView: View {
                             .onTapGesture {
                                 viewModel.isShowingPhotoPicker = true
                             }
-                        
                             .padding(.bottom, 10)
                     }
                     
@@ -375,7 +374,6 @@ struct CreacionPerfilView: View {
                 }
                 
             }
-            
             .alert(isPresented: $viewModel.alertPushCreacionPerfil, content: {
                 Alert(title: Text(viewModel.alertTitleCreacionPerfil), message: Text(viewModel.alertMessageCreacionPerfil), dismissButton: .default(Text("Vale")))
             })

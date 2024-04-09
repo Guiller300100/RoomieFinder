@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class PerfilViewModel: BaseViewModel, ObservableObject {
     var business = PerfilBusiness()
@@ -12,7 +13,11 @@ public class PerfilViewModel: BaseViewModel, ObservableObject {
     var showWarningError = false
     @Published var modelView: PerfilModelView
     var dto: PerfilDTO?
-    
+
+    //IMAGE PICKER STATES
+    @Published var avatarImage = UIImage(named: "DefaultAvatarImage")!
+    @Published var isShowingPhotoPicker = false
+
     init(dto: PerfilDTO? = nil) {
         self.dto = dto
         self.modelView = PerfilModelView(modelBusiness: nil)
