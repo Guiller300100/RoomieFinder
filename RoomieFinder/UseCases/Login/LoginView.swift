@@ -9,75 +9,76 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
     @FocusState private var focusedField: FocusedField?
-    
+
     init(_ viewModel: LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-    
-    
+
+
     var body: some View {
-        
+
         switch viewModel.state {
         case .error, .unknownError:
             VStack {
                 Text("Here your custom Error view")
             }
-            
-            
+
+
         case .empty:
             VStack {
                 Text("Here your custom Empty View")
             }
-            
+
         case .okey, .loading:
-            VStack {
-                
-                title
-                
-                emailTextField
-                
-                passTextField
-                
-                
-                logInButton
-                
-                Divider()
-                    .overlay(Rectangle().foregroundStyle(Constants.inicioSesionColor))
-                    .frame(maxWidth: 330)
-                
-                
-                registreButton
-                
-                    .alert(isPresented: $viewModel.alertPush, content: {
-                        Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text("Vale")))
-                    })
-                
-                    .navigationDestination(isPresented: $viewModel.correctLogin) {
-                        withAnimation {
-                            HomeView(HomeViewModel())
-                                .navigationBarBackButtonHidden()
+            NavigationStack {
+                VStack {
+
+                    title
+
+                    emailTextField
+
+                    passTextField
+
+
+                    logInButton
+
+                    Divider()
+                        .overlay(Rectangle().foregroundStyle(Constants.inicioSesionColor))
+                        .frame(maxWidth: 330)
+
+
+                    registreButton
+
+                        .alert(isPresented: $viewModel.alertPush, content: {
+                            Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text("Vale")))
+                        })
+
+                        .navigationDestination(isPresented: $viewModel.correctLogin) {
+                            withAnimation {
+                                HomeView(HomeViewModel())
+                                    .navigationBarBackButtonHidden()
+                            }
                         }
-                    }
-                
-                    .navigationDestination(isPresented: $viewModel.registreNavigation) {
-                        withAnimation {
-                            RegistroView(RegistroViewModel())
-                                .navigationBarBackButtonHidden()
+
+                        .navigationDestination(isPresented: $viewModel.registreNavigation) {
+                            withAnimation {
+                                RegistroView(RegistroViewModel())
+                                    .navigationBarBackButtonHidden()
+                            }
                         }
-                    }
-                
+                }
             }
         }
     }
-    
-    
+
+
     private var title: some View {
         Text(Constants.titulo)
             .customFont(.regularFont, size: 40)
     }
-    
+
     private var emailTextField: some View {
-        
+
         TextField("Correo", text: $viewModel.emailInput, onCommit: {
             focusedField = .pass
         })
@@ -90,11 +91,11 @@ struct LoginView: View {
         .onChange(of: viewModel.emailInput) { newValue in
             viewModel.emailDidSubmit()
         }
-        
+
     }
-    
+
     private var passTextField: some View {
-        
+
         SecureField("Contraseña", text: $viewModel.passwordInput, onCommit: {
             focusedField = nil
         })
@@ -104,10 +105,12 @@ struct LoginView: View {
         .background(Constants.textFieldColor)
         .clipShape(RoundedRectangle(cornerRadius: 6))
     }
-    
+
     private var logInButton: some View {
         Button(action: {
-            viewModel.comprobarFields()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                viewModel.comprobarFields()
+            }
         }, label: {
             Text("Inicio sesión")
                 .customFont(.mediumFont, size: 15)
@@ -120,7 +123,7 @@ struct LoginView: View {
         .padding(.top, 30)
         .disabled((viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) || viewModel.emailForegroundStyle == .red)
     }
-    
+
     private var registreButton: some View {
         Button(action: {
             viewModel.registreNavigation = true
