@@ -35,10 +35,18 @@ struct CreacionAnuncioView: View {
             VStack {
                 TopBarView()
                 ScrollView {
+
+                    HStack{
+                        VistaAnteriorButton()
+                        Spacer()
+                    }
+                    .padding(.init(top: 13, leading: 15, bottom: 0, trailing: 15))
+                    .frame(maxWidth: .infinity)
+
                     Text("Creación de anuncio")
                         .customFont(.mediumFont, size: 24)
                         .foregroundStyle(Constants.mainColor)
-                        .padding(.init(top: 55, leading: 15, bottom: 15, trailing: 15))
+                        .padding(.init(top: 13, leading: 15, bottom: 15, trailing: 15))
 
 
                     VStack(alignment: .leading) {
@@ -195,6 +203,23 @@ struct CreacionAnuncioView: View {
         }
 
 
+    }
+
+}
+
+struct VistaAnteriorButton: View {
+
+    @Environment(\.presentationMode) var presentationMode
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 30))
+            }
+        }
     }
 }
 
