@@ -32,69 +32,67 @@ struct HomeView: View {
             }
             
         case .okey, .loading:
-            NavigationStack {
-                TabView(selection: $selection) {
-                    PersonasView(PersonasViewModel(), perfilList ?? [])
-                        .tabItem {
-                            Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
+            TabView(selection: $selection) {
+                PersonasView(PersonasViewModel(), perfilList ?? [])
+                    .tabItem {
+                        Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
+                            .environment(\.symbolVariants, .none)
+                        Text("Personas")
+                            .customFont(.mediumFont, size: 12)
+                        
+                    }
+                    .tag(0)
+                
+                PisosView(PisosViewModel(), anunciosPisos ?? [])
+                    .tabItem {
+                        Image(systemName: selection == 1 ? "house.lodge.fill" : "house.lodge")
+                            .environment(\.symbolVariants, .none)
+                        Text("Casas")
+                            .customFont(.mediumFont, size: 12)
+                        
+                    }
+                    .tag(1)
+                BusquedaView(BusquedaViewModel())
+                    .tabItem {
+                        if selection == 2 {
+                            Image("magnifyingglass")
+                                .font(.system(size: 30, weight: .heavy))
                                 .environment(\.symbolVariants, .none)
-                            Text("Personas")
-                                .customFont(.mediumFont, size: 12)
-                            
-                        }
-                        .tag(0)
-                    
-                    PisosView(PisosViewModel(), anunciosPisos ?? [])
-                        .tabItem {
-                            Image(systemName: selection == 1 ? "house.lodge.fill" : "house.lodge")
+                        } else {
+                            Image(systemName: "magnifyingglass")
                                 .environment(\.symbolVariants, .none)
-                            Text("Casas")
-                                .customFont(.mediumFont, size: 12)
-                            
                         }
-                        .tag(1)
-                    BusquedaView(BusquedaViewModel())
-                        .tabItem {
-                            if selection == 2 {
-                                Image("magnifyingglass")
-                                    .font(.system(size: 30, weight: .heavy))
-                                    .environment(\.symbolVariants, .none)
-                            } else {
-                                Image(systemName: "magnifyingglass")
-                                    .environment(\.symbolVariants, .none)
-                            }
-                            Text("Busqueda")
-                                .customFont(.mediumFont, size: 12)
-                        }
-                        .tag(2)
-                    MensajesView(MensajesViewModel())
-                        .tabItem {
-                            Image(systemName: selection == 3 ? "message.fill" : "message")
-                                .environment(\.symbolVariants, .none)
-                            Text("Mensajes")
-                                .customFont(.mediumFont, size: 12)
-                        }
-                        .tag(3)
-                    PerfilView(PerfilViewModel())
-                        .tabItem {
-                            Image(systemName: selection == 4 ? "person.fill" : "person")
-                                .environment(\.symbolVariants, .none)
-                            Text("Perfil")
-                                .customFont(.mediumFont, size: 12)
-                        }
-                        .tag(4)
-                }
-                .onAppear {
-                    UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
-                }
-                .task {
-                    await self.cargarDatos()
-                }
-                .onAppear {
-                    self.viewModel.onAppear()
-                }
-                .loaderBase(state: self.viewModel.state)
+                        Text("Busqueda")
+                            .customFont(.mediumFont, size: 12)
+                    }
+                    .tag(2)
+                MensajesView(MensajesViewModel())
+                    .tabItem {
+                        Image(systemName: selection == 3 ? "message.fill" : "message")
+                            .environment(\.symbolVariants, .none)
+                        Text("Mensajes")
+                            .customFont(.mediumFont, size: 12)
+                    }
+                    .tag(3)
+                PerfilView(PerfilViewModel())
+                    .tabItem {
+                        Image(systemName: selection == 4 ? "person.fill" : "person")
+                            .environment(\.symbolVariants, .none)
+                        Text("Perfil")
+                            .customFont(.mediumFont, size: 12)
+                    }
+                    .tag(4)
             }
+            .onAppear {
+                UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
+            }
+            .task {
+                await self.cargarDatos()
+            }
+            .onAppear {
+                self.viewModel.onAppear()
+            }
+            .loaderBase(state: self.viewModel.state)
         }
         
     }

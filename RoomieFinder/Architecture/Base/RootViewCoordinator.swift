@@ -20,8 +20,10 @@ struct RootView: View {
             EmptyView()
             
         case .main:
-            LoginView(LoginViewModel())
-
+            NavigationStack {
+                LoginView(LoginViewModel())
+            }
+            
         case .login:
             EmptyView()
         }

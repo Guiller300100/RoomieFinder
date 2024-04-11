@@ -9,7 +9,7 @@ import SwiftUI
 struct CreacionPerfilView: View {
     @StateObject var viewModel: CreacionPerfilViewModel
     @FocusState private var focusedField: CreacionType?
-
+    
     init(_ viewModel: CreacionPerfilViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -383,8 +383,10 @@ struct CreacionPerfilView: View {
             })
             
             .navigationDestination(isPresented: $viewModel.navigationCheck, destination: {
-                CreacionAnuncioView(CreacionAnuncioViewModel())
-                    .navigationBarBackButtonHidden(true)
+                withAnimation {
+                    CreacionAnuncioView(CreacionAnuncioViewModel())
+                        .navigationBarBackButtonHidden(true)
+                }
             })
             .onAppear {
                 self.viewModel.onAppear()

@@ -47,6 +47,7 @@ struct BusquedaView: View {
                             
                             Spacer()
                         }
+                        .frame(height: 25)
                         .padding(.all, 15)
                         
                         
