@@ -7,66 +7,30 @@
 import SwiftUI
 
 struct HomeView: View {
+    // MARK: Variables
     @StateObject var viewModel: HomeViewModel
-    @State var perfilList: [Perfil]?
-    @State var anunciosPisos: [AnuncioPisos]?
     @State private var selection = 0
-
+    
     init(_ viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-
-
+    
+    
+    // MARK: body
     var body: some View {
-
-        switch viewModel.state {
-        case .error, .unknownError:
-            VStack {
-                Text("Here your custom Error view")
-            }
-
-
-        case .empty:
-            VStack {
-                Text("Here your custom Empty View")
-            }
-
-        case .okey, .loading:
-            NavigationStack {
-                homeTabView
-                    .onAppear {
-                        self.viewModel.onAppear()
-                    }
-                    .loaderBase(state: self.viewModel.state)
-            }
-        }
-
-    }
-
-    private var homeTabView: some View {
         TabView(selection: $selection) {
-            PersonasView(PersonasViewModel(), perfilList ?? [])
+            PersonasView(PersonasViewModel())
                 .tabItem {
                     Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
                         .environment(\.symbolVariants, .none)
                     Text("Personas")
                         .customFont(.mediumFont, size: 12)
-
+                    
                 }
                 .tag(0)
-
-            PisosView(PisosViewModel(), anunciosPisos ?? [])
-                .tabItem {
-                    Image(systemName: selection == 1 ? "house.lodge.fill" : "house.lodge")
-                        .environment(\.symbolVariants, .none)
-                    Text("Casas")
-                        .customFont(.mediumFont, size: 12)
-
-                }
-                .tag(1)
             BusquedaView(BusquedaViewModel())
                 .tabItem {
-                    if selection == 2 {
+                    if selection == 1 {
                         Image("magnifyingglass")
                             .font(.system(size: 30, weight: .heavy))
                             .environment(\.symbolVariants, .none)
@@ -77,53 +41,26 @@ struct HomeView: View {
                     Text("Busqueda")
                         .customFont(.mediumFont, size: 12)
                 }
-                .tag(2)
+                .tag(1)
             MensajesView(MensajesViewModel())
                 .tabItem {
-                    Image(systemName: selection == 3 ? "message.fill" : "message")
+                    Image(systemName: selection == 2 ? "message.fill" : "message")
                         .environment(\.symbolVariants, .none)
                     Text("Mensajes")
                         .customFont(.mediumFont, size: 12)
                 }
-                .tag(3)
+                .tag(2)
             PerfilView(PerfilViewModel())
                 .tabItem {
-                    Image(systemName: selection == 4 ? "person.fill" : "person")
+                    Image(systemName: selection == 3 ? "person.fill" : "person")
                         .environment(\.symbolVariants, .none)
                     Text("Perfil")
                         .customFont(.mediumFont, size: 12)
                 }
-                .tag(4)
+                .tag(3)
         }
         .onAppear {
             UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
-        }
-        .task {
-            await self.cargarDatos()
-        }
-    }
-
-    func cargarDatos() async {
-        if let filePath = Bundle.main.url(forResource: "Perfiles", withExtension: "json"){
-            do {
-                let data = try Data(contentsOf: filePath)
-                let decoder = JSONDecoder()
-                self.perfilList = try decoder.decode([Perfil].self, from: data)
-            } catch {
-                print("Error cargando datos desde JSON: \(error)")
-                self.perfilList = []
-            }
-        }
-
-        if let filePath = Bundle.main.url(forResource: "AnunciosPisos", withExtension: "json"){
-            do {
-                let data = try Data(contentsOf: filePath)
-                let decoder = JSONDecoder()
-                self.anunciosPisos = try decoder.decode([AnuncioPisos].self, from: data)
-            } catch {
-                print("Error cargando datos desde JSON: \(error)")
-                self.anunciosPisos = []
-            }
         }
     }
 }

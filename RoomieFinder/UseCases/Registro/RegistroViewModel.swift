@@ -7,12 +7,7 @@
 import Foundation
 import Firebase
 
-public class RegistroViewModel: BaseViewModel, ObservableObject {
-    var business = RegistroBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: RegistroModelView
-    var dto: RegistroDTO?
+public class RegistroViewModel: ObservableObject {
 
     //TEXTFIELDS
     @Published var nombre: String = ""
@@ -32,11 +27,6 @@ public class RegistroViewModel: BaseViewModel, ObservableObject {
     @Published var alertPushRegistro = false
     @Published var alertTitleRegistro: String = ""
     @Published var alertMessageRegistro: String = ""
-
-    init(dto: RegistroDTO? = nil) {
-        self.dto = dto
-        self.modelView = RegistroModelView(modelBusiness: nil)
-    }
 
     func comprobarFields() {
         if camposVacios() {
@@ -89,11 +79,6 @@ public class RegistroViewModel: BaseViewModel, ObservableObject {
 
     
 }
-
-struct RegistroDTO {
-    // Añadir propiedades del DTO si fuese necesario
-}
-
 
 enum SignUpType {
     case nombre

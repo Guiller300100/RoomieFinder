@@ -6,12 +6,7 @@
 
 import Foundation
 
-public class CreacionAnuncioViewModel: BaseViewModel, ObservableObject {
-    var business = CreacionAnuncioBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: CreacionAnuncioModelView
-    var dto: CreacionAnuncioDTO?
+public class CreacionAnuncioViewModel: ObservableObject {
 
     //VARIABLES
     @Published var direccion = ""
@@ -31,11 +26,6 @@ public class CreacionAnuncioViewModel: BaseViewModel, ObservableObject {
     @Published var alertTitleCreacionAnuncio: String = ""
     @Published var alertMessageCreacionAnuncio: String = ""
 
-    init(dto: CreacionAnuncioDTO? = nil) {
-        self.dto = dto
-
-        self.modelView = CreacionAnuncioModelView(modelBusiness: nil)
-    }
 
     func comprobarFields() {
 
@@ -63,9 +53,6 @@ public class CreacionAnuncioViewModel: BaseViewModel, ObservableObject {
     
 }
 
-struct CreacionAnuncioDTO {
-    // Añadir propiedades del DTO si fuese necesario
-}
 
 
 enum AnuncioFieldType {

@@ -16,59 +16,44 @@ struct LoginView: View {
 
 
     var body: some View {
-
-        switch viewModel.state {
-        case .error, .unknownError:
+        NavigationStack {
             VStack {
-                Text("Here your custom Error view")
+                title
+
+                emailTextField
+
+                passTextField
+
+
+                logInButton
+
+                Divider()
+                    .overlay(Rectangle().foregroundStyle(Constants.inicioSesionColor))
+                    .frame(maxWidth: 330)
+
+
+                registreButton
             }
 
+            .alert(isPresented: $viewModel.alertPush, content: {
+                Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text("Vale")))
+            })
 
-        case .empty:
-            VStack {
-                Text("Here your custom Empty View")
+            .navigationDestination(isPresented: $viewModel.correctLogin) {
+                withAnimation {
+                    HomeView(HomeViewModel())
+                        .navigationBarBackButtonHidden()
+                }
             }
 
-        case .okey, .loading:
-            NavigationStack {
-                VStack {
-
-                    title
-
-                    emailTextField
-
-                    passTextField
-
-
-                    logInButton
-
-                    Divider()
-                        .overlay(Rectangle().foregroundStyle(Constants.inicioSesionColor))
-                        .frame(maxWidth: 330)
-
-
-                    registreButton
-
-                        .alert(isPresented: $viewModel.alertPush, content: {
-                            Alert(title: Text(viewModel.alertTitle), message: Text(viewModel.alertMessage), dismissButton: .default(Text("Vale")))
-                        })
-
-                        .navigationDestination(isPresented: $viewModel.correctLogin) {
-                            withAnimation {
-                                HomeView(HomeViewModel())
-                                    .navigationBarBackButtonHidden()
-                            }
-                        }
-
-                        .navigationDestination(isPresented: $viewModel.registreNavigation) {
-                            withAnimation {
-                                RegistroView(RegistroViewModel())
-                                    .navigationBarBackButtonHidden()
-                            }
-                        }
+            .navigationDestination(isPresented: $viewModel.registreNavigation) {
+                withAnimation {
+                    RegistroView(RegistroViewModel())
+                        .navigationBarBackButtonHidden()
                 }
             }
         }
+
     }
 
 

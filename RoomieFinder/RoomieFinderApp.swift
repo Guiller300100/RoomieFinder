@@ -12,12 +12,10 @@ import Firebase
 struct RoomieFinderApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var coordinator = RootViewCoordinator()
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-                .environmentObject(coordinator)
+            LoginView(LoginViewModel())
         }
     }
 }

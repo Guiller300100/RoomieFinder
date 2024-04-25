@@ -6,27 +6,39 @@
 
 import Foundation
 
-public class PersonasViewModel: BaseViewModel, ObservableObject {
-    var business = PersonasBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: PersonasModelView
-    var dto: PersonasDTO?
-    
-    init(dto: PersonasDTO? = nil) {
-        self.dto = dto
-        self.modelView = PersonasModelView(modelBusiness: nil)
-    }
+public class PersonasViewModel: ObservableObject {
+    @Published var perfilList: [Perfil] = []
     
     public func onAppear() {
+        perfilList = self.cargarDatos()
     }
     
     public func actionFromView() {
         // Example of private method
     }
-    
-}
 
-struct PersonasDTO {
-    // Añadir propiedades del DTO si fuese necesario
+    func cargarDatos() -> [Perfil] {
+      var listaPerfiles: [Perfil] = []
+
+      if let filePath = Bundle.main.url(forResource: "Perfiles", withExtension: "json") {
+        DispatchQueue.global(qos: .userInitiated).async {
+          do {
+            let data = try Data(contentsOf: filePath)
+            let decoder = JSONDecoder()
+            listaPerfiles = try decoder.decode([Perfil].self, from: data)
+          } catch {
+            print("Error cargando datos desde JSON: \(error)")
+          }
+
+          // Actualizar la interfaz de usuario en el hilo principal
+          DispatchQueue.main.async {
+            self.perfilList = listaPerfiles
+          }
+        }
+      }
+
+      return listaPerfiles
+    }
+
+
 }

@@ -7,12 +7,7 @@
 import Foundation
 import Firebase
 
-public class CreacionPerfilViewModel: BaseViewModel, ObservableObject {
-    var business = CreacionPerfilBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: CreacionPerfilModelView
-    var dto: CreacionPerfilDTO?
+public class CreacionPerfilViewModel: ObservableObject {
 
     //VARIABLES
     @Published var estudios = ""
@@ -50,10 +45,6 @@ public class CreacionPerfilViewModel: BaseViewModel, ObservableObject {
     @Published var alertTitleCreacionPerfil: String = ""
     @Published var alertMessageCreacionPerfil: String = ""
 
-    init(dto: CreacionPerfilDTO? = nil) {
-        self.dto = dto
-        self.modelView = CreacionPerfilModelView(modelBusiness: nil)
-    }
     
     func comprobarField() {
 
@@ -82,10 +73,6 @@ public class CreacionPerfilViewModel: BaseViewModel, ObservableObject {
         // Example of private method
     }
     
-}
-
-struct CreacionPerfilDTO {
-    // Añadir propiedades del DTO si fuese necesario
 }
 
 

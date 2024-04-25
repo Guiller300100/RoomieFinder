@@ -6,18 +6,8 @@
 
 import Foundation
 
-public class MensajesViewModel: BaseViewModel, ObservableObject {
-    var business = MensajesBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: MensajesModelView
-    var dto: MensajesDTO?
+public class MensajesViewModel: ObservableObject {
     @Published var isToggleOn = false
-
-    init(dto: MensajesDTO? = nil) {
-        self.dto = dto
-        self.modelView = MensajesModelView(modelBusiness: nil)
-    }
     
     public func onAppear() {
     }
@@ -28,6 +18,3 @@ public class MensajesViewModel: BaseViewModel, ObservableObject {
     
 }
 
-struct MensajesDTO {
-    // Añadir propiedades del DTO si fuese necesario
-}

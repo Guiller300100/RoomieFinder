@@ -7,21 +7,16 @@
 import Foundation
 import UIKit
 
-public class PerfilViewModel: BaseViewModel, ObservableObject {
-    var business = PerfilBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: PerfilModelView
-    var dto: PerfilDTO?
+public class PerfilViewModel: ObservableObject {
 
     //IMAGE PICKER STATES
     @Published var avatarImage = UIImage(named: "DefaultAvatarImage")!
     @Published var isShowingPhotoPicker = false
 
-    init(dto: PerfilDTO? = nil) {
-        self.dto = dto
-        self.modelView = PerfilModelView(modelBusiness: nil)
-    }
+    //NAVIGATION CHECK
+    @Published var navigationCheck = false
+
+
     
     public func onAppear() {
 
@@ -33,6 +28,3 @@ public class PerfilViewModel: BaseViewModel, ObservableObject {
     
 }
 
-struct PerfilDTO {
-    // Añadir propiedades del DTO si fuese necesario
-}

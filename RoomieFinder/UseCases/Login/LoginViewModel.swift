@@ -9,12 +9,7 @@ import FirebaseAuth
 import SwiftUI
 
 
-public class LoginViewModel: BaseViewModel, ObservableObject {
-    var business = LoginBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: LoginModelView
-    var dto: LoginDTO?
+public class LoginViewModel: ObservableObject {
 
     //TEXTFIELDS
     @Published var emailInput: String = ""
@@ -29,11 +24,6 @@ public class LoginViewModel: BaseViewModel, ObservableObject {
     @Published var alertPush = false
     @Published var alertTitle: String = ""
     @Published var alertMessage: String = ""
-
-    init(dto: LoginDTO? = nil) {
-        self.dto = dto
-        self.modelView = LoginModelView(modelBusiness: nil)
-    }
 
     func emailDidSubmit() {
         emailForegroundStyle = emailInput.isEmailValid() ? .blue : .red
@@ -92,13 +82,3 @@ public class LoginViewModel: BaseViewModel, ObservableObject {
     public func onAppear() {
         
     }
-
-    public func actionFromView() {
-        // Example of private method
-    }
-
-
-
-struct LoginDTO {
-    // Añadir propiedades del DTO si fuese necesario
-}

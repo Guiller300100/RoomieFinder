@@ -6,17 +6,8 @@
 
 import Foundation
 
-public class BusquedaViewModel: BaseViewModel, ObservableObject {
-    var business = BusquedaBusiness()
-    var state: ViewModelState = .okey
-    var showWarningError = false
-    @Published var modelView: BusquedaModelView
-    var dto: BusquedaDTO?
-    
-    init(dto: BusquedaDTO? = nil) {
-        self.dto = dto
-        self.modelView = BusquedaModelView(modelBusiness: nil)
-    }
+public class BusquedaViewModel: ObservableObject {
+
     
     public func onAppear() {
 
@@ -26,8 +17,4 @@ public class BusquedaViewModel: BaseViewModel, ObservableObject {
         // Example of private method
     }
     
-}
-
-struct BusquedaDTO {
-    // Añadir propiedades del DTO si fuese necesario
 }
