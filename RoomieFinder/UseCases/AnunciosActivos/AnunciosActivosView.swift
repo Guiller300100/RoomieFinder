@@ -18,27 +18,47 @@ struct AnunciosActivosView: View {
         VStack {
             TopBarView()
 
-            HStack{
-                VistaAnteriorButton()
-                Spacer()
+            ScrollView {
+
+                HStack{
+                    VistaAnteriorButton()
+                    Spacer()
+                }
+                .padding(.init(top: 13, leading: 15, bottom: 0, trailing: 15))
+                .frame(maxWidth: .infinity)
+
+                textLabel
+
+                AnuncioRow()
+
+                AnuncioRow()
+
+                buttonNewLabel
+
             }
-            .padding(.init(top: 13, leading: 15, bottom: 0, trailing: 15))
-            .frame(maxWidth: .infinity)
-
-            textLabel
-
-
-
-            Spacer()
         }
     }
 
     private var textLabel: some View {
         Text("Anuncios activos")
-            .customFont(.mediumFont, size: 24)
+            .customFont(font: .mediumFont, size: 24)
             .foregroundStyle(Constants.mainColor)
             .padding(.top, 26)
 
+    }
+
+    private var buttonNewLabel: some View {
+        Button(action: {
+            //
+
+        }) {
+            Text("Nuevo anuncio")
+                .customFont(font: .boldFont, size: 15)
+                .frame(width: 131, height: 40)
+                .foregroundStyle(.white)
+                .background(Constants.mainColor)
+                .clipShape(RoundedRectangle(cornerRadius: 999))
+        }
     }
 
 }

@@ -16,7 +16,7 @@ struct TopBarView: View {
         VStack {
             HStack {
                 Text(Constants.titulo)
-                    .customFont(.mediumFont, size: 24)
+                    .customFont(font: .mediumFont, size: 24)
 
                 Spacer()
 
@@ -39,11 +39,11 @@ struct TopBarView: View {
                     if Auth.auth().currentUser != nil {
                         // El usuario está autenticado
                         Text("Cerrar Sesión")
-                            .customFont(.boldFont, size: 14)
+                            .customFont(font: .boldFont, size: 14)
                     } else {
                         // El usuario no está autenticado
                         Text("Iniciar Sesión")
-                            .customFont(.boldFont, size: 14)
+                            .customFont(font: .boldFont, size: 14)
                     }
 
                 })

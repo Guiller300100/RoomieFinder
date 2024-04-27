@@ -15,7 +15,7 @@ enum CustomFont: String {
 }
 
 extension Text {
-    func customFont(_ font: CustomFont? = nil, size: CGFloat, color: Color? = nil) -> Text {
+    func customFont(font: CustomFont? = nil, size: CGFloat, color: Color? = nil) -> Text {
         var text: Text
         
         if let font = font {

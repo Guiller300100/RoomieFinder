@@ -43,7 +43,7 @@ struct RegistroView: View {
 
     private var titleView: some View {
         Text("Registro")
-            .customFont(.mediumFont, size: 24)
+            .customFont(font: .mediumFont, size: 24)
             .foregroundStyle(Constants.mainColor)
             .padding(.init(top: 55, leading: 15, bottom: 15, trailing: 15))
     }
@@ -53,7 +53,7 @@ struct RegistroView: View {
         VStack(alignment: .leading) {
 
             Text("Nombre:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("Nombre", text: $viewModel.nombre, onCommit: {
                 focusedField = .apellido
@@ -67,7 +67,7 @@ struct RegistroView: View {
                 .padding(.bottom, 16)
 
             Text("Apellido:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("Apellido", text: $viewModel.apellido, onCommit: {
                 focusedField = .correo
@@ -82,7 +82,7 @@ struct RegistroView: View {
 
             DatePicker(selection: $viewModel.fechaNacimiento, displayedComponents: .date) {
                 Text("Fecha de nacimiento")
-                    .customFont(.boldFont, size: 14)
+                    .customFont(font: .boldFont, size: 14)
             }
 
             Divider()
@@ -91,7 +91,7 @@ struct RegistroView: View {
                 .padding(.init(top: 10, leading: 0, bottom: 16, trailing: 0))
 
             Text("Correo electrónico:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("Correo electrónico", text: $viewModel.correoElectronico, onCommit: {
                 focusedField = .passwordFirst
@@ -105,7 +105,7 @@ struct RegistroView: View {
                 .padding(.bottom, 16)
 
             Text("Contraseña:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             SecureField("Contraseña", text: $viewModel.passwordInput, onCommit: {
                 focusedField = nil
@@ -127,7 +127,7 @@ struct RegistroView: View {
 
         }) {
             Text("Registrarse")
-                .customFont(.boldFont, size: 15)
+                .customFont(font: .boldFont, size: 15)
                 .frame(width: 130, height: 36)
                 .foregroundStyle(.white)
                 .background(Constants.mainColor)

@@ -28,7 +28,7 @@ struct CreacionAnuncioView: View {
                 .frame(maxWidth: .infinity)
 
                 Text("Creación de anuncio")
-                    .customFont(.mediumFont, size: 24)
+                    .customFont(font: .mediumFont, size: 24)
                     .foregroundStyle(Constants.mainColor)
                     .padding(.init(top: 13, leading: 15, bottom: 15, trailing: 15))
 
@@ -41,7 +41,7 @@ struct CreacionAnuncioView: View {
                     viewModel.navigationCheck = true
                 }) {
                     Text("Crear anuncio")
-                        .customFont(.boldFont, size: 15)
+                        .customFont(font: .boldFont, size: 15)
                         .frame(width: 127, height: 36)
                         .foregroundStyle(.white)
                         .background(Constants.mainColor)
@@ -68,7 +68,7 @@ struct CreacionAnuncioView: View {
 
             //MARK: ¿Dispones de un piso?
             Text("¿Dispones de un piso?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -80,7 +80,7 @@ struct CreacionAnuncioView: View {
                     Image(systemName: viewModel.pisoSiCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -96,7 +96,7 @@ struct CreacionAnuncioView: View {
                     Image(systemName: viewModel.pisoNoCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("No")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -105,7 +105,7 @@ struct CreacionAnuncioView: View {
 
             //MARK: ¿En que barrio buscas piso/Donde esta el piso?
             Text(viewModel.pisoNoCheck ? "¿En que barrio buscas piso?" : "¿Dónde esta el piso?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.direccion, onCommit: {
                 focusedField = .tiempo
@@ -120,7 +120,7 @@ struct CreacionAnuncioView: View {
 
             //MARK: ¿Durante cuanto tiempo?
             Text("¿Durante cuanto tiempo?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.tiempoAlquiler, onCommit: {
                 focusedField = .presupuesto
@@ -135,7 +135,7 @@ struct CreacionAnuncioView: View {
 
             //MARK: ¿Cuál es tu presupuesto máximo/Cuánto vale?
             Text(viewModel.pisoNoCheck ? "¿Cuál es tu presupuesto máximo?" : "¿Cuánto vale?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.precio, onCommit: {
                 if viewModel.pisoSiCheck {
@@ -155,7 +155,7 @@ struct CreacionAnuncioView: View {
             //MARK: Numero de habitaciones
             if viewModel.pisoSiCheck {
                 Text("Número de habitaciones")
-                    .customFont(.boldFont, size: 14)
+                    .customFont(font: .boldFont, size: 14)
 
                 TextField("", text: $viewModel.numHabitaciones)
                     .keyboardType(.numberPad)

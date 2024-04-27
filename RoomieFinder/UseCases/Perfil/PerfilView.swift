@@ -48,7 +48,7 @@ struct PerfilView: View {
 
     private var textLabel: some View {
         Text("Mi perfil")
-            .customFont(.mediumFont, size: 24)
+            .customFont(font: .mediumFont, size: 24)
             .foregroundStyle(Constants.mainColor)
             .padding(.top, 15)
     }
@@ -72,7 +72,7 @@ struct PerfilView: View {
                 viewModel.isShowingPhotoPicker = true
             }, label: {
                 Text("Editar Avatar")
-                    .customFont(.mediumFont, size: 13)
+                    .customFont(font: .mediumFont, size: 13)
                     .foregroundStyle(Color("AccentColor"))
             })
         }
@@ -87,7 +87,7 @@ struct PerfilView: View {
 
             }) {
                 Text("Editar información personal")
-                    .customFont(.boldFont, size: 15)
+                    .customFont(font: .boldFont, size: 15)
                     .frame(width: 217, height: 41)
                     .foregroundStyle(.white)
                     .background(Constants.mainColor)
@@ -102,7 +102,7 @@ struct PerfilView: View {
                 viewModel.navigationCheck = true
             }) {
                 Text("Anuncios activos")
-                    .customFont(.boldFont, size: 15)
+                    .customFont(font: .boldFont, size: 15)
                     .frame(width: 144, height: 41)
                     .foregroundStyle(.white)
                     .background(Constants.mainColor)

@@ -24,7 +24,7 @@ struct HomeView: View {
                     Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
                         .environment(\.symbolVariants, .none)
                     Text("Personas")
-                        .customFont(.mediumFont, size: 12)
+                        .customFont(font: .mediumFont, size: 12)
                     
                 }
                 .tag(0)
@@ -39,7 +39,7 @@ struct HomeView: View {
                             .environment(\.symbolVariants, .none)
                     }
                     Text("Busqueda")
-                        .customFont(.mediumFont, size: 12)
+                        .customFont(font: .mediumFont, size: 12)
                 }
                 .tag(1)
             MensajesView(MensajesViewModel())
@@ -47,7 +47,7 @@ struct HomeView: View {
                     Image(systemName: selection == 2 ? "message.fill" : "message")
                         .environment(\.symbolVariants, .none)
                     Text("Mensajes")
-                        .customFont(.mediumFont, size: 12)
+                        .customFont(font: .mediumFont, size: 12)
                 }
                 .tag(2)
             PerfilView(PerfilViewModel())
@@ -55,7 +55,7 @@ struct HomeView: View {
                     Image(systemName: selection == 3 ? "person.fill" : "person")
                         .environment(\.symbolVariants, .none)
                     Text("Perfil")
-                        .customFont(.mediumFont, size: 12)
+                        .customFont(font: .mediumFont, size: 12)
                 }
                 .tag(3)
         }

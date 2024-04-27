@@ -31,7 +31,7 @@ struct BusquedaView: View {
                         }
                         Spacer()
                         Text("Búsqueda")
-                            .customFont(.mediumFont, size: 24)
+                            .customFont(font: .mediumFont, size: 24)
                             .offset(x: -13)
                             .foregroundStyle(Constants.mainColor)
 

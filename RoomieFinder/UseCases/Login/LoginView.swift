@@ -59,7 +59,7 @@ struct LoginView: View {
 
     private var title: some View {
         Text(Constants.titulo)
-            .customFont(.regularFont, size: 40)
+            .customFont(font: .regularFont, size: 40)
     }
 
     private var emailTextField: some View {
@@ -98,7 +98,7 @@ struct LoginView: View {
             }
         }, label: {
             Text("Inicio sesión")
-                .customFont(.mediumFont, size: 15)
+                .customFont(font: .mediumFont, size: 15)
                 .foregroundStyle(!(viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) && viewModel.emailForegroundStyle == .blue ?  .white : Constants.inicioSesionColor)
                 .frame(width: 320, height: 35)
         })
@@ -114,7 +114,7 @@ struct LoginView: View {
             viewModel.registreNavigation = true
         }, label: {
             Text("Registro")
-                .customFont(.mediumFont, size: 15)
+                .customFont(font: .mediumFont, size: 15)
                 .foregroundStyle(.black)
                 .frame(width: 320, height: 35)
         })

@@ -48,7 +48,7 @@ struct CreacionPerfilView: View {
     private var titleAndPhoto: some View {
         VStack {
             Text("Creación de perfil")
-                .customFont(.mediumFont, size: 24)
+                .customFont(font: .mediumFont, size: 24)
                 .foregroundStyle(Constants.mainColor)
                 .padding(.init(top: 55, leading: 15, bottom: 15, trailing: 15))
 
@@ -74,7 +74,7 @@ struct CreacionPerfilView: View {
         VStack(alignment: .leading) {
             //MARK: ¿Qué estudias o que vas a estudiar?
             Text("¿Qué estudias o que vas a estudiar?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.estudios, onCommit: {
                 focusedField = .universidad
@@ -89,7 +89,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿En qué universidad?
             Text("¿En qué universidad?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.universidad, onCommit: {
                 focusedField = .tiempoLibre
@@ -104,7 +104,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Que idiomas hablas?
             Text("¿Que idiomas hablas?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -143,7 +143,7 @@ struct CreacionPerfilView: View {
 
             //MARK: Sexo
             Text("Sexo:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -155,7 +155,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.hombreCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Hombre")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -170,7 +170,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.mujerCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Mujer")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -179,7 +179,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Como consideras que eres?
             Text("¿Como consideras que eres?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -192,7 +192,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.activoCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Activo")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -208,7 +208,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.tranquiloCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Tranquilo")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -224,7 +224,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.ambosCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("50/50")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -233,7 +233,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Prefieres un ambiente tranquilo o más social en casa?
             Text("¿Prefieres un ambiente tranquilo o más social en casa?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -245,7 +245,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.ambienteSocialCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Social")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -260,7 +260,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.ambienteTranquiloCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Tranquilo")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -269,7 +269,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Qué te gusta hacer en tu tiempo libre?
             Text("¿Qué te gusta hacer en tu tiempo libre?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.tiempoLibre, onCommit: {
                 focusedField = .descripcion
@@ -284,7 +284,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Sueles fumar en tu dia a dia?
             Text("¿Sueles fumar en tu dia a dia?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -296,7 +296,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.fumarSiCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -311,7 +311,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.fumarNoCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("No")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -320,7 +320,7 @@ struct CreacionPerfilView: View {
 
             //MARK: ¿Te gusta salir mucho de fiesta?
             Text("¿Te gusta salir mucho de fiesta?")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
                 .padding(.bottom, 5)
 
             Button {
@@ -332,7 +332,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.fiestaSiCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -347,7 +347,7 @@ struct CreacionPerfilView: View {
                     Image(systemName: viewModel.fiestaNoCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("No")
-                        .customFont(.regularFont, size: 14)
+                        .customFont(font: .regularFont, size: 14)
                         .foregroundStyle(.black)
                 }
 
@@ -356,7 +356,7 @@ struct CreacionPerfilView: View {
 
             //MARK: Descríbete para conocerte más:
             Text("Descríbete para conocerte más:")
-                .customFont(.boldFont, size: 14)
+                .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.descripcion, onCommit: {
                 focusedField = nil
@@ -381,7 +381,7 @@ struct CreacionPerfilView: View {
             viewModel.navigationCheck = true
         }) {
             Text("Guardar")
-                .customFont(.boldFont, size: 15)
+                .customFont(font: .boldFont, size: 15)
                 .frame(width: 92, height: 36)
                 .foregroundStyle(.white)
                 .background(Constants.mainColor)

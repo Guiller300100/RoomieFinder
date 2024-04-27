@@ -24,7 +24,7 @@ struct MultiPicker: View {
                 }) {
                     HStack {
                         Text(option.rawValue)
-                            .customFont(.regularFont, size: 18, color: .black)
+                            .customFont(font: .regularFont, size: 18, color: .black)
                         Spacer()
                         Image(systemName: selectedItems.contains(option) ? "checkmark.circle.fill" : "circle")
                     }
