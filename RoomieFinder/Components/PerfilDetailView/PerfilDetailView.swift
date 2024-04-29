@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PerfilDetailView: View {
 
-    var perfil: Perfil
+    let perfil: Perfil
 
     var body: some View {
         ZStack {
@@ -85,5 +85,5 @@ struct PerfilDetailView: View {
 }
 
 #Preview {
-    PerfilDetailView(perfil: Perfil(id: 1, nombre: "Juan", edad: 23, presupuesto: 1000, barrio: "Salamanca", favorito: false))
+    PerfilDetailView(perfil: Perfil(nombre: "Juan", edad: 23, presupuesto: 1000, barrio: "Salamanca", favorito: false))
 }
