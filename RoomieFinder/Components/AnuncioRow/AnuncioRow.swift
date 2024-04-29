@@ -39,7 +39,7 @@ struct AnuncioRow: View {
         .frame(width: 307, height: 212)
         .background(Color.second)
         .clipShape(RoundedRectangle(cornerRadius: 30))
-        .padding()
+        .padding(.all, 10)
     }
 
 

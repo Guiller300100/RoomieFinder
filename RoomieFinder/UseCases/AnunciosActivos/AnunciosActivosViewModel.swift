@@ -8,7 +8,9 @@ import Foundation
 
 public class AnunciosActivosViewModel: ObservableObject {
 
-    
+
+    @Published var isNavigated: Bool = false
+
     public func onAppear() {
     }
 

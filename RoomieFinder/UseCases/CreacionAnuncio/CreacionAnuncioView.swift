@@ -9,9 +9,12 @@ import SwiftUI
 struct CreacionAnuncioView: View {
     @StateObject var viewModel: CreacionAnuncioViewModel
     @FocusState private var focusedField: AnuncioFieldType?
+    private var firstTime: Bool
+    @Environment(\.presentationMode) var presentationMode
 
-    init(_ viewModel: CreacionAnuncioViewModel) {
+    init(_ viewModel: CreacionAnuncioViewModel, firstTime: Bool) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self.firstTime = firstTime
     }
 
 
@@ -21,7 +24,9 @@ struct CreacionAnuncioView: View {
             ScrollView {
 
                 HStack{
-                    VistaAnteriorButton()
+                    VistaAnteriorButton(dismissAction: {
+                        presentationMode.wrappedValue.dismiss()
+                    })
                     Spacer()
                 }
                 .padding(.init(top: 13, leading: 15, bottom: 0, trailing: 15))
@@ -37,8 +42,11 @@ struct CreacionAnuncioView: View {
 
                 //MARK: BOTON CREAR ANUNCIO
                 Button(action: {
-//                    viewModel.comprobarFields()
-                    viewModel.navigationCheck = true
+                    if firstTime {
+                        viewModel.navigationCheck = true
+                    } else {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }) {
                     Text("Crear anuncio")
                         .customFont(font: .boldFont, size: 15)
@@ -190,20 +198,17 @@ struct CreacionAnuncioView: View {
 
 private struct VistaAnteriorButton: View {
 
-    @Environment(\.presentationMode) var presentationMode
-
+    var dismissAction: (() -> Void)?
     var body: some View {
-        VStack(alignment: .leading) {
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "arrow.left")
-                    .font(.system(size: 30))
-            }
+        Button(action: {
+            dismissAction?()
+        }) {
+            Image(systemName: "arrow.left")
+                .font(.system(size: 30))
         }
     }
 }
 
 #Preview {
-    CreacionAnuncioView(CreacionAnuncioViewModel())
+    CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: false)
 }

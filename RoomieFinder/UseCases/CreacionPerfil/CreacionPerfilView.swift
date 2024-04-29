@@ -39,7 +39,7 @@ struct CreacionPerfilView: View {
 
         .navigationDestination(isPresented: $viewModel.navigationCheck, destination: {
             withAnimation {
-                CreacionAnuncioView(CreacionAnuncioViewModel())
+                CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: true)
                     .navigationBarBackButtonHidden(true)
             }
         })

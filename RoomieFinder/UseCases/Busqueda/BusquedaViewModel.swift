@@ -8,7 +8,8 @@ import Foundation
 
 public class BusquedaViewModel: ObservableObject {
 
-    
+    @Published var filtrosNavegacion: Bool = false
+
     public func onAppear() {
 
     }

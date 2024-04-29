@@ -89,4 +89,5 @@ enum Idiomas: String, CaseIterable {
     case Francés
     case Italiano
     case Portugués
+    case Alemán
 }

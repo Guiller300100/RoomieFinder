@@ -37,6 +37,11 @@ struct AnunciosActivosView: View {
 
             }
         }
+
+        .navigationDestination(isPresented: $viewModel.isNavigated) {
+            CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: false)
+                .navigationBarBackButtonHidden()
+        }
     }
 
     private var textLabel: some View {
@@ -49,7 +54,7 @@ struct AnunciosActivosView: View {
 
     private var buttonNewLabel: some View {
         Button(action: {
-            //
+            viewModel.isNavigated = true
 
         }) {
             Text("Nuevo anuncio")

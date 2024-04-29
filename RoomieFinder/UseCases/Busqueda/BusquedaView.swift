@@ -23,6 +23,8 @@ struct BusquedaView: View {
                     HStack {
                         Button {
 
+                            viewModel.filtrosNavegacion = true
+
                         } label: {
                             Image(systemName: "line.3.horizontal.decrease.circle.fill")
                                 .resizable()
@@ -45,6 +47,11 @@ struct BusquedaView: View {
                 }
             }
         }
+        .navigationDestination(isPresented: $viewModel.filtrosNavegacion, destination: {
+            withAnimation {
+                FiltrosView()
+            }
+        })
         .onAppear {
             self.viewModel.onAppear()
         }

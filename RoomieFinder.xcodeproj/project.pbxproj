@@ -54,6 +54,7 @@
 		B3EADB952BD41DBB00C2F6AA /* AnunciosActivosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EADB8F2BD41DBB00C2F6AA /* AnunciosActivosView.swift */; };
 		B3FDA5012BDD7E7600526E6A /* PerfilRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FDA5002BDD7E7600526E6A /* PerfilRow.swift */; };
 		B3FDA5052BDD7EE100526E6A /* AnuncioRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FDA5042BDD7EE100526E6A /* AnuncioRow.swift */; };
+		B3FDA5092BDECF9000526E6A /* FiltrosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FDA5082BDECF9000526E6A /* FiltrosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		B3EADB8F2BD41DBB00C2F6AA /* AnunciosActivosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnunciosActivosView.swift; sourceTree = "<group>"; };
 		B3FDA5002BDD7E7600526E6A /* PerfilRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilRow.swift; sourceTree = "<group>"; };
 		B3FDA5042BDD7EE100526E6A /* AnuncioRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnuncioRow.swift; sourceTree = "<group>"; };
+		B3FDA5082BDECF9000526E6A /* FiltrosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +328,7 @@
 		B3EA1EA42BC59603003EF343 /* Busqueda */ = {
 			isa = PBXGroup;
 			children = (
+				B3FDA5062BDECF6D00526E6A /* Filtros */,
 				B3EA1EB42BC596D0003EF343 /* BusquedaViewModel.swift */,
 				B3EA1EB72BC596D0003EF343 /* BusquedaView.swift */,
 			);
@@ -400,6 +403,14 @@
 				B3FDA5042BDD7EE100526E6A /* AnuncioRow.swift */,
 			);
 			path = AnuncioRow;
+			sourceTree = "<group>";
+		};
+		B3FDA5062BDECF6D00526E6A /* Filtros */ = {
+			isa = PBXGroup;
+			children = (
+				B3FDA5082BDECF9000526E6A /* FiltrosView.swift */,
+			);
+			path = Filtros;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +531,7 @@
 				B3EA1EF42BC59D95003EF343 /* MensajesView.swift in Sources */,
 				B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */,
 				B3EA1E852BC58C4A003EF343 /* TextExtension.swift in Sources */,
+				B3FDA5092BDECF9000526E6A /* FiltrosView.swift in Sources */,
 				B3EA1ED52BC59A1E003EF343 /* PersonasViewModel.swift in Sources */,
 				B3EA1ED82BC59A1E003EF343 /* PersonasView.swift in Sources */,
 				B39D5F3E2BC1695B00F3F561 /* UIImagePickerController.swift in Sources */,
