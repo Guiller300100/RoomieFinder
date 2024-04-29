@@ -9,8 +9,8 @@
 import Foundation
 
 // MARK: - Perfil
-struct Perfil: Codable, Identifiable {
-    let id: Int?
+struct Perfil: Codable, Identifiable, Equatable {
+    let id = UUID().uuidString
     let nombre: String?
     let edad, presupuesto: Int?
     let barrio: String?
@@ -25,8 +25,7 @@ struct Perfil: Codable, Identifiable {
         case favorito = "Favorito"
     }
 
-    init(id: Int?, nombre: String?, edad: Int?, presupuesto: Int?, barrio: String?, favorito: Bool) {
-        self.id = id
+    init(nombre: String?, edad: Int?, presupuesto: Int?, barrio: String?, favorito: Bool) {
         self.nombre = nombre
         self.edad = edad
         self.presupuesto = presupuesto
