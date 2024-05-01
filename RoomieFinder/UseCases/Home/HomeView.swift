@@ -9,7 +9,7 @@ import SwiftUI
 struct HomeView: View {
     // MARK: Variables
     @StateObject var viewModel: HomeViewModel
-    @State private var selection = 1
+    @State private var selection = 2
 
     init(_ viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -28,25 +28,23 @@ struct HomeView: View {
 //                    
 //                }
 //                .tag(0)
-            BusquedaView(BusquedaViewModel())
+            MensajesView(MensajesViewModel())
                 .tabItem {
-                    if selection == 1 {
-                        Image("magnifyingglass")
-                            .font(.system(size: 30, weight: .heavy))
-                            .environment(\.symbolVariants, .none)
-                    } else {
-                        Image(systemName: "magnifyingglass")
-                            .environment(\.symbolVariants, .none)
-                    }
-                    Text("Busqueda")
+                    Image(systemName: selection == 1 ? "message.fill" : "message")
+                        .environment(\.symbolVariants, .none)
+                    Text("Mensajes")
                         .customFont(font: .mediumFont, size: 12)
                 }
                 .tag(1)
-            MensajesView(MensajesViewModel())
+            BusquedaView(BusquedaViewModel())
                 .tabItem {
-                    Image(systemName: selection == 2 ? "message.fill" : "message")
-                        .environment(\.symbolVariants, .none)
-                    Text("Mensajes")
+                    if selection == 2 {
+                        Image("magnifyingglass")
+                            .font(.system(size: 30, weight: .heavy))
+                    } else {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    Text("Busqueda")
                         .customFont(font: .mediumFont, size: 12)
                 }
                 .tag(2)
