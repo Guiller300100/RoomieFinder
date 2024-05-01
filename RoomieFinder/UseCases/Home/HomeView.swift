@@ -9,8 +9,8 @@ import SwiftUI
 struct HomeView: View {
     // MARK: Variables
     @StateObject var viewModel: HomeViewModel
-    @State private var selection = 0
-    
+    @State private var selection = 1
+
     init(_ viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -19,15 +19,15 @@ struct HomeView: View {
     // MARK: body
     var body: some View {
         TabView(selection: $selection) {
-            PersonasView(PersonasViewModel())
-                .tabItem {
-                    Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
-                        .environment(\.symbolVariants, .none)
-                    Text("Personas")
-                        .customFont(font: .mediumFont, size: 12)
-                    
-                }
-                .tag(0)
+//            PersonasView(PersonasViewModel())
+//                .tabItem {
+//                    Image(systemName: selection == 0 ? "person.3.fill" : "person.3")
+//                        .environment(\.symbolVariants, .none)
+//                    Text("Personas")
+//                        .customFont(font: .mediumFont, size: 12)
+//                    
+//                }
+//                .tag(0)
             BusquedaView(BusquedaViewModel())
                 .tabItem {
                     if selection == 1 {
@@ -60,7 +60,7 @@ struct HomeView: View {
                 .tag(3)
         }
         .onAppear {
-            UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
+            viewModel.onAppear()
         }
     }
 }

@@ -43,10 +43,34 @@ struct BusquedaView: View {
                     .padding(.all, 15)
 
 
-                    Text("Prueba")
+                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+                        ForEach(viewModel.perfilList, id: \.id) { perfil in
+                            PerfilRow(perfil: perfil)
+                                .onTapGesture {
+                                    DispatchQueue.main.async {
+                                        self.viewModel.perfilSeleccionado = perfil
+                                        self.viewModel.isTapped.toggle()
+                                    }
+                                }
+                        }
+                    }
+                    .padding(.horizontal)
                 }
             }
         }
+        //MARK: - VISTA MODAL PERSONAS
+        .sheet(isPresented: $viewModel.isShowed) {
+            if let perfil = viewModel.perfilSeleccionado {
+                PerfilDetailView(perfil: perfil)
+                    .presentationDetents([.fraction(0.80)])
+            } else {
+                Text(self.viewModel.perfilSeleccionado?.nombre ?? "No hay nombre")
+            }
+        }
+        .onChange(of: self.viewModel.isTapped, perform: { newValue in
+            self.viewModel.isShowed = true
+        })
+
         .navigationDestination(isPresented: $viewModel.filtrosNavegacion, destination: {
             withAnimation {
                 FiltrosView()

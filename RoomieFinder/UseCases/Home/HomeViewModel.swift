@@ -5,12 +5,12 @@
 //
 
 import Foundation
-
+import UIKit
 
 public class HomeViewModel: ObservableObject {
     
     public func onAppear() {
-        
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
     }
     
     public func actionFromView() {
