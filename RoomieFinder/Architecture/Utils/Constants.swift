@@ -19,3 +19,8 @@ struct Constants {
     static let inicioSesionColor = Color("inicioSesionColor")
     static let RegistroColor = Color("RegistroColor")
 }
+
+
+public enum CollectionType: String {
+    case Perfiles
+}

@@ -39,8 +39,15 @@ public class RegistroViewModel: ObservableObject {
             alertPushRegistro = true
         }
         else {
+            addData()
             createUser()
         }
+    }
+
+    func addData() {
+        
+        
+
     }
 
     func camposVacios() -> Bool {
@@ -72,12 +79,12 @@ public class RegistroViewModel: ObservableObject {
     public func onAppear() {
 
     }
-    
+
     public func actionFromView() {
         // Example of private method
     }
 
-    
+
 }
 
 enum SignUpType {
