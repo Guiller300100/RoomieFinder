@@ -25,7 +25,7 @@ struct PerfilDetailView: View {
                         .padding()
 
                     VStack(alignment: .leading) {
-                        Text("\(perfil.nombre!), \(perfil.edad!) años")
+                        Text("\(perfil.nombre), años")
                             .customFont(font: .mediumFont, size: 24)
                             .padding(.leading)
                             .padding(.top, 20)
@@ -38,7 +38,7 @@ struct PerfilDetailView: View {
 
                         HStack { // Tabular el texto "Me gusta" una posición a la izquierda
                             Spacer()
-                            Text("• \(perfil.barrio!)")
+                            Text("• ")
                                 .customFont(font: .regularFont, size: 18)
                                 .padding(.horizontal)
                                 .frame(maxWidth: .infinity, alignment: .leading)

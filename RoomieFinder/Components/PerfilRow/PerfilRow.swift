@@ -12,7 +12,7 @@ struct PerfilRow: View {
 
     @State private var isFavorited: Bool
     var perfil : Perfil
-
+    
     init(perfil: Perfil) {
         self.perfil = perfil
         self._isFavorited = State(initialValue: perfil.favorito)

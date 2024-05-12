@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct CreacionPerfilView: View {
+
     @StateObject var viewModel: CreacionPerfilViewModel
     @FocusState private var focusedField: CreacionType?
 
@@ -288,12 +289,10 @@ struct CreacionPerfilView: View {
                 .padding(.bottom, 5)
 
             Button {
-                viewModel.fumarSiCheck = true
-                viewModel.fumarNoCheck = !viewModel.fumarSiCheck
-
+                viewModel.fumarCheck = true
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fumarSiCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fumarCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
                         .customFont(font: .regularFont, size: 14)
@@ -303,12 +302,11 @@ struct CreacionPerfilView: View {
             }
 
             Button {
-                viewModel.fumarNoCheck = true
-                viewModel.fumarSiCheck = !viewModel.fumarNoCheck
+                viewModel.fumarCheck = false
 
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fumarNoCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fumarCheck ? "circle" : "checkmark.circle.fill")
 
                     Text("No")
                         .customFont(font: .regularFont, size: 14)
@@ -324,12 +322,11 @@ struct CreacionPerfilView: View {
                 .padding(.bottom, 5)
 
             Button {
-                viewModel.fiestaSiCheck = true
-                viewModel.fiestaNoCheck = !viewModel.fiestaSiCheck
+                viewModel.fiestaCheck = true
 
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fiestaSiCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fiestaCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
                         .customFont(font: .regularFont, size: 14)
@@ -339,12 +336,11 @@ struct CreacionPerfilView: View {
             }
 
             Button {
-                viewModel.fiestaNoCheck = true
-                viewModel.fiestaSiCheck = !viewModel.fiestaNoCheck
+                viewModel.fiestaCheck = false
 
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fiestaNoCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fiestaCheck ? "circle" : "checkmark.circle.fill")
 
                     Text("No")
                         .customFont(font: .regularFont, size: 14)
@@ -375,10 +371,8 @@ struct CreacionPerfilView: View {
 
     private var buttonLabel: some View {
         //MARK: BOTON GUARDAR
-        //TODO: CAMBIAR ACCION BUTTON
         Button(action: {
-            //viewModel.comprobarField()
-            viewModel.navigationCheck = true
+            viewModel.comprobarField()
         }) {
             Text("Guardar")
                 .customFont(font: .boldFont, size: 15)

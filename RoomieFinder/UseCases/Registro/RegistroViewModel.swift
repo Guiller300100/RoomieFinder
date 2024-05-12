@@ -5,9 +5,13 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 
 public class RegistroViewModel: ObservableObject {
+
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //TEXTFIELDS
     @Published var nombre: String = ""
@@ -29,6 +33,7 @@ public class RegistroViewModel: ObservableObject {
     @Published var alertMessageRegistro: String = ""
 
     func comprobarFields() {
+        alertPushRegistro = false
         if camposVacios() {
             alertTitleRegistro = "Campos vacíos"
             alertMessageRegistro = "Por favor, completa todos los campos."
@@ -39,15 +44,84 @@ public class RegistroViewModel: ObservableObject {
             alertPushRegistro = true
         }
         else {
-            addData()
             createUser()
+                addData { error in
+                    if let error = error {
+                        // Handle error from addData
+                    } else {
+                        self.getData()
+                        self.isRegistred = true
+                    }
+            }
+
         }
     }
 
-    func addData() {
-        
-        
+    func addData(completion: @escaping (Error?) -> Void) {
 
+        guard let currentUser = Auth.auth().currentUser else { return }
+
+        DispatchQueue.main.async {
+            FirestoreUtils.addData(
+                collection: .Perfiles,
+                documentData: [
+                    "userID": currentUser.uid,
+                    "nombre": self.nombre,
+                    "apellido": self.apellido,
+                    "fnac": self.formatearFecha(date: self.fechaNacimiento)
+                ]
+            ) { error in
+                if let error = error {
+                    print("Error adding data:", error)
+                    completion(error) // Pass the error to the completion handler
+                } else {
+                    print("Data added successfully")
+                    completion(nil) // Pass nil if successful
+                }
+            }
+        }
+        print(currentUser.uid)
+    }
+
+    func getData() {
+        FirestoreUtils.getData(collection: .Perfiles) { snapshot in
+            if let snapshot = snapshot {
+
+                    self.globalViewModel.users = []
+                    self.globalViewModel.users = snapshot.documents.map{ d in
+                        return Usuario(
+                            id: d.documentID,
+                            userID: d["userID"] as? String ?? "",
+                            nombre: d["nombre"] as? String ?? "",
+                            apellido: d["apellido"] as? String ?? "",
+                            fnac: d["fnac"] as? String ?? "",
+                            info: Info(
+                                prueba: ""
+                            )
+                        )
+                    }
+                }
+            }
+        print("Recogido los datos")
+    }
+
+    func calcularEdadComoString() -> String {
+        let calendar = Calendar.current
+        let fechaActual = Date()
+
+        let edadComponents = calendar.dateComponents([.year], from: fechaNacimiento, to: fechaActual)
+
+        if let edad = edadComponents.year {
+            return "\(edad)"
+        } else {
+            return "Edad no disponible"
+        }
+    }
+
+    func formatearFecha(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
     }
 
     func camposVacios() -> Bool {
@@ -65,7 +139,6 @@ public class RegistroViewModel: ObservableObject {
         Auth.auth().createUser(withEmail: correoElectronico, password: passwordInput) { result, error in
             if let resultDes = result, error == nil {
                 print(resultDes)
-                self.isRegistred = true
             } else {
                 self.alertTitleRegistro = "Error"
                 self.alertMessageRegistro = "Correo o contraseña incorrectos"

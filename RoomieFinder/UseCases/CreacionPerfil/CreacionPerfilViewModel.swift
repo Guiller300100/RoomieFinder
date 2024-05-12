@@ -6,8 +6,12 @@
 
 import Foundation
 import Firebase
+import SwiftUI
 
 public class CreacionPerfilViewModel: ObservableObject {
+
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //VARIABLES
     @Published var estudios = ""
@@ -25,10 +29,8 @@ public class CreacionPerfilViewModel: ObservableObject {
     @Published var ambosCheck = false
     @Published var ambienteSocialCheck = false
     @Published var ambienteTranquiloCheck = false
-    @Published var fumarSiCheck = false
-    @Published var fumarNoCheck = false
-    @Published var fiestaSiCheck = false
-    @Published var fiestaNoCheck = false
+    @Published var fumarCheck = false
+    @Published var fiestaCheck = false
 
 
 
@@ -48,7 +50,7 @@ public class CreacionPerfilViewModel: ObservableObject {
     
     func comprobarField() {
 
-        if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || (!fumarSiCheck && !fumarNoCheck) || (!fiestaSiCheck && !fiestaNoCheck) || descripcion.isEmpty {
+        if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
 
             alertTitleCreacionPerfil = "Campos vacíos"
             alertMessageCreacionPerfil = "Por favor, completa todos los campos."
@@ -56,7 +58,7 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         } else {
 
-            //TODO FUNCIONALIDAD PARA GUARDAR INFO DEL PERFIL
+            addData()
 
             navigationCheck = true
 
@@ -65,7 +67,30 @@ public class CreacionPerfilViewModel: ObservableObject {
 
     }
 
+    func addData() {
+
+        guard let currentUser = Auth.auth().currentUser else {return}
+        guard let profile = globalViewModel.users.first(where: { $0.userID == currentUser.uid }) else {return}
+
+        FirestoreUtils.updateData(collection: .Perfiles, documentId: profile.id, documentData: ["Prueba": "prueba"]) { error in
+            if let error = error {
+                print("Error update data:", error)
+                // Maneja el error aquí (mostrar mensaje de error, reintentar, etc.)
+            } else {
+                print("Data update successfully")
+                // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
+            }
+        }
+
+    }
+
     public func onAppear() {
+
+        print(globalViewModel.users)
+
+        //let profile = globalViewModel.users.first(where: { $0.userID == "1" })
+
+
 
     }
     

@@ -16,6 +16,7 @@ struct RoomieFinderApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView(LoginViewModel())
+                .environmentObject(GlobalViewModel.shared)
         }
     }
 }
