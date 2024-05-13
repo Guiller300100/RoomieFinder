@@ -9,6 +9,9 @@ import SwiftUI
 struct CreacionAnuncioView: View {
     @StateObject var viewModel: CreacionAnuncioViewModel
     @FocusState private var focusedField: AnuncioFieldType?
+    @StateObject var globalViewModel = GlobalViewModel.shared
+
+    //var retrievePhoto: UIImage = UIImage(named: "DefaultAvatarImage")!
     private var firstTime: Bool
     @Environment(\.presentationMode) var presentationMode
 
@@ -58,7 +61,9 @@ struct CreacionAnuncioView: View {
 
             }
         }
-
+        .onAppear() {
+            viewModel.onAppear()
+        }
         .alert(isPresented: $viewModel.alertPushCreacionAnuncio, content: {
             Alert(title: Text(viewModel.alertTitleCreacionAnuncio), message: Text(viewModel.alertMessageCreacionAnuncio), dismissButton: .default(Text("Vale")))
         })
@@ -170,12 +175,14 @@ struct CreacionAnuncioView: View {
                     .textFieldStyle(.plain)
                     .focused($focusedField, equals: .habitaciones)
                     .toolbar {
-                        ToolbarItem(placement: .keyboard) {
-                            HStack {
-                                Button("Intro") {
-                                    focusedField = nil
+                        if focusedField == .habitaciones {
+                            ToolbarItem(placement: .keyboard) {
+                                HStack {
+                                    Button("Fin") {
+                                        focusedField = nil
+                                    }
+                                    Spacer()
                                 }
-                                Spacer()
                             }
                         }
                     }

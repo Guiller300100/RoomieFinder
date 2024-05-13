@@ -25,7 +25,7 @@ struct PerfilDetailView: View {
                         .padding()
 
                     VStack(alignment: .leading) {
-                        Text("\(perfil.nombre), años")
+                        Text("\(String(describing: perfil.nombre)), años")
                             .customFont(font: .mediumFont, size: 24)
                             .padding(.leading)
                             .padding(.top, 20)

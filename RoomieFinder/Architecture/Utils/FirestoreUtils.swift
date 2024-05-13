@@ -30,7 +30,21 @@ class FirestoreUtils {
             }
         }
     }
-    
+
+    // Función estática para obtener datos solo del usuario
+    static func getDataCurrentUser(collection: CollectionType, completion: @escaping (QuerySnapshot?) -> Void) {
+
+        guard let currentUser = Auth.auth().currentUser else {return}
+        db.collection(collection.rawValue).whereField("userID", isEqualTo: currentUser.uid).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(nil)
+                print("Error fetching data:", error)
+            } else {
+                completion(querySnapshot)
+            }
+        }
+    }
+
     // Función estática para actualizar datos
     static func updateData(collection: CollectionType, documentId: String, documentData: [String: Any], completion: @escaping (Error?) -> Void) {
         db.collection(collection.rawValue).document(documentId).updateData(documentData) { error in

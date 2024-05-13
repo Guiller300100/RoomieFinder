@@ -7,6 +7,7 @@
 //   let Perfils = try? JSONDecoder().decode(Perfils.self, from: jsonData)
 
 import Foundation
+import SwiftUI
 
 // MARK: - Perfil
 struct Perfil: Codable, Identifiable, Equatable {
@@ -45,15 +46,15 @@ struct Usuario: Identifiable {
 
 
 struct Info {
-    var prueba: String
-//    var estudios: String
-//    var universidad: String
-//    var idiomas: Set<Idiomas>
-//    var sexo: String
-//    var tipoPersona: String
-//    var ambiente: String
-//    var tiempoLibre: String
-//    var fumar: Bool
-//    var fiesta: Bool
-//    var descripcion: String
+    var estudios: String
+    var universidad: String
+    var idiomas: Set<Idiomas>
+    var sexo: String
+    var tipoPersona: String
+    var ambiente: String
+    var tiempoLibre: String
+    var fumar: Bool
+    var fiesta: Bool
+    var descripcion: String
+    var urlImage: String
 }

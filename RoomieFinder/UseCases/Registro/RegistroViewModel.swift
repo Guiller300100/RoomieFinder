@@ -45,15 +45,6 @@ public class RegistroViewModel: ObservableObject {
         }
         else {
             createUser()
-                addData { error in
-                    if let error = error {
-                        // Handle error from addData
-                    } else {
-                        self.getData()
-                        self.isRegistred = true
-                    }
-            }
-
         }
     }
 
@@ -96,9 +87,19 @@ public class RegistroViewModel: ObservableObject {
                             apellido: d["apellido"] as? String ?? "",
                             fnac: d["fnac"] as? String ?? "",
                             info: Info(
-                                prueba: ""
+                                estudios: "",
+                                universidad: "",
+                                idiomas: Set<Idiomas>(),
+                                sexo: "",
+                                tipoPersona: "",
+                                ambiente: "",
+                                tiempoLibre: "",
+                                fumar: false,
+                                fiesta: false,
+                                descripcion: "",
+                                urlImage: "DefaultAvatarImage"
                             )
-                        )
+                            )
                     }
                 }
             }
@@ -139,6 +140,14 @@ public class RegistroViewModel: ObservableObject {
         Auth.auth().createUser(withEmail: correoElectronico, password: passwordInput) { result, error in
             if let resultDes = result, error == nil {
                 print(resultDes)
+                self.addData { error in
+                    if error != nil {
+                        // Handle error from addData
+                    } else {
+                        self.getData()
+                        self.isRegistred = true
+                    }
+            }
             } else {
                 self.alertTitleRegistro = "Error"
                 self.alertMessageRegistro = "Correo o contraseña incorrectos"

@@ -6,6 +6,7 @@
 
 import Foundation
 import Firebase
+import FirebaseStorage
 import SwiftUI
 
 public class CreacionPerfilViewModel: ObservableObject {
@@ -33,6 +34,12 @@ public class CreacionPerfilViewModel: ObservableObject {
     @Published var fiestaCheck = false
 
 
+    //VARIABLES
+    var sexo = ""
+    var tipoPersona = ""
+    var ambiente = ""
+    var idiomasArray = [String]()
+    var photoPath = ""
 
 
     //IMAGE PICKER STATES
@@ -47,7 +54,7 @@ public class CreacionPerfilViewModel: ObservableObject {
     @Published var alertTitleCreacionPerfil: String = ""
     @Published var alertMessageCreacionPerfil: String = ""
 
-    
+
     func comprobarField() {
 
         if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
@@ -58,46 +65,118 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         } else {
 
-            addData()
-
-            navigationCheck = true
+            self.addData(path: photoPath)
 
         }
+
+    }
+
+    func uploadPhoto() {
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+
+        // Create storage reference
+        let storageRef = Storage.storage().reference()
+
+        // Turn our image into data
+        guard let imageData = avatarImage.jpegData(compressionQuality: 1) else {
+            return
+        }
+
+        // Specify the file path and name
+        let path = "images/\(currentUser.uid).jpg"
+        let fileRef = storageRef.child(path)
+
+        // Upload that data
+        _ = fileRef.putData(imageData, metadata: nil) { metadata, error in
+            // Check for errors
+            if let error = error {
+                print("Error uploading data: \(error)")
+            } else {
+                // Data uploaded successfully, call the completion handler with the path
+                self.photoPath = path
+                print("Added the photo to Storage with path: \(self.photoPath)")
+            }
+        }
+    }
+
+
+    func prepareData() {
+        if hombreCheck {
+            sexo = "hombre"
+        } else if mujerCheck {
+            sexo = "mujer"
+        }
+
+        if activoCheck {
+            tipoPersona = "activo"
+        } else if tranquiloCheck {
+            tipoPersona = "tranquilo"
+        } else {
+            tipoPersona = "ambos"
+        }
+
+        if ambienteSocialCheck {
+            ambiente = "Social"
+        } else if ambienteTranquiloCheck {
+            ambiente = "Tranquilo"
+        }
+
+        let idiomasStrings = idiomas.map { $0.rawValue }
+
+        idiomasArray = idiomasStrings
 
 
     }
 
-    func addData() {
+    func addData(path: String) {
 
         guard let currentUser = Auth.auth().currentUser else {return}
         guard let profile = globalViewModel.users.first(where: { $0.userID == currentUser.uid }) else {return}
 
-        FirestoreUtils.updateData(collection: .Perfiles, documentId: profile.id, documentData: ["Prueba": "prueba"]) { error in
-            if let error = error {
-                print("Error update data:", error)
-                // Maneja el error aquí (mostrar mensaje de error, reintentar, etc.)
-            } else {
-                print("Data update successfully")
-                // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
+
+        prepareData()
+
+
+        DispatchQueue.main.async { [self] in
+            FirestoreUtils.updateData(
+                collection: .Perfiles,
+                documentId: profile.id,
+                documentData: [
+                    "estudios": estudios,
+                    "universidad": universidad,
+                    "idiomas": idiomasArray,
+                    "sexo": sexo,
+                    "tipoPersona": tipoPersona,
+                    "ambiente": ambiente,
+                    "tiempoLibre": tiempoLibre,
+                    "fumar": fumarCheck,
+                    "fiesta": fiestaCheck,
+                    "descripcion": descripcion,
+                    "url": path
+                ]
+            ) { error in
+                if let error = error {
+                    print("Error update data:", error)
+                } else {
+                    print("Data update successfully")
+                }
             }
+
         }
 
+        navigationCheck = true
     }
 
     public func onAppear() {
 
-        print(globalViewModel.users)
-
-        //let profile = globalViewModel.users.first(where: { $0.userID == "1" })
-
-
-
     }
-    
+
     public func actionFromView() {
         // Example of private method
     }
-    
+
 }
 
 

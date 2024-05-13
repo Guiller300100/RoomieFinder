@@ -110,6 +110,7 @@ struct CreacionPerfilView: View {
 
             Button {
                 viewModel.isMultiPickerOpen.toggle()
+                viewModel.uploadPhoto()
             } label: {
                 HStack
                 {
@@ -354,11 +355,22 @@ struct CreacionPerfilView: View {
             Text("Descríbete para conocerte más:")
                 .customFont(font: .boldFont, size: 14)
 
-            TextField("", text: $viewModel.descripcion, onCommit: {
-                focusedField = nil
-            })
-            .textFieldStyle(.plain)
-            .focused($focusedField, equals: .descripcion)
+            TextField("", text: $viewModel.descripcion, axis: .vertical)
+                .lineLimit(2)
+                .textFieldStyle(.plain)
+                .focused($focusedField, equals: .descripcion)
+                .toolbar {
+                    if focusedField == .descripcion {
+                        ToolbarItem(placement: .keyboard) {
+                            HStack {
+                                Spacer()
+                                Button("Fin") {
+                                    focusedField = nil
+                                }
+                            }
+                        }
+                    }
+                }
 
             Divider()
                 .frame(height: 1)
