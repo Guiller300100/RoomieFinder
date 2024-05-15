@@ -9,7 +9,11 @@ import Foundation
 class GlobalViewModel: ObservableObject {
     static let shared = GlobalViewModel()
 
+    //Info de los demas perfiles
     @Published var users = [Usuario]()
+    @Published var anuncios = [Anuncio]()
+
+    //CurrentUser
     @Published var misAnuncios = [Anuncio]()
     @Published var currentUser: Usuario = Usuario(
         id: "",
