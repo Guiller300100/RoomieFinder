@@ -39,7 +39,7 @@ struct AnunciosActivosView: View {
         }
 
         .navigationDestination(isPresented: $viewModel.isNavigated) {
-            CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: false)
+            CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: false))
                 .navigationBarBackButtonHidden()
         }
     }

@@ -40,7 +40,7 @@ struct CreacionPerfilView: View {
 
         .navigationDestination(isPresented: $viewModel.navigationCheck, destination: {
             withAnimation {
-                CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: true)
+                CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: true))
                     .navigationBarBackButtonHidden(true)
             }
         })
@@ -110,7 +110,6 @@ struct CreacionPerfilView: View {
 
             Button {
                 viewModel.isMultiPickerOpen.toggle()
-                viewModel.uploadPhoto()
             } label: {
                 HStack
                 {
@@ -151,6 +150,7 @@ struct CreacionPerfilView: View {
             Button {
                 viewModel.hombreCheck = true
                 viewModel.mujerCheck = !viewModel.hombreCheck
+                viewModel.uploadPhoto()
 
             } label: {
                 HStack {
@@ -166,6 +166,7 @@ struct CreacionPerfilView: View {
             Button {
                 viewModel.mujerCheck = true
                 viewModel.hombreCheck = !viewModel.mujerCheck
+                viewModel.uploadPhoto()
 
             } label: {
                 HStack {
@@ -324,7 +325,7 @@ struct CreacionPerfilView: View {
 
             Button {
                 viewModel.fiestaCheck = true
-
+                viewModel.uploadPhoto()
             } label: {
                 HStack {
                     Image(systemName: viewModel.fiestaCheck ? "checkmark.circle.fill" : "circle")
@@ -338,7 +339,6 @@ struct CreacionPerfilView: View {
 
             Button {
                 viewModel.fiestaCheck = false
-
             } label: {
                 HStack {
                     Image(systemName: viewModel.fiestaCheck ? "circle" : "checkmark.circle.fill")

@@ -23,4 +23,5 @@ struct Constants {
 
 public enum CollectionType: String {
     case Perfiles
+    case Anuncios
 }

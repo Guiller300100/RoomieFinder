@@ -55,22 +55,6 @@ public class CreacionPerfilViewModel: ObservableObject {
     @Published var alertMessageCreacionPerfil: String = ""
 
 
-    func comprobarField() {
-
-        if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
-
-            alertTitleCreacionPerfil = "Campos vacíos"
-            alertMessageCreacionPerfil = "Por favor, completa todos los campos."
-            alertPushCreacionPerfil = true
-
-        } else {
-
-            self.addData(path: photoPath)
-
-        }
-
-    }
-
     func uploadPhoto() {
         guard let currentUser = Auth.auth().currentUser else {
             return
@@ -101,6 +85,63 @@ public class CreacionPerfilViewModel: ObservableObject {
         }
     }
 
+    func comprobarField() {
+
+        if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
+
+            alertTitleCreacionPerfil = "Campos vacíos"
+            alertMessageCreacionPerfil = "Por favor, completa todos los campos."
+            alertPushCreacionPerfil = true
+
+        } else {
+
+            self.addData { error in
+                if error != nil {
+                    print(error ?? "Error al subir los datos")
+                } else {
+                    self.navigationCheck = true
+                }
+            }
+
+        }
+
+    }
+
+    func addData(completion: @escaping (Error?) -> Void) {
+
+
+        prepareData()
+
+
+        DispatchQueue.main.async { [self] in
+            FirestoreUtils.updateData(
+                collection: .Perfiles,
+                documentId: globalViewModel.currentUser.id,
+                documentData: [
+                    "estudios": estudios,
+                    "universidad": universidad,
+                    "idiomas": idiomasArray,
+                    "sexo": sexo,
+                    "tipoPersona": tipoPersona,
+                    "ambiente": ambiente,
+                    "tiempoLibre": tiempoLibre,
+                    "fumar": fumarCheck,
+                    "fiesta": fiestaCheck,
+                    "descripcion": descripcion,
+                    "url": photoPath
+                ]
+            ) { error in
+                if let error = error {
+                    print("Error update data:", error)
+                    completion(error)
+                } else {
+                    print("Data update successfully")
+                    completion(nil)
+                }
+            }
+
+        }
+    }
 
     func prepareData() {
         if hombreCheck {
@@ -126,47 +167,6 @@ public class CreacionPerfilViewModel: ObservableObject {
         let idiomasStrings = idiomas.map { $0.rawValue }
 
         idiomasArray = idiomasStrings
-
-
-    }
-
-    func addData(path: String) {
-
-        guard let currentUser = Auth.auth().currentUser else {return}
-        guard let profile = globalViewModel.users.first(where: { $0.userID == currentUser.uid }) else {return}
-
-
-        prepareData()
-
-
-        DispatchQueue.main.async { [self] in
-            FirestoreUtils.updateData(
-                collection: .Perfiles,
-                documentId: profile.id,
-                documentData: [
-                    "estudios": estudios,
-                    "universidad": universidad,
-                    "idiomas": idiomasArray,
-                    "sexo": sexo,
-                    "tipoPersona": tipoPersona,
-                    "ambiente": ambiente,
-                    "tiempoLibre": tiempoLibre,
-                    "fumar": fumarCheck,
-                    "fiesta": fiestaCheck,
-                    "descripcion": descripcion,
-                    "url": path
-                ]
-            ) { error in
-                if let error = error {
-                    print("Error update data:", error)
-                } else {
-                    print("Data update successfully")
-                }
-            }
-
-        }
-
-        navigationCheck = true
     }
 
     public func onAppear() {

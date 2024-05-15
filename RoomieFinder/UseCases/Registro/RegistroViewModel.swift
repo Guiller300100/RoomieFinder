@@ -48,6 +48,28 @@ public class RegistroViewModel: ObservableObject {
         }
     }
 
+    func createUser() {
+
+        Auth.auth().createUser(withEmail: correoElectronico, password: passwordInput) { result, error in
+            if let resultDes = result, error == nil {
+                print(resultDes)
+                self.addData { error in
+                    if error != nil {
+                        // Handle error from addData
+                    } else {
+                        self.getData()
+                        self.isRegistred = true
+                    }
+            }
+            } else {
+                self.alertTitleRegistro = "Error"
+                self.alertMessageRegistro = "Correo o contraseña incorrectos"
+                self.alertPushRegistro = true
+                print(error!)
+            }
+        }
+    }
+
     func addData(completion: @escaping (Error?) -> Void) {
 
         guard let currentUser = Auth.auth().currentUser else { return }
@@ -75,11 +97,11 @@ public class RegistroViewModel: ObservableObject {
     }
 
     func getData() {
-        FirestoreUtils.getData(collection: .Perfiles) { snapshot in
+        var usuario = [Usuario]()
+        FirestoreUtils.getDataCurrentUser(collection: .Perfiles) { snapshot in
             if let snapshot = snapshot {
 
-                    self.globalViewModel.users = []
-                    self.globalViewModel.users = snapshot.documents.map{ d in
+                    usuario = snapshot.documents.map{ d in
                         return Usuario(
                             id: d.documentID,
                             userID: d["userID"] as? String ?? "",
@@ -102,7 +124,11 @@ public class RegistroViewModel: ObservableObject {
                             )
                     }
                 }
+
+            self.globalViewModel.currentUser = usuario.first!
             }
+
+        print(globalViewModel.currentUser)
         print("Recogido los datos")
     }
 
@@ -134,29 +160,6 @@ public class RegistroViewModel: ObservableObject {
 
 
     }
-
-    func createUser() {
-
-        Auth.auth().createUser(withEmail: correoElectronico, password: passwordInput) { result, error in
-            if let resultDes = result, error == nil {
-                print(resultDes)
-                self.addData { error in
-                    if error != nil {
-                        // Handle error from addData
-                    } else {
-                        self.getData()
-                        self.isRegistred = true
-                    }
-            }
-            } else {
-                self.alertTitleRegistro = "Error"
-                self.alertMessageRegistro = "Correo o contraseña incorrectos"
-                self.alertPushRegistro = true
-                print(error!)
-            }
-        }
-    }
-
 
     public func onAppear() {
 
