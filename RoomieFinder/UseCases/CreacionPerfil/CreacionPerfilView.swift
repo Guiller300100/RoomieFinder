@@ -35,7 +35,9 @@ struct CreacionPerfilView: View {
         })
 
         .sheet(isPresented: $viewModel.isShowingPhotoPicker, content: {
-            PhotoPicker.init(avatarImage: $viewModel.avatarImage)
+            PhotoPicker.init(avatarImage: $viewModel.avatarImage) {
+                viewModel.uploadPhoto()
+            }
         })
 
         .navigationDestination(isPresented: $viewModel.navigationCheck, destination: {
@@ -150,7 +152,6 @@ struct CreacionPerfilView: View {
             Button {
                 viewModel.hombreCheck = true
                 viewModel.mujerCheck = !viewModel.hombreCheck
-                viewModel.uploadPhoto()
 
             } label: {
                 HStack {
@@ -166,8 +167,6 @@ struct CreacionPerfilView: View {
             Button {
                 viewModel.mujerCheck = true
                 viewModel.hombreCheck = !viewModel.mujerCheck
-                viewModel.uploadPhoto()
-
             } label: {
                 HStack {
                     Image(systemName: viewModel.mujerCheck ? "checkmark.circle.fill" : "circle")

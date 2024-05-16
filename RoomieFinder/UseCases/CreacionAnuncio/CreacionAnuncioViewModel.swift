@@ -115,9 +115,9 @@ public class CreacionAnuncioViewModel: ObservableObject {
                         num_hab: d["num_hab"] as? String ?? ""
                     )
                 }
+                print("Recogido los datos del Anuncio")
             }
         }
-        print("Recogido los datos del Anuncio")
     }
 
     func getDataUser() {
@@ -155,39 +155,7 @@ public class CreacionAnuncioViewModel: ObservableObject {
             self.globalViewModel.currentUser = usuario.first!
         }
         print("Recogido los datos de usuario")
-
-        // TODO: HACER ESTO CUANDO CARGUE LA FOTO DE PERFIL
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            self.getPhoto()
-//        }
     }
-    
-//    func getPhoto() {
-//
-//        guard let currentUser = Auth.auth().currentUser else {return}
-//
-//        let user = globalViewModel.users.first { $0.userID == currentUser.uid }
-//
-//
-//        let storageRef = Storage.storage().reference()
-//        let fileRef = storageRef.child(user!.info.urlImage)
-//
-//        DispatchQueue.main.async {
-//            fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
-//                if let error = error {
-//                    print("Error getting image data: \(error)")
-//                } else if let data = data {
-//                    if let image = UIImage(data: data) {
-//                        self.avatarImage = image
-//                    } else {
-//                        print("Error creating UIImage from data")
-//                    }
-//                } else {
-//                    print("No data received")
-//                }
-//            }
-//        }
-//    }
     
     public func onAppear() {
         if firstTime {

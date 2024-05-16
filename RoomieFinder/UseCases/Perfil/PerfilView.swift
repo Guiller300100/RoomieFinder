@@ -30,6 +30,9 @@ struct PerfilView: View {
             .padding()
 
         }
+        .onAppear() {
+            viewModel.onAppear()
+        }
 
         .navigationDestination(isPresented: $viewModel.navigationCheck,
                                destination: {
@@ -42,7 +45,9 @@ struct PerfilView: View {
         })
 
         .sheet(isPresented: $viewModel.isShowingPhotoPicker, content: {
-            PhotoPicker.init(avatarImage: $viewModel.avatarImage)
+            PhotoPicker.init(avatarImage: $viewModel.avatarImage) {
+                viewModel.uploadPhoto()
+            }
         })
     }
 
@@ -112,6 +117,19 @@ struct PerfilView: View {
             Spacer()
         }
 
+    }
+
+    private var buttonUploadPhoto: some View {
+        Button(action: {
+            viewModel.uploadPhoto()
+        }) {
+            Text("Aplicar cambios")
+                .customFont(font: .boldFont, size: 15)
+                .frame(width: 217, height: 41)
+                .foregroundStyle(.white)
+                .background(Constants.mainColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
     }
 
 }
