@@ -119,47 +119,10 @@ public class CreacionAnuncioViewModel: ObservableObject {
             }
         }
     }
-
-    func getDataUser() {
-        var usuario = [Usuario]()
-        FirestoreUtils.getDataCurrentUser(collection: .Perfiles) { snapshot in
-            if let snapshot = snapshot {
-
-                usuario = snapshot.documents.map{ d in
-                    let idiomasStrings = d["idiomas"] as? [String] ?? []
-                    // Convierte los strings a instancias de enum Idiomas
-                    let idiomasEnum: Set<Idiomas> = Set(idiomasStrings.compactMap { Idiomas(rawValue: $0) })
-
-                    return Usuario(
-                        id: d.documentID,
-                        userID: d["userID"] as? String ?? "",
-                        nombre: d["nombre"] as? String ?? "",
-                        apellido: d["apellido"] as? String ?? "",
-                        fnac: d["fnac"] as? String ?? "",
-                        info: Info(
-                            estudios: d["estudios"] as? String ?? "",
-                            universidad: d["universidad"] as? String ?? "",
-                            idiomas: idiomasEnum,
-                            sexo: d["sexo"] as? String ?? "",
-                            tipoPersona: d["tipoPersona"] as? String ?? "",
-                            ambiente: d["ambiente"] as? String ?? "",
-                            tiempoLibre: d["tiempoLibre"] as? String ?? "",
-                            fumar: d["fumar"] as? Bool ?? false,
-                            fiesta: d["fiesta"] as? Bool ?? false,
-                            descripcion: d["descripcion"] as? String ?? "",
-                            urlImage: d["url"] as? String ?? ""
-                        )
-                    )
-                }
-            }
-            self.globalViewModel.currentUser = usuario.first!
-        }
-        print("Recogido los datos de usuario")
-    }
     
     public func onAppear() {
         if firstTime {
-            getDataUser()
+            globalViewModel.getDataCurrentUser()
         }
 
         if anuncioSelected != nil {

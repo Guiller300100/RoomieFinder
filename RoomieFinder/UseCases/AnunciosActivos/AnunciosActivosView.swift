@@ -9,6 +9,9 @@ import SwiftUI
 struct AnunciosActivosView: View {
     @StateObject var viewModel: AnunciosActivosViewModel
 
+    //Array de datos
+    @StateObject var globalViewModel = GlobalViewModel.shared
+
     init(_ viewModel: AnunciosActivosViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -29,9 +32,7 @@ struct AnunciosActivosView: View {
 
                 textLabel
 
-                AnuncioRow()
-
-                AnuncioRow()
+                anuncios
 
                 buttonNewLabel
 
@@ -64,6 +65,16 @@ struct AnunciosActivosView: View {
                 .background(Constants.mainColor)
                 .clipShape(RoundedRectangle(cornerRadius: 999))
         }
+    }
+
+    private var anuncios: some View {
+
+        ForEach(globalViewModel.misAnuncios) { anuncio in
+            
+            AnuncioRow(anuncio: anuncio)
+
+        }
+
     }
 
 }

@@ -10,6 +10,9 @@ struct LoginView: View {
     @StateObject var viewModel: LoginViewModel
     @FocusState private var focusedField: FocusedField?
 
+    //Datos globables
+    @StateObject var globalViewModel = GlobalViewModel.shared
+
     init(_ viewModel: LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -93,7 +96,8 @@ struct LoginView: View {
 
     private var logInButton: some View {
         Button(action: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            globalViewModel.fromLogin = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 viewModel.comprobarFields()
             }
         }, label: {

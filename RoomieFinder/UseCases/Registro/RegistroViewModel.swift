@@ -57,7 +57,7 @@ public class RegistroViewModel: ObservableObject {
                     if error != nil {
                         // Handle error from addData
                     } else {
-                        self.getData()
+                        self.globalViewModel.getDataCurrentUser()
                         self.isRegistred = true
                     }
             }
@@ -94,42 +94,6 @@ public class RegistroViewModel: ObservableObject {
             }
         }
         print(currentUser.uid)
-    }
-
-    func getData() {
-        var usuario = [Usuario]()
-        FirestoreUtils.getDataCurrentUser(collection: .Perfiles) { snapshot in
-            if let snapshot = snapshot {
-
-                    usuario = snapshot.documents.map{ d in
-                        return Usuario(
-                            id: d.documentID,
-                            userID: d["userID"] as? String ?? "",
-                            nombre: d["nombre"] as? String ?? "",
-                            apellido: d["apellido"] as? String ?? "",
-                            fnac: d["fnac"] as? String ?? "",
-                            info: Info(
-                                estudios: "",
-                                universidad: "",
-                                idiomas: Set<Idiomas>(),
-                                sexo: "",
-                                tipoPersona: "",
-                                ambiente: "",
-                                tiempoLibre: "",
-                                fumar: false,
-                                fiesta: false,
-                                descripcion: "",
-                                urlImage: "DefaultAvatarImage"
-                            )
-                            )
-                    }
-                }
-
-            self.globalViewModel.currentUser = usuario.first!
-            }
-
-        print(globalViewModel.currentUser)
-        print("Recogido los datos")
     }
 
     func calcularEdadComoString() -> String {

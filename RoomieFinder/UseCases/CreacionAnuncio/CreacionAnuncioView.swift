@@ -9,7 +9,6 @@ import SwiftUI
 struct CreacionAnuncioView: View {
     @StateObject var viewModel: CreacionAnuncioViewModel
     @FocusState private var focusedField: AnuncioFieldType?
-    @StateObject var globalViewModel = GlobalViewModel.shared
     @Environment(\.presentationMode) var presentationMode
 
     init(_ viewModel: CreacionAnuncioViewModel) {
@@ -97,7 +96,7 @@ struct CreacionAnuncioView: View {
             .padding(.bottom, 16)
 
             //MARK: ¿En que barrio buscas piso/Donde esta el piso?
-            Text(viewModel.pisoCheck ? "¿Dónde esta el piso? (No pongas la dirección exacta, solo el barrio, por privacidad)" : "¿En que barrio buscas piso?")
+            Text(viewModel.pisoCheck ? "¿Dónde esta el piso? (No pongas la dirección exacta, solo el barrio o la zona, por privacidad)" : "¿En que zona/barrio buscas piso?")
                 .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.direccion, onCommit: {
@@ -112,7 +111,7 @@ struct CreacionAnuncioView: View {
                 .padding(.bottom, 16)
 
             //MARK: ¿Durante cuanto tiempo?
-            Text("¿Durante cuanto tiempo?")
+            Text("¿Durante cuanto tiempo? (Especifica meses o año)")
                 .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.tiempoAlquiler, onCommit: {

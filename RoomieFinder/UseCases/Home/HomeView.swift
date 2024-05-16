@@ -9,7 +9,6 @@ import SwiftUI
 struct HomeView: View {
     // MARK: Variables
     @StateObject var viewModel: HomeViewModel
-    @State private var selection = 1
 
     init(_ viewModel: HomeViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -18,10 +17,10 @@ struct HomeView: View {
     
     // MARK: body
     var body: some View {
-        TabView(selection: $selection) {
+        TabView(selection: $viewModel.selection) {
             MensajesView(MensajesViewModel())
                 .tabItem {
-                    Image(systemName: selection == 0 ? "message.fill" : "message")
+                    Image(systemName: viewModel.selection == 0 ? "message.fill" : "message")
                         .environment(\.symbolVariants, .none)
                     Text("Mensajes")
                         .customFont(font: .mediumFont, size: 12)
@@ -29,7 +28,7 @@ struct HomeView: View {
                 .tag(0)
             BusquedaView(BusquedaViewModel())
                 .tabItem {
-                    if selection == 1 {
+                    if viewModel.selection == 1 {
                         Image("magnifyingglass")
                             .font(.system(size: 30, weight: .heavy))
                     } else {
@@ -41,7 +40,7 @@ struct HomeView: View {
                 .tag(1)
             PerfilView(PerfilViewModel())
                 .tabItem {
-                    Image(systemName: selection == 2 ? "person.fill" : "person")
+                    Image(systemName: viewModel.selection == 2 ? "person.fill" : "person")
                         .environment(\.symbolVariants, .none)
                     Text("Perfil")
                         .customFont(font: .mediumFont, size: 12)
