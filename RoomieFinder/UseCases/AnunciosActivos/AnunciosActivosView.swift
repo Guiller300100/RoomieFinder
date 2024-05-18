@@ -38,10 +38,20 @@ struct AnunciosActivosView: View {
 
             }
         }
+        .onAppear() {
+            viewModel.onAppear()
+        }
 
-        .navigationDestination(isPresented: $viewModel.isNavigated) {
+        .navigationDestination(isPresented: $viewModel.isNavigatedNew) {
             CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: false))
                 .navigationBarBackButtonHidden()
+        }
+
+        .navigationDestination(isPresented: $viewModel.isNavigatedModified) {
+            if let anuncio = viewModel.anuncioSelected {
+                CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: false, anuncioSelected: anuncio))
+                    .navigationBarBackButtonHidden()
+            }
         }
     }
 
@@ -53,9 +63,22 @@ struct AnunciosActivosView: View {
 
     }
 
+    private var anuncios: some View {
+
+        ForEach(globalViewModel.misAnuncios) { anuncio in
+
+            AnuncioRow(anuncio: anuncio) {
+                self.viewModel.anuncioSelected = anuncio
+                viewModel.isNavigatedModified = true
+            }
+
+        }
+
+    }
+
     private var buttonNewLabel: some View {
         Button(action: {
-            viewModel.isNavigated = true
+            viewModel.isNavigatedNew = true
 
         }) {
             Text("Nuevo anuncio")
@@ -65,16 +88,6 @@ struct AnunciosActivosView: View {
                 .background(Constants.mainColor)
                 .clipShape(RoundedRectangle(cornerRadius: 999))
         }
-    }
-
-    private var anuncios: some View {
-
-        ForEach(globalViewModel.misAnuncios) { anuncio in
-            
-            AnuncioRow(anuncio: anuncio)
-
-        }
-
     }
 
 }

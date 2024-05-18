@@ -15,6 +15,7 @@ public class CreacionPerfilViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //VARIABLES
+    @Published var firstTime: Bool
     @Published var estudios = ""
     @Published var universidad = ""
     @Published var idiomas = Set<Idiomas>()
@@ -54,6 +55,9 @@ public class CreacionPerfilViewModel: ObservableObject {
     @Published var alertTitleCreacionPerfil: String = ""
     @Published var alertMessageCreacionPerfil: String = ""
 
+    public init(firstTime: Bool = true) {
+        self.firstTime = firstTime
+    }
 
     func uploadPhoto() {
         guard let currentUser = Auth.auth().currentUser else {
@@ -85,24 +89,24 @@ public class CreacionPerfilViewModel: ObservableObject {
         }
     }
 
-    func comprobarField() {
+    func comprobarFields(completion: @escaping (Bool) -> Void) {
 
         if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
 
             alertTitleCreacionPerfil = "Campos vacíos"
             alertMessageCreacionPerfil = "Por favor, completa todos los campos."
             alertPushCreacionPerfil = true
+            completion(false)
 
-        } else {
-
+        }  else {
             self.addData { error in
-                if error != nil {
-                    print(error ?? "Error al subir los datos")
+                if let error = error {
+                    print(error)
+                    completion(false)
                 } else {
-                    self.navigationCheck = true
+                    completion(true)
                 }
             }
-
         }
 
     }
@@ -112,24 +116,41 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         prepareData()
 
+        var data = [String: Any]()
+        if firstTime {
+            data = [
+                "estudios": estudios,
+                "universidad": universidad,
+                "idiomas": idiomasArray,
+                "sexo": sexo,
+                "tipoPersona": tipoPersona,
+                "ambiente": ambiente,
+                "tiempoLibre": tiempoLibre,
+                "fumar": fumarCheck,
+                "fiesta": fiestaCheck,
+                "descripcion": descripcion,
+                "url": photoPath
+            ]
+        } else {
+            data = [
+                "estudios": estudios,
+                "universidad": universidad,
+                "idiomas": idiomasArray,
+                "sexo": sexo,
+                "tipoPersona": tipoPersona,
+                "ambiente": ambiente,
+                "tiempoLibre": tiempoLibre,
+                "fumar": fumarCheck,
+                "fiesta": fiestaCheck,
+                "descripcion": descripcion
+            ]
+        }
 
         DispatchQueue.main.async { [self] in
             FirestoreUtils.updateData(
                 collection: .Perfiles,
                 documentId: globalViewModel.currentUser.id,
-                documentData: [
-                    "estudios": estudios,
-                    "universidad": universidad,
-                    "idiomas": idiomasArray,
-                    "sexo": sexo,
-                    "tipoPersona": tipoPersona,
-                    "ambiente": ambiente,
-                    "tiempoLibre": tiempoLibre,
-                    "fumar": fumarCheck,
-                    "fiesta": fiestaCheck,
-                    "descripcion": descripcion,
-                    "url": photoPath
-                ]
+                documentData: data
             ) { error in
                 if let error = error {
                     print("Error update data:", error)
@@ -159,9 +180,9 @@ public class CreacionPerfilViewModel: ObservableObject {
         }
 
         if ambienteSocialCheck {
-            ambiente = "Social"
+            ambiente = "social"
         } else if ambienteTranquiloCheck {
-            ambiente = "Tranquilo"
+            ambiente = "tranquilo"
         }
 
         let idiomasStrings = idiomas.map { $0.rawValue }
@@ -169,7 +190,57 @@ public class CreacionPerfilViewModel: ObservableObject {
         idiomasArray = idiomasStrings
     }
 
+    private func modificarInfo() {
+        estudios = globalViewModel.currentUser.info.estudios
+        universidad = globalViewModel.currentUser.info.universidad
+        idiomas = globalViewModel.currentUser.info.idiomas
+
+        if globalViewModel.currentUser.info.sexo == "hombre" {
+            hombreCheck = true
+        } else if globalViewModel.currentUser.info.sexo == "mujer"{
+            mujerCheck = true
+        }
+
+
+        if globalViewModel.currentUser.info.tipoPersona == "activo" {
+            activoCheck = true
+        } else if globalViewModel.currentUser.info.tipoPersona == "tranquilo" {
+            tranquiloCheck = true
+        } else {
+            ambosCheck = true
+        }
+
+        if globalViewModel.currentUser.info.ambiente == "social" {
+            ambienteSocialCheck = true
+        } else if globalViewModel.currentUser.info.ambiente == "tranquilo" {
+            ambienteTranquiloCheck = true
+        }
+
+        tiempoLibre = globalViewModel.currentUser.info.tiempoLibre
+
+        if globalViewModel.currentUser.info.fumar {
+            fumarCheck = true
+        } else {
+            fumarCheck = false
+        }
+
+        if globalViewModel.currentUser.info.fiesta {
+            fiestaCheck = true
+        } else {
+            fiestaCheck = false
+        }
+
+        descripcion = globalViewModel.currentUser.info.descripcion
+
+    }
+
     public func onAppear() {
+        if !globalViewModel.currentUser.info.urlImage.isEmpty {
+            firstTime = false
+            modificarInfo()
+        } else {
+            firstTime = true
+        }
 
     }
 

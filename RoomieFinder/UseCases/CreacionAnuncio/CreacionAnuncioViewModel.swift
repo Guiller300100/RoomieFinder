@@ -15,7 +15,7 @@ public class CreacionAnuncioViewModel: ObservableObject {
 
     //ARRAYS DE DATOS
     @ObservedObject var globalViewModel = GlobalViewModel.shared
-    
+
     //VARIABLES
     @Published var direccion = ""
     @Published var tiempoAlquiler = ""
@@ -28,7 +28,7 @@ public class CreacionAnuncioViewModel: ObservableObject {
 
     //NAVIGATION CHECK
     @Published var navigationCheck = false
-    
+
     //ALERTAS
     @Published var alertPushCreacionAnuncio = false
     @Published var alertTitleCreacionAnuncio: String = ""
@@ -44,33 +44,48 @@ public class CreacionAnuncioViewModel: ObservableObject {
         self.anuncioSelected = anuncioSelected
     }
 
-    
+
     func comprobarFields(completion: @escaping (Bool) -> Void) {
 
         if direccion.isEmpty || tiempoAlquiler.isEmpty || precio.isEmpty || ( pisoCheck && numHabitaciones.isEmpty)  {
-            
+
             alertTitleCreacionAnuncio = "Campos vacíos"
             alertMessageCreacionAnuncio = "Por favor, completa todos los campos."
             alertPushCreacionAnuncio = true
-            
+
         } else {
 
             //TODO: COMPROBAR SI ANUNCIOSELECTED ES NULO O NO, YA QUE SI NO ES NULO ES HACER UN UPDATE
 
-            self.addData { error in
-                if error != nil {
-                    print("error al subir los datos")
-                } else {
-                    self.getDataAd()
-                    if self.firstTime {
-                        completion(true)
+            if anuncioSelected == nil {
+                self.addData { error in
+                    if error != nil {
+                        print("error al subir los datos")
                     } else {
-                        completion(false)
+                        self.getDataAd()
+                        if self.firstTime {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    }
+                }
+            } else {
+                self.updateData { error in
+                    if error != nil {
+                        print("error al subir los datos")
+                    } else {
+                        self.getDataAd()
+                        if self.firstTime {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
                     }
                 }
             }
         }
-        
+
     }
 
     func addData(completion: @escaping (Error?) -> Void) {
@@ -81,6 +96,35 @@ public class CreacionAnuncioViewModel: ObservableObject {
                 collection: .Anuncios,
                 documentData: [
                     "userID": globalViewModel.currentUser.userID,
+                    "barrio": direccion,
+                    "tiempoEstancia": tiempoAlquiler,
+                    "presupuesto": precio,
+                    "num_hab": numHabitaciones
+                ]
+            ) { error in
+                if let error = error {
+                    print("Error update data:", error)
+                    completion(error)
+                } else {
+                    print("Data update successfully")
+                    completion(nil)
+                }
+            }
+
+        }
+    }
+
+
+    func updateData(completion: @escaping (Error?) -> Void) {
+
+
+
+
+        DispatchQueue.main.async { [self] in
+            FirestoreUtils.updateData(
+                collection: .Anuncios,
+                documentId: anuncioSelected!.id,
+                documentData: [
                     "barrio": direccion,
                     "tiempoEstancia": tiempoAlquiler,
                     "presupuesto": precio,
@@ -119,7 +163,7 @@ public class CreacionAnuncioViewModel: ObservableObject {
             }
         }
     }
-    
+
     public func onAppear() {
         if firstTime {
             globalViewModel.getDataCurrentUser()
@@ -138,12 +182,12 @@ public class CreacionAnuncioViewModel: ObservableObject {
 
 
     }
-    
+
     public func actionFromView() {
         // Example of private method
     }
-    
-    
+
+
 }
 
 

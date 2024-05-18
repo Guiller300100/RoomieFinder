@@ -192,9 +192,9 @@ struct CreacionAnuncioView: View {
                 }
             }
         }) {
-            Text("Crear anuncio")
+            Text(viewModel.anuncioSelected != nil ? "Modificar anuncio" : "Crear anuncio")
                 .customFont(font: .boldFont, size: 15)
-                .frame(width: 127, height: 36)
+                .frame(width: 140, height: 36)
                 .foregroundStyle(.white)
                 .background(Constants.mainColor)
                 .clipShape(RoundedRectangle(cornerRadius: 999))

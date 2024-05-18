@@ -10,6 +10,7 @@ struct CreacionPerfilView: View {
 
     @StateObject var viewModel: CreacionPerfilViewModel
     @FocusState private var focusedField: CreacionType?
+    @Environment(\.presentationMode) var presentationMode
 
     init(_ viewModel: CreacionPerfilViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -21,7 +22,9 @@ struct CreacionPerfilView: View {
             TopBarView()
             ScrollView {
 
-                titleAndPhoto
+                if viewModel.firstTime {
+                    titleAndPhoto
+                }
 
                 formLabel
 
@@ -29,6 +32,9 @@ struct CreacionPerfilView: View {
 
             }
 
+        }
+        .onAppear() {
+            viewModel.onAppear()
         }
         .alert(isPresented: $viewModel.alertPushCreacionPerfil, content: {
             Alert(title: Text(viewModel.alertTitleCreacionPerfil), message: Text(viewModel.alertMessageCreacionPerfil), dismissButton: .default(Text("Vale")))
@@ -383,7 +389,16 @@ struct CreacionPerfilView: View {
     private var buttonLabel: some View {
         //MARK: BOTON GUARDAR
         Button(action: {
-            viewModel.comprobarField()
+            viewModel.comprobarFields { success in
+                if success {
+                    if viewModel.firstTime {
+                        viewModel.navigationCheck = true
+                    } else {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+
         }) {
             Text("Guardar")
                 .customFont(font: .boldFont, size: 15)

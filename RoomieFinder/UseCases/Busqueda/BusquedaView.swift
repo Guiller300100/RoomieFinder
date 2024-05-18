@@ -9,6 +9,9 @@ import SwiftUI
 struct BusquedaView: View {
     @StateObject var viewModel: BusquedaViewModel
 
+    //Array de datos
+    @StateObject var globalViewModel = GlobalViewModel.shared
+
     init(_ viewModel: BusquedaViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -44,11 +47,11 @@ struct BusquedaView: View {
 
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-                        ForEach(viewModel.perfilList, id: \.id) { perfil in
-                            PerfilRow(perfil: perfil)
+                        ForEach(globalViewModel.anuncios, id: \.id) { anuncio in
+                            PerfilRow(anuncio: anuncio)
                                 .onTapGesture {
                                     DispatchQueue.main.async {
-                                        self.viewModel.perfilSeleccionado = perfil
+                                        self.viewModel.anuncioSeleccionado = anuncio
                                         self.viewModel.isTapped.toggle()
                                     }
                                 }
@@ -60,11 +63,12 @@ struct BusquedaView: View {
         }
         //MARK: - VISTA MODAL PERSONAS
         .sheet(isPresented: $viewModel.isShowed) {
-            if let perfil = viewModel.perfilSeleccionado {
-                PerfilDetailView(perfil: perfil)
+            if let anuncio = viewModel.anuncioSeleccionado {
+                let usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })!
+                PerfilDetailView(usuario: usuario)
                     .presentationDetents([.fraction(0.80)])
             } else {
-                Text(self.viewModel.perfilSeleccionado?.nombre ?? "No hay nombre")
+                Text("No hay nombre")
             }
         }
         .onChange(of: self.viewModel.isTapped, perform: { newValue in

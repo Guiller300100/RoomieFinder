@@ -34,11 +34,21 @@ struct PerfilView: View {
             viewModel.onAppear()
         }
 
-        .navigationDestination(isPresented: $viewModel.navigationCheck,
+        .navigationDestination(isPresented: $viewModel.navigationAnunciosCheck,
                                destination: {
             withAnimation {
                 AnunciosActivosView(
                     AnunciosActivosViewModel()
+                )
+                .navigationBarBackButtonHidden(true)
+            }
+        })
+
+        .navigationDestination(isPresented: $viewModel.navigationInfoPerfilCheck,
+                               destination: {
+            withAnimation {
+                CreacionPerfilView(
+                    CreacionPerfilViewModel(firstTime: false)
                 )
                 .navigationBarBackButtonHidden(true)
             }
@@ -89,7 +99,7 @@ struct PerfilView: View {
 
             //MARK: BOTON EDITAR
             Button(action: {
-
+                viewModel.navigationInfoPerfilCheck = true
             }) {
                 Text("Editar información personal")
                     .customFont(font: .boldFont, size: 15)
@@ -104,7 +114,7 @@ struct PerfilView: View {
 
             //MARK: BOTON ANUNCIOS
             Button(action: {
-                viewModel.navigationCheck = true
+                viewModel.navigationAnunciosCheck = true
             }) {
                 Text("Anuncios activos")
                     .customFont(font: .boldFont, size: 15)

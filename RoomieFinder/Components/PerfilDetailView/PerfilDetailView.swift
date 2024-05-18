@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PerfilDetailView: View {
 
-    let perfil: Perfil
+    let usuario: Usuario
 
     var body: some View {
         ZStack {
@@ -25,7 +25,7 @@ struct PerfilDetailView: View {
                         .padding()
 
                     VStack(alignment: .leading) {
-                        Text("\(String(describing: perfil.nombre)), años")
+                        Text("\(String(describing: usuario.nombre)), años")
                             .customFont(font: .mediumFont, size: 24)
                             .padding(.leading)
                             .padding(.top, 20)
@@ -85,5 +85,5 @@ struct PerfilDetailView: View {
 }
 
 #Preview {
-    PerfilDetailView(perfil: Perfil(nombre: "Juan", edad: 23, presupuesto: 1000, barrio: "Salamanca", favorito: false))
+    PerfilDetailView(usuario: Usuario(id: "", userID: "", nombre: "", apellido: "", fnac: "", info: Info(estudios: "", universidad: "", idiomas: Set<Idiomas>(), sexo: "", tipoPersona: "", ambiente: "", tiempoLibre: "", fumar: false, fiesta: false, descripcion: "", urlImage: "")))
 }

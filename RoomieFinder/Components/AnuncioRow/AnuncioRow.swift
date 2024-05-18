@@ -13,6 +13,8 @@ struct AnuncioRow: View {
 
     //Array de datos
     @StateObject var globalViewModel = GlobalViewModel.shared
+    var modifiedCallback: () -> Void
+
 
 
     var body: some View {
@@ -61,6 +63,8 @@ struct AnuncioRow: View {
     private var buttonModifiedLabel: some View {
         Button(action: {
 
+            modifiedCallback()
+
         }) {
             Text("Modificar anuncio")
                 .customFont(font: .boldFont, size: 15)
@@ -91,5 +95,7 @@ struct AnuncioRow: View {
 }
 
 #Preview {
-    AnuncioRow(anuncio: Anuncio(id: "", userID: "", barrio: "Parquesol", tiempoEstancia: "4 meses", presupuesto: "300€", num_hab: "4"))
+    AnuncioRow(anuncio: Anuncio(id: "", userID: "", barrio: "Parquesol", tiempoEstancia: "4 meses", presupuesto: "300€", num_hab: "4")) {
+
+    }
 }

@@ -12,8 +12,11 @@ public class AnunciosActivosViewModel: ObservableObject {
     //Array de datos
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
+    @Published var anuncioSelected: Anuncio?
 
-    @Published var isNavigated: Bool = false
+
+    @Published var isNavigatedNew: Bool = false
+    @Published var isNavigatedModified: Bool = false
 
     public func onAppear() {
         globalViewModel.getCurrentUserAd()

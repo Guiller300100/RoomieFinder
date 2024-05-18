@@ -27,4 +27,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         FirebaseApp.configure()
         return true
     }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+
+        print("CerrandoApp")
+
+        if Auth.auth().currentUser != nil {
+            do {
+                try Auth.auth().signOut()
+                // Cerrar sesión exitosamente
+                print("Sesión cerrada exitosamente.")
+            } catch let error as NSError {
+                // Manejar el error
+                print("Error al cerrar sesión: \(error.localizedDescription)")
+            }
+        }
+    }
 }

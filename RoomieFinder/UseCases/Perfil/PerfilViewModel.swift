@@ -19,7 +19,8 @@ public class PerfilViewModel: ObservableObject {
     @Published var isShowingPhotoPicker = false
 
     //NAVIGATION CHECK
-    @Published var navigationCheck = false
+    @Published var navigationAnunciosCheck = false
+    @Published var navigationInfoPerfilCheck = false
 
     //VARIABLES
     var photoPath = ""
