@@ -21,8 +21,8 @@ struct BusquedaView: View {
         VStack {
             TopBarView()
 
-            ScrollView {
-                VStack {
+            VStack {
+                ScrollView {
                     HStack {
                         Button {
 
@@ -58,6 +58,11 @@ struct BusquedaView: View {
                         }
                     }
                     .padding(.horizontal)
+                }
+                .refreshable {
+                    // Llama a las funciones para recargar datos
+                    globalViewModel.getAllUsers()
+                    globalViewModel.getAllAds()
                 }
             }
         }

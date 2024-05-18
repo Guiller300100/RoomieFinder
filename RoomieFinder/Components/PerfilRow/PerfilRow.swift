@@ -7,12 +7,14 @@
 
 import Foundation
 import SwiftUI
+import FirebaseStorage
 
 struct PerfilRow: View {
 
     //Array de datos
     @StateObject var globalViewModel = GlobalViewModel.shared
 
+    @State private var avatarImage: UIImage? = nil
     @State private var isFavorited: Bool = false
     let anuncio: Anuncio
     @State var usuario: Usuario?
@@ -25,7 +27,7 @@ struct PerfilRow: View {
 
     var body: some View {
         VStack {
-            Image("Perfil")
+            Image(uiImage: (avatarImage ?? UIImage(named: "DefaultAvatarImage")!))
                 .resizable()
                 .frame(width: 91, height: 71)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
@@ -67,8 +69,11 @@ struct PerfilRow: View {
 
             if !anuncio.num_hab.isEmpty {
                 HStack {
-                    Spacer()
+                    Text("Nº habs: \(anuncio.num_hab)")
+                        .customFont(font: .regularFont, size: 12)
 
+                    Spacer()
+                    
                     Image(systemName: "house")
                         .foregroundStyle(.black)
                         .frame(width: 20, height: 18)
@@ -82,8 +87,17 @@ struct PerfilRow: View {
         .background(Color.second)
         .clipShape(RoundedRectangle(cornerRadius: 30))
         .onAppear {
-            usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })!
-            //edad = calcularEdad(from: usuario.fnac)
+            guard !anuncio.userID.isEmpty else {
+                return
+            }
+            usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if let imageUrl = usuario?.info.urlImage {
+                    getPhoto(url: imageUrl) { image in
+                        avatarImage = image
+                    }
+                }
+            }
             //isFavorited = perfil.favorito
         }
 
@@ -130,3 +144,29 @@ private func calcularEdad(from fechaNacimientoString: String, with format: Strin
     let ageComponents = calendar.dateComponents([.year], from: fechaNacimiento, to: now)
     return ageComponents.year!
 }
+
+
+private func getPhoto(url: String, completion: @escaping (UIImage?) -> Void) {
+    let storageRef = Storage.storage().reference()
+    let fileRef = storageRef.child(url)
+
+    fileRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+        DispatchQueue.main.async {
+            if let error = error {
+                print("Error getting image data: \(error)")
+                completion(nil)
+            } else if let data = data {
+                if let image = UIImage(data: data) {
+                    completion(image)
+                } else {
+                    print("Error creating UIImage from data")
+                    completion(nil)
+                }
+            } else {
+                print("No data received")
+                completion(nil)
+            }
+        }
+    }
+}
+

@@ -13,7 +13,7 @@ extension String {
         guard !isEmpty else {
             return false
         }
-        // TODO: type.regex en utils
+        
         let regTest = NSPredicate(format: "SELF MATCHES %@", "[\\w.\\-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
         return regTest.evaluate(with: self)
     }

@@ -22,10 +22,7 @@ public class HomeViewModel: ObservableObject {
             selection = 1
             globalViewModel.fromLogin = false
         }
-        UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
-        //globalViewModel.getDataCurrentUser()
-        globalViewModel.getAllAds()
-        globalViewModel.getAllUsers()
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor)
     }
 
 

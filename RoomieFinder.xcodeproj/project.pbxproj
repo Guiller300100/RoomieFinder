@@ -31,7 +31,7 @@
 		B3D0BBC02BED31B2004E1AF1 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B3D0BBBF2BED31B2004E1AF1 /* FirebaseFirestoreCombine-Community */; };
 		B3D0BBC22BED31B7004E1AF1 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B3D0BBC12BED31B7004E1AF1 /* FirebaseDatabase */; };
 		B3D0BBC42BED31BB004E1AF1 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B3D0BBC32BED31BB004E1AF1 /* FirebaseDatabaseSwift */; };
-		B3D0BBC62BED391A004E1AF1 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0BBC52BED391A004E1AF1 /* DataModels.swift */; };
+		B3D0BBC62BED391A004E1AF1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0BBC52BED391A004E1AF1 /* Extensions.swift */; };
 		B3D0BBDA2BF14BFD004E1AF1 /* GlobalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0BBD92BF14BFD004E1AF1 /* GlobalViewModel.swift */; };
 		B3D0BBDC2BF27AFC004E1AF1 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B3D0BBDB2BF27AFC004E1AF1 /* FirebaseStorage */; };
 		B3D0BBDE2BF27AFC004E1AF1 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B3D0BBDD2BF27AFC004E1AF1 /* FirebaseStorageCombine-Community */; };
@@ -81,7 +81,7 @@
 		B39D5F3D2BC1695B00F3F561 /* UIImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerController.swift; sourceTree = "<group>"; };
 		B3CFCC292BF51CC900D44618 /* AnuncioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnuncioModel.swift; sourceTree = "<group>"; };
 		B3D0BBB92BED314B004E1AF1 /* FirestoreUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUtils.swift; sourceTree = "<group>"; };
-		B3D0BBC52BED391A004E1AF1 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
+		B3D0BBC52BED391A004E1AF1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B3D0BBD92BF14BFD004E1AF1 /* GlobalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalViewModel.swift; sourceTree = "<group>"; };
 		B3EA1E642BC58A62003EF343 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		B3EA1E672BC58A62003EF343 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				B3EA1E7C2BC58C4A003EF343 /* Constants.swift */,
 				B3EA1E7D2BC58C4A003EF343 /* DateFormat.swift */,
 				B3D0BBB92BED314B004E1AF1 /* FirestoreUtils.swift */,
-				B3D0BBC52BED391A004E1AF1 /* DataModels.swift */,
+				B3D0BBC52BED391A004E1AF1 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -541,7 +541,7 @@
 				B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */,
 				B3EA1E852BC58C4A003EF343 /* TextExtension.swift in Sources */,
 				B3FDA5092BDECF9000526E6A /* FiltrosView.swift in Sources */,
-				B3D0BBC62BED391A004E1AF1 /* DataModels.swift in Sources */,
+				B3D0BBC62BED391A004E1AF1 /* Extensions.swift in Sources */,
 				B39D5F3E2BC1695B00F3F561 /* UIImagePickerController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

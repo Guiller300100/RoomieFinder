@@ -3,8 +3,6 @@
 //  RoomieFinder
 //
 //  Created by Guillermo Rodriguez Alonso on 21/3/24.
-//
-//   let Perfils = try? JSONDecoder().decode(Perfils.self, from: jsonData)
 
 import Foundation
 import SwiftUI

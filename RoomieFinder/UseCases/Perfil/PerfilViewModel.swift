@@ -50,28 +50,9 @@ public class PerfilViewModel: ObservableObject {
                 print("Added the photo to Storage with path: \(self.photoPath)")
 
                 self.getPhoto()
-//                self.updateDataPhoto { error in
-//                    if error != nil {
-//                        print("Error update data:", error!)
-//                    } else {
-//
-//                    }
-//                }
             }
         }
     }
-
-//    func updateDataPhoto(completion: @escaping (Error?) -> Void) {
-//
-//        FirestoreUtils.updateData(collection: .Perfiles, documentId: globalViewModel.currentUser.id, documentData: ["url": photoPath]) { error in
-//            if let error = error {
-//                completion(error)
-//            } else {
-//                print("Data update successfully")
-//                completion(nil)
-//            }
-//        }
-//    }
 
     func getPhoto() {
         let storageRef = Storage.storage().reference()
@@ -98,7 +79,7 @@ public class PerfilViewModel: ObservableObject {
     public func onAppear() {
         globalViewModel.getDataCurrentUser()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.getPhoto()
         }
 

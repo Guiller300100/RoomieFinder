@@ -55,8 +55,6 @@ public class CreacionAnuncioViewModel: ObservableObject {
 
         } else {
 
-            //TODO: COMPROBAR SI ANUNCIOSELECTED ES NULO O NO, YA QUE SI NO ES NULO ES HACER UN UPDATE
-
             if anuncioSelected == nil {
                 self.addData { error in
                     if error != nil {

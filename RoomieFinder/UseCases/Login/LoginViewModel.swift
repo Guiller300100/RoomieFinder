@@ -11,9 +11,13 @@ import SwiftUI
 
 public class LoginViewModel: ObservableObject {
 
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
+
     //TEXTFIELDS
-    @Published var emailInput: String = ""
-    @Published var passwordInput: String = ""
+    //TODO: QUITARLO EN EL FUTURO
+    @Published var emailInput: String = "g@gmail.com"
+    @Published var passwordInput: String = "1234567"
     @Published var emailForegroundStyle = Color.black
 
     //BUTTONS
@@ -51,23 +55,25 @@ public class LoginViewModel: ObservableObject {
     }
 
     func signIn() {
-        Auth.auth().signIn(withEmail: emailInput, password: passwordInput) { [weak self] authResult, error in
-            guard self != nil else { return }
+        Auth.auth().signIn(withEmail: emailInput, password: passwordInput) { authResult, error in
 
             if let error = error {
                 // Manejar el error
                 print("Error al iniciar sesión: \(error.localizedDescription)")
 
                 // Establecer incorrectoLogin en true
-                self!.alertTitle = "Error"
-                self!.alertMessage = "Correo o contraseña incorrectos"
-                self!.alertPush = true
+                self.alertTitle = "Error"
+                self.alertMessage = "Correo o contraseña incorrectos"
+                self.alertPush = true
+                self.passwordInput = ""
                 return
             }
 
             // El inicio de sesión fue exitoso
             // Establecer correctoLogin en true
-            self?.correctLogin = true
+            self.globalViewModel.getAllAds()
+            self.globalViewModel.getAllUsers()
+            self.correctLogin = true
         }
     }
 

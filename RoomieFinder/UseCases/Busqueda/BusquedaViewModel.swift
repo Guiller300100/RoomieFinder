@@ -5,8 +5,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 public class BusquedaViewModel: ObservableObject {
+
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     @Published var filtrosNavegacion: Bool = false
     @Published var isShowed: Bool = false
@@ -14,6 +18,8 @@ public class BusquedaViewModel: ObservableObject {
     @Published var isTapped: Bool = false
 
     public func onAppear() {
+        globalViewModel.getAllAds()
+        globalViewModel.getAllUsers()
     }
 
 
