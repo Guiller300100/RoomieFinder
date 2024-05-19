@@ -15,9 +15,8 @@ public class LoginViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //TEXTFIELDS
-    //TODO: QUITARLO EN EL FUTURO
-    @Published var emailInput: String = "g@gmail.com"
-    @Published var passwordInput: String = "1234567"
+    @Published var emailInput: String = ""
+    @Published var passwordInput: String = ""
     @Published var emailForegroundStyle = Color.black
 
     //BUTTONS
@@ -28,20 +27,13 @@ public class LoginViewModel: ObservableObject {
     @Published var alertPush = false
     @Published var alertTitle: String = ""
     @Published var alertMessage: String = ""
-
-    func emailDidSubmit() {
-        emailForegroundStyle = emailInput.isEmailValid() ? .blue : .red
-    }
+    @Published var isKeyboardVisible = false
 
 
     func comprobarFields() {
         if emailInput.isEmpty || passwordInput.isEmpty {
             alertTitle = "Campos vacíos"
             alertMessage = "Por favor, completa todos los campos."
-            alertPush = true
-        } else if emailForegroundStyle == .red {
-            alertTitle = "Error en el email"
-            alertMessage = "Por favor, introduce un email válido."
             alertPush = true
         } else if passwordInput.count < 6 {
             alertTitle = "Error en la contraseña"
@@ -73,6 +65,7 @@ public class LoginViewModel: ObservableObject {
             // Establecer correctoLogin en true
             self.globalViewModel.getAllAds()
             self.globalViewModel.getAllUsers()
+            self.globalViewModel.getFav()
             self.correctLogin = true
         }
     }

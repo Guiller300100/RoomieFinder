@@ -9,6 +9,9 @@ import SwiftUI
 import FirebaseStorage
 
 struct PerfilDetailView: View {
+    
+    //Array de datos
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     let usuario: Usuario
     @State private var avatarImage: UIImage? = nil
@@ -110,16 +113,38 @@ struct PerfilDetailView: View {
                     Spacer()
                 }
 
-                Button {
-                    print("Crear chat")
-                } label: {
-                    Text("Guardar")
-                        .customFont(font: .boldFont, size: 15)
-                        .frame(width: 92, height: 36)
-                        .foregroundStyle(.white)
-                        .background(Constants.mainColor)
-                        .clipShape(RoundedRectangle(cornerRadius: 999))
+                HStack {
+
+                    Spacer()
+
+                    Button {
+                        print("Crear chat")
+                    } label: {
+                        Text("Crear chat")
+                            .customFont(font: .boldFont, size: 15)
+                            .frame(width: 92, height: 36)
+                            .foregroundStyle(.white)
+                            .background(Constants.mainColor)
+                            .clipShape(RoundedRectangle(cornerRadius: 999))
+                    }
+
+                    Spacer()
+
+                    Button(action: {
+                        if isUserInFavorites(userID: usuario.userID){
+                            globalViewModel.deleteFav()
+                        } else {
+                            globalViewModel.updateFav(userFavID: usuario.userID)
+                        }
+                    }, label: {
+                        Image(systemName: isUserInFavorites(userID: usuario.userID) ? "star.fill" : "star")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.yellow)
+                    })
+
                 }
+                .padding(.trailing, 16)
             }
 
 
@@ -131,6 +156,10 @@ struct PerfilDetailView: View {
                 }
             }
         }
+    }
+
+    private func isUserInFavorites(userID: String) -> Bool {
+        return globalViewModel.favoritos.contains { $0.favUserID == userID }
     }
 }
 

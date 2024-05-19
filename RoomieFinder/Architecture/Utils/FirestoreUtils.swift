@@ -33,6 +33,17 @@ class FirestoreUtils {
         }
     }
 
+    static func getData(collection: String, completion: @escaping (QuerySnapshot?) -> Void) {
+        db.collection(collection).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                completion(nil)
+                print("Error fetching data:", error)
+            } else {
+                completion(querySnapshot)
+            }
+        }
+    }
+
     // Función estática para obtener datos solo del usuario
     static func getDataCurrentUser(collection: CollectionType, completion: @escaping (QuerySnapshot?) -> Void) {
 
@@ -45,6 +56,12 @@ class FirestoreUtils {
             } else {
                 completion(querySnapshot)
             }
+        }
+    }
+
+    static func updateFav(collection: CollectionType, documentId: String, documentData: [String: Any], completion: @escaping (Error?) -> Void) {
+        db.collection(collection.rawValue).document(documentId).setData(documentData, merge: true) { error in
+            completion(error)
         }
     }
 

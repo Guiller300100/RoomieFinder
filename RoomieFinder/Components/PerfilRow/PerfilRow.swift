@@ -12,7 +12,7 @@ import FirebaseStorage
 struct PerfilRow: View {
 
     //Array de datos
-    @StateObject var globalViewModel = GlobalViewModel.shared
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     @State private var avatarImage: UIImage? = nil
     @State private var isFavorited: Bool = false
@@ -29,7 +29,7 @@ struct PerfilRow: View {
         VStack {
             Image(uiImage: (avatarImage ?? UIImage(named: "DefaultAvatarImage")!))
                 .resizable()
-                .frame(width: 91, height: 71)
+                .frame(width: 81, height: 71)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding(.top, 13)
 
@@ -50,18 +50,17 @@ struct PerfilRow: View {
 
 
                 VStack {
+                    //TODO: TENGO QUE MIRAR LO DE FAV
                     Button(action: {
-                        isFavorited.toggle()
-                    }, label: {
-                        if isFavorited {
-                            Image(systemName: "star.fill")
-                                .foregroundStyle(.yellow)
-                                .frame(width: 20, height: 18)
+                        if isUserInFavorites(userID: usuario?.userID ?? ""){
+                            globalViewModel.deleteFav()
                         } else {
-                            Image(systemName: "star.fill")
-                                .foregroundStyle(.gray)
-                                .frame(width: 20, height: 18)
+                            globalViewModel.updateFav(userFavID: usuario?.userID ?? "")
                         }
+                    }, label: {
+                        Image(systemName: isUserInFavorites(userID: usuario?.userID ?? "") ? "star.fill" : "star")
+                            .foregroundColor(.yellow)
+
                     })
                     Spacer()
                 }
@@ -75,6 +74,7 @@ struct PerfilRow: View {
                     Spacer()
                     
                     Image(systemName: "house")
+                        .resizable()
                         .foregroundStyle(.black)
                         .frame(width: 20, height: 18)
                 }
@@ -87,21 +87,30 @@ struct PerfilRow: View {
         .background(Color.second)
         .clipShape(RoundedRectangle(cornerRadius: 30))
         .onAppear {
-            guard !anuncio.userID.isEmpty else {
-                return
-            }
-            usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if let imageUrl = usuario?.info.urlImage {
-                    getPhoto(url: imageUrl) { image in
-                        avatarImage = image
-                    }
+                    updateUsuario()
+                    loadImage()
+                }
+                .onChange(of: globalViewModel.users) { _ in
+                    updateUsuario()
+                    loadImage()
                 }
             }
-            //isFavorited = perfil.favorito
-        }
 
-    }
+            private func updateUsuario() {
+                usuario = globalViewModel.users.first { $0.userID == anuncio.userID }
+            }
+
+            private func loadImage() {
+                guard let imageUrl = usuario?.info.urlImage else { return }
+                getPhoto(url: imageUrl) { image in
+                    avatarImage = image
+                }
+            }
+
+            private func isUserInFavorites(userID: String) -> Bool {
+                return globalViewModel.favoritos.contains { $0.favUserID == userID }
+            }
+
 }
 
 private func eliminarUltimoEuro(_ cadena: String) -> String {
@@ -169,4 +178,3 @@ private func getPhoto(url: String, completion: @escaping (UIImage?) -> Void) {
         }
     }
 }
-

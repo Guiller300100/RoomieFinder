@@ -330,7 +330,6 @@ struct CreacionPerfilView: View {
 
             Button {
                 viewModel.fiestaCheck = true
-                viewModel.uploadPhoto()
             } label: {
                 HStack {
                     Image(systemName: viewModel.fiestaCheck ? "checkmark.circle.fill" : "circle")

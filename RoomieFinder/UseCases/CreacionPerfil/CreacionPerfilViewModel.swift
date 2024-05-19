@@ -116,6 +116,10 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         prepareData()
 
+        if photoPath.isEmpty {
+            uploadPhoto()
+        }
+
         var data = [String: Any]()
         if firstTime {
             data = [

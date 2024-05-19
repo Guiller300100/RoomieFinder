@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Firebase
+
 class GlobalViewModel: ObservableObject {
     static let shared = GlobalViewModel()
 
@@ -14,6 +16,7 @@ class GlobalViewModel: ObservableObject {
     //Info de los demas perfiles
     @Published var users = [Usuario]()
     @Published var anuncios = [Anuncio]()
+    @Published var favoritos = [Favoritos]()
 
     //CurrentUser
     @Published var misAnuncios = [Anuncio]()
@@ -38,10 +41,43 @@ class GlobalViewModel: ObservableObject {
         )
     )
 
-//    @Published var favoritos = [Favoritos]()
-
     private init() {
 
+    }
+
+    func deleteFav() {
+
+        guard let currentUser = Auth.auth().currentUser else { return }
+
+        FirestoreUtils.deleteData(collection: .Favoritos, documentId: currentUser.uid) { error in
+            if let error = error {
+                print("Error delete data:", error)
+                // Maneja el error aquí (mostrar mensaje de error, reintentar, etc.)
+            } else {
+                print("Data delete successfully")
+                // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
+            }
+        }
+
+        getFav()
+    }
+
+    func updateFav(userFavID: String) {
+
+        guard let currentUser = Auth.auth().currentUser else { return }
+
+
+        FirestoreUtils.updateFav(collection: .Favoritos, documentId: currentUser.uid, documentData: ["currentUser": currentUser.uid, "userFavID": userFavID]) { error in
+            if let error = error {
+                print("Error delete data:", error)
+                // Maneja el error aquí (mostrar mensaje de error, reintentar, etc.)
+            } else {
+                print("Data update successfully")
+                // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
+            }
+        }
+
+        getFav()
     }
 
     func getCurrentUserAd() {
@@ -69,6 +105,21 @@ class GlobalViewModel: ObservableObject {
         FirestoreUtils.deleteData(collection: collection, documentId: documentId) { error in
             if error != nil {
                 print("elemento borrado")
+            }
+        }
+    }
+
+    func getFav() {
+
+        FirestoreUtils.getData(collection: "Favoritos") { snapshot in
+            if let snapshot = snapshot {
+                    self.favoritos = []
+                    self.favoritos = snapshot.documents.map{ d in
+                        return Favoritos(
+                            id: d.documentID,
+                            currentUser: d["currentUser"] as? String ?? "",
+                            favUserID: d["userFavID"] as? String ?? "")
+                    }
             }
         }
     }

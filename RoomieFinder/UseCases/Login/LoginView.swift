@@ -69,17 +69,15 @@ struct LoginView: View {
 
         TextField("Correo", text: $viewModel.emailInput, onCommit: {
             focusedField = .pass
+
         })
+
         .focused($focusedField, equals: .email)
         .padding(.all, 18)
         .frame(width: 330, height: 42)
         .background(Constants.textFieldColor)
         .foregroundStyle(viewModel.emailForegroundStyle)
         .clipShape(RoundedRectangle(cornerRadius: 6))
-        .onChange(of: viewModel.emailInput) { newValue in
-            viewModel.emailDidSubmit()
-        }
-
     }
 
     private var passTextField: some View {
@@ -103,14 +101,14 @@ struct LoginView: View {
         }, label: {
             Text("Inicio sesión")
                 .customFont(font: .mediumFont, size: 15)
-                .foregroundStyle(!(viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) && viewModel.emailForegroundStyle == .blue ?  .white : Constants.inicioSesionColor)
+                .foregroundStyle(!(viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) ?  .white : Constants.inicioSesionColor)
                 .frame(width: 320, height: 35)
         })
         .frame(width: 330, height: 35)
-        .background(!(viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) && viewModel.emailForegroundStyle == .blue ? Constants.mainColor : Constants.mainColor.opacity(0.36))
+        .background(!(viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) ? Constants.mainColor : Constants.mainColor.opacity(0.36))
         .clipShape(RoundedRectangle(cornerRadius: 6))
         .padding(.top, 30)
-        .disabled((viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty) || viewModel.emailForegroundStyle == .red)
+        .disabled((viewModel.emailInput.isEmpty || viewModel.passwordInput.isEmpty))
     }
 
     private var registreButton: some View {

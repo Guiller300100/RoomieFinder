@@ -20,10 +20,6 @@ public class RegistroViewModel: ObservableObject {
     @Published var correoElectronico: String = ""
     @Published var passwordInput: String = ""
 
-    //RADIOBUTTONS
-    @Published var estudianteCheck = true
-    @Published var PropietarioCheck = false
-
     //NAVIGATION STATE
     @Published var isRegistred = false
 
@@ -58,6 +54,7 @@ public class RegistroViewModel: ObservableObject {
                         // Handle error from addData
                     } else {
                         self.globalViewModel.getDataCurrentUser()
+                        self.vaciarCampos()
                         self.isRegistred = true
                     }
             }
@@ -68,6 +65,13 @@ public class RegistroViewModel: ObservableObject {
                 print(error!)
             }
         }
+    }
+
+    func vaciarCampos() {
+        nombre = ""
+        apellido = ""
+        correoElectronico = ""
+        passwordInput = ""
     }
 
     func addData(completion: @escaping (Error?) -> Void) {
