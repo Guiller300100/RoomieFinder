@@ -96,6 +96,18 @@ struct PerfilDetailView: View {
                         }
                         .padding(.leading)
 
+
+                        HStack {
+                            Spacer()
+                            Text("• Actualmente \(usuario.info.trabaja ? "si": "no") trabajo")
+                                .customFont(font: .regularFont, size: 18)
+                                .lineLimit(nil)
+                                .padding(.horizontal)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.leading)
+
+
                         HStack {
                             Spacer()
                             Text("• \(usuario.info.fumar ? "Fumo en mi dia a dia" : "No fumo en mi dia a dia") \(usuario.info.fiesta ? "y me gusta bastante salir de fiesta" : " y no me gusta mucho salir de fiesta")")
@@ -127,6 +139,7 @@ struct PerfilDetailView: View {
                             .background(Constants.mainColor)
                             .clipShape(RoundedRectangle(cornerRadius: 999))
                     }
+                    .offset(x: 18)
 
                     Spacer()
 
@@ -203,5 +216,5 @@ private func calcularEdad(from fechaNacimientoString: String, with format: Strin
 
 
 #Preview {
-    PerfilDetailView(usuario: Usuario(id: "", userID: "", nombre: "", apellido: "", fnac: "", info: Info(estudios: "", universidad: "", idiomas: Set<Idiomas>(), sexo: "", tipoPersona: "", ambiente: "", tiempoLibre: "", fumar: false, fiesta: false, descripcion: "", urlImage: "")))
+    PerfilDetailView(usuario: Usuario(id: "", userID: "", nombre: "", apellido: "", fnac: "", info: Info(estudios: "", trabaja: false, universidad: "", idiomas: Set<Idiomas>(), sexo: "", tipoPersona: "", ambiente: "", tiempoLibre: "", fumar: false, fiesta: false, descripcion: "", urlImage: "")))
 }

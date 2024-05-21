@@ -10,7 +10,7 @@ struct BusquedaView: View {
     @StateObject var viewModel: BusquedaViewModel
 
     //Array de datos
-    @StateObject var globalViewModel = GlobalViewModel.shared
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     init(_ viewModel: BusquedaViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -23,31 +23,50 @@ struct BusquedaView: View {
 
             VStack {
                 ScrollView {
-                    HStack {
-                        Button {
+                        HStack {
+                            Button {
 
-                            viewModel.filtrosNavegacion = true
+                                viewModel.filtrosNavegacion = true
 
-                        } label: {
-                            Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                                .resizable()
-                                .frame(width: 25, height: 25)
+                            } label: {
+                                Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundStyle(Constants.mainColor)
+                            }
+
+                            Spacer()
+
+                            Text("Búsqueda")
+                                .customFont(font: .mediumFont, size: 24)
+                                .offset(x: -39)
                                 .foregroundStyle(Constants.mainColor)
+
+
+                            if globalViewModel.isToggleOn {
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25, alignment: .trailing)
+                                    .foregroundStyle(.yellow)
+                            } else {
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 25, height: 25, alignment: .trailing)
+                                    .foregroundStyle(.gray)
+                            }
+
+                            Toggle(isOn: $globalViewModel.isToggleOn){
+                            }
+                            .toggleStyle(SwitchToggleStyle(tint: Constants.mainColor))
+                            .labelsHidden()
                         }
-                        Spacer()
-                        Text("Búsqueda")
-                            .customFont(font: .mediumFont, size: 24)
-                            .offset(x: -13)
-                            .foregroundStyle(Constants.mainColor)
-
-                        Spacer()
-                    }
-                    .frame(height: 25)
-                    .padding(.all, 15)
-
+                        .frame(height: 25)
+                        .padding(.all, 15)
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-                        ForEach(globalViewModel.anuncios, id: \.id) { anuncio in
+                        ForEach(globalViewModel.anunciosFiltrados, id: \.id) { anuncio in
                             PerfilRow(anuncio: anuncio)
                                 .onTapGesture {
                                     DispatchQueue.main.async {
@@ -61,8 +80,10 @@ struct BusquedaView: View {
                 }
                 .refreshable {
                     // Llama a las funciones para recargar datos
+                    globalViewModel.limpiarFiltros()
                     globalViewModel.getAllUsers()
                     globalViewModel.getAllAds()
+
                 }
             }
         }
@@ -79,10 +100,15 @@ struct BusquedaView: View {
         .onChange(of: self.viewModel.isTapped, perform: { newValue in
             self.viewModel.isShowed = true
         })
+        .onChange(of: globalViewModel.isToggleOn) { newValue in
+            // Llama a la función onAppear nuevamente para aplicar los filtros actualizados
+            globalViewModel.aplicarFiltros()
+        }
 
         .navigationDestination(isPresented: $viewModel.filtrosNavegacion, destination: {
             withAnimation {
                 FiltrosView()
+                    .navigationBarBackButtonHidden(true)
             }
         })
         .onAppear {

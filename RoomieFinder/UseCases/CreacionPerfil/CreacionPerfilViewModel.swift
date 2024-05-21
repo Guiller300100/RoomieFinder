@@ -17,6 +17,7 @@ public class CreacionPerfilViewModel: ObservableObject {
     //VARIABLES
     @Published var firstTime: Bool
     @Published var estudios = ""
+    @Published var trabaja: Bool = false
     @Published var universidad = ""
     @Published var idiomas = Set<Idiomas>()
     @Published var isMultiPickerOpen = false
@@ -59,9 +60,10 @@ public class CreacionPerfilViewModel: ObservableObject {
         self.firstTime = firstTime
     }
 
-    func uploadPhoto() {
+    //MARK: UPLOAD PHOTO
+    func uploadPhoto() -> String {
         guard let currentUser = Auth.auth().currentUser else {
-            return
+            return ""
         }
 
         // Create storage reference
@@ -69,7 +71,7 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         // Turn our image into data
         guard let imageData = avatarImage.jpegData(compressionQuality: 1) else {
-            return
+            return ""
         }
 
         // Specify the file path and name
@@ -83,12 +85,14 @@ public class CreacionPerfilViewModel: ObservableObject {
                 print("Error uploading data: \(error)")
             } else {
                 // Data uploaded successfully, call the completion handler with the path
-                self.photoPath = path
                 print("Added the photo to Storage with path: \(self.photoPath)")
             }
         }
+        
+        return path
     }
 
+    //MARK: COMPROBAR FIELDS
     func comprobarFields(completion: @escaping (Bool) -> Void) {
 
         if estudios.isEmpty || universidad.isEmpty || idiomas.isEmpty || (!hombreCheck && !mujerCheck) || (!activoCheck && !tranquiloCheck && !ambosCheck) || (!ambienteSocialCheck && !ambienteTranquiloCheck) || tiempoLibre.isEmpty || descripcion.isEmpty {
@@ -111,19 +115,22 @@ public class CreacionPerfilViewModel: ObservableObject {
 
     }
 
+    //MARK: ADD DATA
     func addData(completion: @escaping (Error?) -> Void) {
 
 
         prepareData()
 
-        if photoPath.isEmpty {
-            uploadPhoto()
+        if globalViewModel.currentUser.info.urlImage.isEmpty || photoPath.isEmpty {
+
+            self.photoPath = self.uploadPhoto()
         }
 
         var data = [String: Any]()
         if firstTime {
             data = [
                 "estudios": estudios,
+                "trabaja": trabaja,
                 "universidad": universidad,
                 "idiomas": idiomasArray,
                 "sexo": sexo,
@@ -168,6 +175,7 @@ public class CreacionPerfilViewModel: ObservableObject {
         }
     }
 
+    //MARK: PREPARE DATA
     func prepareData() {
         if hombreCheck {
             sexo = "hombre"
@@ -194,10 +202,12 @@ public class CreacionPerfilViewModel: ObservableObject {
         idiomasArray = idiomasStrings
     }
 
+    //MARK: MODIFICAR INFO
     private func modificarInfo() {
         estudios = globalViewModel.currentUser.info.estudios
         universidad = globalViewModel.currentUser.info.universidad
         idiomas = globalViewModel.currentUser.info.idiomas
+        trabaja = globalViewModel.currentUser.info.trabaja
 
         if globalViewModel.currentUser.info.sexo == "hombre" {
             hombreCheck = true
@@ -238,6 +248,7 @@ public class CreacionPerfilViewModel: ObservableObject {
 
     }
 
+    //MARK: ON APPEAR
     public func onAppear() {
         if !globalViewModel.currentUser.info.urlImage.isEmpty {
             firstTime = false
@@ -247,11 +258,6 @@ public class CreacionPerfilViewModel: ObservableObject {
         }
 
     }
-
-    public func actionFromView() {
-        // Example of private method
-    }
-
 }
 
 
@@ -262,11 +268,11 @@ enum CreacionType {
     case descripcion
 }
 
-enum Idiomas: String, CaseIterable {
-    case Español
-    case Inglés
-    case Francés
-    case Italiano
-    case Portugués
-    case Alemán
+public enum Idiomas: String, CaseIterable {
+    case español
+    case ingles
+    case frances
+    case italiano
+    case portugues
+    case aleman
 }

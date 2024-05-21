@@ -33,13 +33,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("CerrandoApp")
 
         if Auth.auth().currentUser != nil {
-            do {
-                try Auth.auth().signOut()
-                // Cerrar sesión exitosamente
-                print("Sesión cerrada exitosamente.")
-            } catch let error as NSError {
-                // Manejar el error
-                print("Error al cerrar sesión: \(error.localizedDescription)")
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    try Auth.auth().signOut()
+                    // Cerrar sesión exitosamente
+                    DispatchQueue.main.async {
+                        print("Sesión cerrada exitosamente.")
+                    }
+                } catch let error as NSError {
+                    // Manejar el error
+                    DispatchQueue.main.async {
+                        print("Error al cerrar sesión: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }

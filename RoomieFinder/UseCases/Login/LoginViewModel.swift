@@ -15,8 +15,9 @@ public class LoginViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //TEXTFIELDS
-    @Published var emailInput: String = ""
-    @Published var passwordInput: String = ""
+    // TODO: CAMBIAR ESTOS VALORES
+    @Published var emailInput: String = "guirodr@gmail.com"
+    @Published var passwordInput: String = "1234567"
     @Published var emailForegroundStyle = Color.black
 
     //BUTTONS
@@ -27,7 +28,6 @@ public class LoginViewModel: ObservableObject {
     @Published var alertPush = false
     @Published var alertTitle: String = ""
     @Published var alertMessage: String = ""
-    @Published var isKeyboardVisible = false
 
 
     func comprobarFields() {

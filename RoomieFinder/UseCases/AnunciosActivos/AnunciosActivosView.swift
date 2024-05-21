@@ -10,7 +10,7 @@ struct AnunciosActivosView: View {
     @StateObject var viewModel: AnunciosActivosViewModel
 
     //Array de datos
-    @StateObject var globalViewModel = GlobalViewModel.shared
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     init(_ viewModel: AnunciosActivosViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)

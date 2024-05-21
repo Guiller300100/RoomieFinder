@@ -97,7 +97,6 @@ public class RegistroViewModel: ObservableObject {
                 }
             }
         }
-        print(currentUser.uid)
     }
 
     func calcularEdadComoString() -> String {

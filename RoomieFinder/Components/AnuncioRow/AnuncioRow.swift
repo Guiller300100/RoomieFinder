@@ -12,7 +12,7 @@ struct AnuncioRow: View {
     let anuncio: Anuncio
 
     //Array de datos
-    @StateObject var globalViewModel = GlobalViewModel.shared
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
     var modifiedCallback: () -> Void
 
 

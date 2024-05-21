@@ -15,13 +15,11 @@ struct PerfilRow: View {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     @State private var avatarImage: UIImage? = nil
-    @State private var isFavorited: Bool = false
     let anuncio: Anuncio
     @State var usuario: Usuario?
 
     init(anuncio: Anuncio) {
         self.anuncio = anuncio
-
 
     }
 
@@ -40,7 +38,7 @@ struct PerfilRow: View {
                     Text("\(usuario?.nombre ?? ""), \(calcularEdad(from: usuario?.fnac ?? "")) años")
                         .customFont(font: .mediumFont, size: 14)
                         .lineLimit(nil)
-                    Text("• Presupuesto: \(eliminarUltimoEuro(anuncio.presupuesto))€")
+                    Text((anuncio.num_hab.isEmpty ? "• Presupuesto:" : "• Precio:") + "\(eliminarUltimoEuro(anuncio.presupuesto))€")
                         .customFont(font: .regularFont, size: 12)
                         .padding(.top, 0.5)
                     Text("• Zona \(eliminarZonaOBarrio(from: anuncio.barrio))")

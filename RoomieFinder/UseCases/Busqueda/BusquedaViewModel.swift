@@ -20,6 +20,7 @@ public class BusquedaViewModel: ObservableObject {
     public func onAppear() {
         globalViewModel.getAllAds()
         globalViewModel.getAllUsers()
+
     }
 
 

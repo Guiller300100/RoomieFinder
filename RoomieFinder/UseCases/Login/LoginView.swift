@@ -11,7 +11,7 @@ struct LoginView: View {
     @FocusState private var focusedField: FocusedField?
 
     //Datos globables
-    @StateObject var globalViewModel = GlobalViewModel.shared
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     init(_ viewModel: LoginViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)

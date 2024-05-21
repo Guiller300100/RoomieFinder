@@ -42,7 +42,7 @@ struct CreacionPerfilView: View {
 
         .sheet(isPresented: $viewModel.isShowingPhotoPicker, content: {
             PhotoPicker.init(avatarImage: $viewModel.avatarImage) {
-                viewModel.uploadPhoto()
+                _ = viewModel.uploadPhoto()
             }
         })
 
@@ -110,6 +110,39 @@ struct CreacionPerfilView: View {
                 .frame(height: 1)
                 .overlay(Color.gray.opacity(0.7))
                 .padding(.bottom, 16)
+
+            //MARK: Trabajas
+            Text("¿Trabajas?")
+                .customFont(font: .boldFont, size: 14)
+                .padding(.bottom, 5)
+
+            Button {
+                viewModel.trabaja = true
+
+            } label: {
+                HStack {
+                    Image(systemName: viewModel.trabaja ? "checkmark.circle.fill" : "circle")
+
+                    Text("Si")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+
+            Button {
+                viewModel.trabaja = false
+            } label: {
+                HStack {
+                    Image(systemName: !viewModel.trabaja ? "checkmark.circle.fill" : "circle")
+
+                    Text("No")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+            .padding(.bottom, 16)
 
             //MARK: ¿Que idiomas hablas?
             Text("¿Que idiomas hablas?")

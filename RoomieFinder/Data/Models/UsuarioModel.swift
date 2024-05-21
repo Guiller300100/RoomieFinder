@@ -28,6 +28,7 @@ struct Usuario: Identifiable, Equatable {
 
 struct Info: Equatable {
     var estudios: String
+    var trabaja: Bool
     var universidad: String
     var idiomas: Set<Idiomas>
     var sexo: String
@@ -41,6 +42,7 @@ struct Info: Equatable {
 
     static func ==(lhs: Info, rhs: Info) -> Bool {
             return lhs.estudios == rhs.estudios
+                && lhs.trabaja == rhs.trabaja
                 && lhs.universidad == rhs.universidad
                 && lhs.idiomas == rhs.idiomas
                 && lhs.sexo == rhs.sexo
