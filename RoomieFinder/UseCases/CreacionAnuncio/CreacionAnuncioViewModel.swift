@@ -83,7 +83,7 @@ public class CreacionAnuncioViewModel: ObservableObject {
                 }
             }
         }
-
+        
     }
 
     func addData(completion: @escaping (Error?) -> Void) {

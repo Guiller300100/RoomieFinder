@@ -10,14 +10,14 @@ import Firebase
 
 class GlobalViewModel: ObservableObject {
     static let shared = GlobalViewModel()
-    
+
     @Published var fromLogin: Bool = true
-    
+
     //Info de los demas perfiles
     @Published var users = [Usuario]()
     @Published var anuncios = [Anuncio]()
     @Published var favoritos = [Favoritos]()
-    
+
     //CurrentUser
     @Published var misAnuncios = [Anuncio]()
     @Published var currentUser: Usuario = Usuario(
@@ -41,10 +41,10 @@ class GlobalViewModel: ObservableObject {
             urlImage: ""
         )
     )
-    
+
     // Almacenar los anuncios filtrados
     @Published var anunciosFiltrados = [Anuncio]()
-    
+
     // MARK: PARTE DE FILTROSVIEW
     @Published var hombreCheck = false
     @Published var mujerCheck = false
@@ -64,6 +64,7 @@ class GlobalViewModel: ObservableObject {
     @Published var alemanCheck = false
     @Published var italianoCheck = false
     @Published var isToggleOn = false
+    @Published var presupuestoMaximo: Double = 0.0
 
     //ALERTAS
     @Published var alertPush = false
@@ -104,6 +105,7 @@ class GlobalViewModel: ObservableObject {
         portuguesCheck = false
         alemanCheck = false
         italianoCheck = false
+        presupuestoMaximo = 0
 
         // Aplica filtros sin ninguno seleccionado
         aplicarFiltros()
@@ -111,9 +113,9 @@ class GlobalViewModel: ObservableObject {
     }
 
     func deleteFav() {
-        
+
         guard let currentUser = Auth.auth().currentUser else { return }
-        
+
         FirestoreUtils.deleteData(collection: .Favoritos, documentId: currentUser.uid) { error in
             if let error = error {
                 print("Error delete data:", error)
@@ -123,16 +125,16 @@ class GlobalViewModel: ObservableObject {
                 // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
             }
         }
-        
+
         getFav()
     }
-    
-    func updateFav(userFavID: String) {
-        
+
+    func updateFav(anuncioID: String) {
+
         guard let currentUser = Auth.auth().currentUser else { return }
-        
-        
-        FirestoreUtils.updateFav(collection: .Favoritos, documentId: currentUser.uid, documentData: ["currentUser": currentUser.uid, "userFavID": userFavID]) { error in
+
+
+        FirestoreUtils.updateFav(collection: .Favoritos, documentId: currentUser.uid, documentData: ["currentUser": currentUser.uid, "anuncioID": anuncioID]) { error in
             if let error = error {
                 print("Error delete data:", error)
                 // Maneja el error aquí (mostrar mensaje de error, reintentar, etc.)
@@ -141,14 +143,14 @@ class GlobalViewModel: ObservableObject {
                 // Realiza acciones posteriores a la adición exitosa (actualiza UI, etc.)
             }
         }
-        
+
         getFav()
     }
-    
+
     func getCurrentUserAd() {
         FirestoreUtils.getDataCurrentUser(collection: .Anuncios) { snapshot in
             if let snapshot = snapshot {
-                
+
                 self.misAnuncios = []
                 self.misAnuncios = snapshot.documents.map{ d in
                     return Anuncio(
@@ -164,18 +166,18 @@ class GlobalViewModel: ObservableObject {
             }
         }
     }
-    
+
     func deleteData(collection: CollectionType, documentId: String) {
-        
+
         FirestoreUtils.deleteData(collection: collection, documentId: documentId) { error in
             if error != nil {
                 print("elemento borrado")
             }
         }
     }
-    
+
     func getFav() {
-        
+
         FirestoreUtils.getData(collection: "Favoritos") { snapshot in
             if let snapshot = snapshot {
                 self.favoritos = []
@@ -183,22 +185,22 @@ class GlobalViewModel: ObservableObject {
                     return Favoritos(
                         id: d.documentID,
                         currentUser: d["currentUser"] as? String ?? "",
-                        favUserID: d["userFavID"] as? String ?? "")
+                        anuncioID: d["anuncioID"] as? String ?? "")
                 }
             }
         }
     }
-    
+
     func getAllUsers() {
         FirestoreUtils.getDataNotCurrentUser(collection: .Perfiles) { snapshot in
             if let snapshot = snapshot {
-                
+
                 self.users = []
                 self.users = snapshot.documents.map{ d in
                     let idiomasStrings = d["idiomas"] as? [String] ?? []
                     // Convierte los strings a instancias de enum Idiomas
                     let idiomasEnum: Set<Idiomas> = Set(idiomasStrings.compactMap { Idiomas(rawValue: $0) })
-                    
+
                     return Usuario(
                         id: d.documentID,
                         userID: d["userID"] as? String ?? "",
@@ -225,17 +227,17 @@ class GlobalViewModel: ObservableObject {
             }
         }
     }
-    
+
     func getDataCurrentUser() {
         var usuario = [Usuario]()
         FirestoreUtils.getDataCurrentUser(collection: .Perfiles) { snapshot in
             if let snapshot = snapshot {
-                
+
                 usuario = snapshot.documents.map{ d in
                     let idiomasStrings = d["idiomas"] as? [String] ?? []
                     // Convierte los strings a instancias de enum Idiomas
                     let idiomasEnum: Set<Idiomas> = Set(idiomasStrings.compactMap { Idiomas(rawValue: $0) })
-                    
+
                     return Usuario(
                         id: d.documentID,
                         userID: d["userID"] as? String ?? "",
@@ -263,11 +265,11 @@ class GlobalViewModel: ObservableObject {
         }
         print("Recogido los datos de usuario")
     }
-    
+
     func getAllAds() {
         FirestoreUtils.getDataNotCurrentUser(collection: .Anuncios) { snapshot in
             if let snapshot = snapshot {
-                
+
                 self.anuncios = []
                 self.anuncios = snapshot.documents.map{ d in
                     return Anuncio(
@@ -281,14 +283,25 @@ class GlobalViewModel: ObservableObject {
                 }
                 print("Recogido los datos de los Anuncios")
 
-                    self.aplicarFiltros()
+                self.aplicarFiltros()
 
             }
         }
     }
-    
+
     // Método para aplicar filtros
     func aplicarFiltros() {
+        // Verificar si no hay filtros activos
+        let allFiltersInactive = !hombreCheck && !mujerCheck && !fumadorCheck && !noFumadorCheck && !fiestaCheck && !noFiestaCheck && !estudianteCheck && !trabajadorCheck && !activoCheck && !tranquiloCheck && !ambosCheck && !españolCheck && !inglesCheck && !francesCheck && !portuguesCheck && !alemanCheck && !italianoCheck
+        let budgetZero = presupuestoMaximo == 0
+
+        // Si no hay filtros activos, el presupuesto es 0 y el toggle no está activado, mostrar todos los anuncios
+        if allFiltersInactive && budgetZero && !isToggleOn {
+            self.anunciosFiltrados = self.anuncios
+            return
+        }
+
+        // Filtrar los anuncios basándose en los filtros activos
         self.anunciosFiltrados = self.anuncios.filter { anuncio in
             guard let user = self.users.first(where: { $0.userID == anuncio.userID }) else {
                 return false
@@ -313,12 +326,19 @@ class GlobalViewModel: ObservableObject {
             if alemanCheck && !user.info.idiomas.contains(.aleman) { return false }
             if italianoCheck && !user.info.idiomas.contains(.italiano) { return false }
 
-            if isToggleOn {
-                return favoritos.contains { $0.favUserID == user.userID }
+            // Aplica el filtro de presupuesto solo si presupuestoMaximo no es 0
+            if presupuestoMaximo != 0 {
+                if let anuncioPresupuesto = Double(anuncio.presupuesto), anuncioPresupuesto > presupuestoMaximo {
+                    return false
+                }
+            }
+
+            // Si el toggle está activado, verifica si el anuncio está en favoritos
+            if isToggleOn && !favoritos.contains(where: { $0.anuncioID == anuncio.id }) {
+                return false
             }
 
             return true
         }
     }
-
 }

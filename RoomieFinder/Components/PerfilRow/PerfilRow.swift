@@ -50,13 +50,13 @@ struct PerfilRow: View {
                 VStack {
                     //TODO: TENGO QUE MIRAR LO DE FAV
                     Button(action: {
-                        if isUserInFavorites(userID: usuario?.userID ?? ""){
+                        if isUserInFavorites(anuncioID: anuncio.id){
                             globalViewModel.deleteFav()
                         } else {
-                            globalViewModel.updateFav(userFavID: usuario?.userID ?? "")
+                            globalViewModel.updateFav(anuncioID: anuncio.id)
                         }
                     }, label: {
-                        Image(systemName: isUserInFavorites(userID: usuario?.userID ?? "") ? "star.fill" : "star")
+                        Image(systemName: isUserInFavorites(anuncioID: anuncio.id) ? "star.fill" : "star")
                             .foregroundColor(.yellow)
 
                     })
@@ -105,8 +105,8 @@ struct PerfilRow: View {
                 }
             }
 
-            private func isUserInFavorites(userID: String) -> Bool {
-                return globalViewModel.favoritos.contains { $0.favUserID == userID }
+            private func isUserInFavorites(anuncioID: String) -> Bool {
+                return globalViewModel.favoritos.contains { $0.anuncioID == anuncioID }
             }
 
 }

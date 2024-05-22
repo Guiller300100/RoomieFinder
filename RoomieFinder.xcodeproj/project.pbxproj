@@ -20,6 +20,7 @@
 		B31E2C652BADC62700A14662 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B31E2C642BADC62700A14662 /* FirebaseAnalyticsSwift */; };
 		B31E2C672BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = B31E2C662BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		B362F99B2BF95E5B0051ED7D /* FavoritosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362F99A2BF95E5B0051ED7D /* FavoritosModel.swift */; };
+		B36401B62BFE38CB00280194 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36401B52BFE38CB00280194 /* DoubleExtension.swift */; };
 		B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B365F5952BC181B3004D08F4 /* MultiPicker.swift */; };
 		B385FD382BACDE1C00A82169 /* UsuarioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* UsuarioModel.swift */; };
 		B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D5F282BBE00DC00F3F561 /* FirebaseAuth */; };
@@ -76,6 +77,7 @@
 		B318D4D82BAB52CC0099771C /* Outfit-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Outfit-Bold.ttf"; sourceTree = "<group>"; };
 		B31E2C5E2BADC50700A14662 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B362F99A2BF95E5B0051ED7D /* FavoritosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosModel.swift; sourceTree = "<group>"; };
+		B36401B52BFE38CB00280194 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		B365F5952BC181B3004D08F4 /* MultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPicker.swift; sourceTree = "<group>"; };
 		B385FD372BACDE1C00A82169 /* UsuarioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsuarioModel.swift; sourceTree = "<group>"; };
 		B39D5F2A2BBF017F00F3F561 /* PerfilDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilDetailView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			children = (
 				B3EA1E752BC58C4A003EF343 /* TextExtension.swift */,
 				B3D0BBC52BED391A004E1AF1 /* SetExtension.swift */,
+				B36401B52BFE38CB00280194 /* DoubleExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 				B3EA1EAD2BC59622003EF343 /* PerfilViewModel.swift in Sources */,
 				B3EA1EB02BC59622003EF343 /* PerfilView.swift in Sources */,
 				B3CFCC2A2BF51CC900D44618 /* AnuncioModel.swift in Sources */,
+				B36401B62BFE38CB00280194 /* DoubleExtension.swift in Sources */,
 				B3EA1E942BC58D02003EF343 /* HomeViewModel.swift in Sources */,
 				B3EA1E972BC58D02003EF343 /* HomeView.swift in Sources */,
 				B3EA1E6A2BC58A62003EF343 /* LoginViewModel.swift in Sources */,

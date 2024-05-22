@@ -136,6 +136,7 @@ struct CreacionAnuncioView: View {
                     focusedField = nil
                 }
             })
+            .keyboardType(.numberPad)
             .textFieldStyle(.plain)
             .focused($focusedField, equals: .presupuesto)
 

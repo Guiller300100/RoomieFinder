@@ -16,45 +16,52 @@ struct FiltrosView: View {
     var body: some View {
         VStack(alignment: .leading) {
 
-                VStack(alignment: .leading) {
-                    Text("Sexo:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+            VStack(alignment: .leading) {
+                Text("Sexo:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    sexoFiltro
+                sexoFiltro
 
-                    Text("Fumador:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+                Text("Fumador:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    fumadorFiltro
+                fumadorFiltro
 
-                    Text("Fiesta:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+                Text("Fiesta:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    fiestaFiltro
+                fiestaFiltro
 
-                    Text("Estudiantes/trabajadores:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+                Text("Estudiantes/trabajadores:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    tipoFiltro
+                tipoFiltro
 
-                    Text("Ambiente en casa:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+                Text("Ambiente en casa:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    ambienteFiltro
+                ambienteFiltro
 
-                    Text("Idiomas:")
-                        .customFont(font: .boldFont, size: 14)
-                        .padding(.bottom, 5)
+                Text("Idiomas:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
 
-                    idiomasFiltro
+                idiomasFiltro
 
-                }
-                .padding()
+                // MARK: Add presupuesto filter with slider
+                Text("Presupuesto máximo:")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
+
+                presupuestoFiltro
+
+            }
+            .padding(.horizontal, 16)
 
             HStack {
                 Image(systemName: "info.circle")
@@ -119,7 +126,7 @@ struct FiltrosView: View {
 
             }
         }
-        .padding(.bottom, 26)
+        .padding(.bottom, 15)
     }
 
     private var fumadorFiltro: some View {
@@ -154,7 +161,7 @@ struct FiltrosView: View {
 
             }
         }
-        .padding(.bottom, 26)
+        .padding(.bottom, 15)
     }
 
     private var fiestaFiltro: some View {
@@ -189,7 +196,7 @@ struct FiltrosView: View {
 
             }
         }
-        .padding(.bottom, 26)
+        .padding(.bottom, 15)
     }
 
     private var tipoFiltro: some View {
@@ -224,7 +231,7 @@ struct FiltrosView: View {
 
             }
         }
-        .padding(.bottom, 26)
+        .padding(.bottom, 15)
     }
 
     private var ambienteFiltro: some View {
@@ -273,7 +280,7 @@ struct FiltrosView: View {
 
             }
         }
-        .padding(.bottom, 26)
+        .padding(.bottom, 15)
     }
 
     private var idiomasFiltro: some View {
@@ -382,6 +389,16 @@ struct FiltrosView: View {
                 .padding(.trailing, 10)
             }
         }
+        .padding(.bottom, 15)
+    }
+
+    private var presupuestoFiltro: some View {
+        HStack {
+            Slider(value: $globalViewModel.presupuestoMaximo, in: 0...1000, step: 100)
+
+            Text("\(globalViewModel.presupuestoMaximo < 1 ? "-" : String(globalViewModel.presupuestoMaximo.toInt() ?? 0)) €")
+        }
+        .padding(.bottom, 15)
     }
 
     private var limpiarButton: some View {
@@ -444,8 +461,9 @@ private func limpiarFiltros(globalViewModel: GlobalViewModel) {
     globalViewModel.portuguesCheck = false
     globalViewModel.alemanCheck = false
     globalViewModel.italianoCheck = false
+    globalViewModel.presupuestoMaximo = 0
 
-    }
+}
 
 #Preview {
     FiltrosView()

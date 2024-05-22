@@ -14,6 +14,7 @@ struct PerfilDetailView: View {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     let usuario: Usuario
+    let anuncio: Anuncio
     @State private var avatarImage: UIImage? = nil
 
     var body: some View {
@@ -144,13 +145,13 @@ struct PerfilDetailView: View {
                     Spacer()
 
                     Button(action: {
-                        if isUserInFavorites(userID: usuario.userID){
+                        if isUserInFavorites(anuncioID: anuncio.id){
                             globalViewModel.deleteFav()
                         } else {
-                            globalViewModel.updateFav(userFavID: usuario.userID)
+                            globalViewModel.updateFav(anuncioID: anuncio.id)
                         }
                     }, label: {
-                        Image(systemName: isUserInFavorites(userID: usuario.userID) ? "star.fill" : "star")
+                        Image(systemName: isUserInFavorites(anuncioID: anuncio.id) ? "star.fill" : "star")
                             .resizable()
                             .frame(width: 25, height: 25)
                             .foregroundColor(.yellow)
@@ -171,8 +172,8 @@ struct PerfilDetailView: View {
         }
     }
 
-    private func isUserInFavorites(userID: String) -> Bool {
-        return globalViewModel.favoritos.contains { $0.favUserID == userID }
+    private func isUserInFavorites(anuncioID: String) -> Bool {
+        return globalViewModel.favoritos.contains { $0.anuncioID == anuncioID }
     }
 }
 
@@ -216,5 +217,35 @@ private func calcularEdad(from fechaNacimientoString: String, with format: Strin
 
 
 #Preview {
-    PerfilDetailView(usuario: Usuario(id: "", userID: "", nombre: "", apellido: "", fnac: "", info: Info(estudios: "", trabaja: false, universidad: "", idiomas: Set<Idiomas>(), sexo: "", tipoPersona: "", ambiente: "", tiempoLibre: "", fumar: false, fiesta: false, descripcion: "", urlImage: "")))
+    PerfilDetailView(
+        usuario: Usuario(
+            id: "",
+            userID: "",
+            nombre: "",
+            apellido: "",
+            fnac: "",
+            info: Info(
+                estudios: "",
+                trabaja: false,
+                universidad: "",
+                idiomas: Set<Idiomas>(),
+                sexo: "",
+                tipoPersona: "",
+                ambiente: "",
+                tiempoLibre: "",
+                fumar: false,
+                fiesta: false,
+                descripcion: "",
+                urlImage: ""
+            )
+        ),
+        anuncio: Anuncio(
+            id: "",
+            userID: "",
+            barrio: "",
+            tiempoEstancia: "",
+            presupuesto: "",
+            num_hab: ""
+        )
+    )
 }

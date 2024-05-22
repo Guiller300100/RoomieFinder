@@ -91,7 +91,7 @@ struct BusquedaView: View {
         .sheet(isPresented: $viewModel.isShowed) {
             if let anuncio = viewModel.anuncioSeleccionado {
                 let usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })!
-                PerfilDetailView(usuario: usuario)
+                PerfilDetailView(usuario: usuario, anuncio: anuncio)
                     .presentationDetents([.fraction(0.80)])
             } else {
                 Text("No hay nombre")

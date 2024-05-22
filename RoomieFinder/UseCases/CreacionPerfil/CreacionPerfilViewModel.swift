@@ -121,7 +121,7 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         prepareData()
 
-        if globalViewModel.currentUser.info.urlImage.isEmpty || photoPath.isEmpty {
+        if globalViewModel.currentUser.info.urlImage.isEmpty && photoPath.isEmpty {
 
             self.photoPath = self.uploadPhoto()
         }

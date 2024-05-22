@@ -10,9 +10,9 @@ import Foundation
 struct Favoritos: Equatable {
     var id: String
     var currentUser: String
-    var favUserID: String
+    var anuncioID: String
 
     static func == (lhs: Favoritos, rhs: Favoritos) -> Bool {
-        return lhs.currentUser == rhs.currentUser && lhs.favUserID == rhs.favUserID
+        return lhs.currentUser == rhs.currentUser && lhs.anuncioID == rhs.anuncioID
     }
 }
