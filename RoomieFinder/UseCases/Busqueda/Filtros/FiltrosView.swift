@@ -53,6 +53,12 @@ struct FiltrosView: View {
 
                 idiomasFiltro
 
+                Text("¿Tiene casa?")
+                    .customFont(font: .boldFont, size: 14)
+                    .padding(.bottom, 5)
+
+                casaFiltro
+
                 // MARK: Add presupuesto filter with slider
                 Text("Presupuesto máximo:")
                     .customFont(font: .boldFont, size: 14)
@@ -392,6 +398,42 @@ struct FiltrosView: View {
         .padding(.bottom, 15)
     }
 
+    private var casaFiltro: some View {
+
+        HStack {
+            Button {
+                globalViewModel.casaCheck.toggle()
+
+            } label: {
+                HStack {
+                    Image(systemName: globalViewModel.casaCheck ? "checkmark.circle.fill" : "circle")
+
+                    Text("Con casa")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+            .padding(.horizontal, 10)
+
+            Button {
+                globalViewModel.noCasaCheck.toggle()
+
+            } label: {
+                HStack {
+                    Image(systemName:
+                            globalViewModel.noCasaCheck ? "checkmark.circle.fill" : "circle")
+
+                    Text("Sin casa")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+        }
+        .padding(.bottom, 15)
+    }
+
     private var presupuestoFiltro: some View {
         HStack {
             Slider(value: $globalViewModel.presupuestoMaximo, in: 0...1000, step: 100)
@@ -461,6 +503,8 @@ private func limpiarFiltros(globalViewModel: GlobalViewModel) {
     globalViewModel.portuguesCheck = false
     globalViewModel.alemanCheck = false
     globalViewModel.italianoCheck = false
+    globalViewModel.casaCheck = false
+    globalViewModel.noCasaCheck = false
     globalViewModel.presupuestoMaximo = 0
 
 }

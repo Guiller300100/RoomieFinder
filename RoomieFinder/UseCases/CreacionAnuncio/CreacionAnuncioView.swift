@@ -139,6 +139,22 @@ struct CreacionAnuncioView: View {
             .keyboardType(.numberPad)
             .textFieldStyle(.plain)
             .focused($focusedField, equals: .presupuesto)
+            .toolbar {
+                if focusedField == .presupuesto {
+                    ToolbarItem(placement: .keyboard) {
+                        HStack {
+                            Button("Fin") {
+                                if viewModel.pisoCheck {
+                                    focusedField = .habitaciones
+                                } else {
+                                    focusedField = nil
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+            }
 
             Divider()
                 .frame(height: 1)

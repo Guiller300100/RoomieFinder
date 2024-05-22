@@ -64,6 +64,9 @@ class GlobalViewModel: ObservableObject {
     @Published var alemanCheck = false
     @Published var italianoCheck = false
     @Published var isToggleOn = false
+    @Published var casaCheck = false
+    @Published var noCasaCheck = false
+
     @Published var presupuestoMaximo: Double = 0.0
 
     //ALERTAS
@@ -75,7 +78,7 @@ class GlobalViewModel: ObservableObject {
     @Published var correctChecks: Bool = false
 
     func comprobarCheck() {
-        if (hombreCheck && mujerCheck) || (fumadorCheck && noFumadorCheck) || (fiestaCheck && noFiestaCheck) || (estudianteCheck && trabajadorCheck) || (activoCheck && tranquiloCheck && ambosCheck) || (españolCheck && inglesCheck && francesCheck && portuguesCheck && alemanCheck && italianoCheck) {
+        if (hombreCheck && mujerCheck) || (fumadorCheck && noFumadorCheck) || (fiestaCheck && noFiestaCheck) || (estudianteCheck && trabajadorCheck) || (activoCheck && tranquiloCheck && ambosCheck) || (españolCheck && inglesCheck && francesCheck && portuguesCheck && alemanCheck && italianoCheck) || (casaCheck && noCasaCheck) {
             correctChecks = false
             alertTitle = "Error en filtros"
             alertMessage = "Por favor, no selecciones todas las opciones de una categoria. Si quieres que salgan todas, deja las opciones de esa categoria sin seleccionar."
@@ -105,6 +108,8 @@ class GlobalViewModel: ObservableObject {
         portuguesCheck = false
         alemanCheck = false
         italianoCheck = false
+        casaCheck = false
+        noCasaCheck = false
         presupuestoMaximo = 0
 
         // Aplica filtros sin ninguno seleccionado
@@ -292,7 +297,7 @@ class GlobalViewModel: ObservableObject {
     // Método para aplicar filtros
     func aplicarFiltros() {
         // Verificar si no hay filtros activos
-        let allFiltersInactive = !hombreCheck && !mujerCheck && !fumadorCheck && !noFumadorCheck && !fiestaCheck && !noFiestaCheck && !estudianteCheck && !trabajadorCheck && !activoCheck && !tranquiloCheck && !ambosCheck && !españolCheck && !inglesCheck && !francesCheck && !portuguesCheck && !alemanCheck && !italianoCheck
+        let allFiltersInactive = !hombreCheck && !mujerCheck && !fumadorCheck && !noFumadorCheck && !fiestaCheck && !noFiestaCheck && !estudianteCheck && !trabajadorCheck && !activoCheck && !tranquiloCheck && !ambosCheck && !españolCheck && !inglesCheck && !francesCheck && !portuguesCheck && !alemanCheck && !italianoCheck && !casaCheck && !noCasaCheck
         let budgetZero = presupuestoMaximo == 0
 
         // Si no hay filtros activos, el presupuesto es 0 y el toggle no está activado, mostrar todos los anuncios
@@ -314,7 +319,7 @@ class GlobalViewModel: ObservableObject {
             if noFumadorCheck && user.info.fumar { return false }
             if fiestaCheck && !user.info.fiesta { return false }
             if noFiestaCheck && user.info.fiesta { return false }
-            if estudianteCheck && user.info.estudios.isEmpty { return false }
+            if estudianteCheck && user.info.trabaja { return false }
             if trabajadorCheck && !user.info.trabaja { return false }
             if activoCheck && user.info.ambiente != "activo" { return false }
             if tranquiloCheck && user.info.ambiente != "tranquilo" { return false }
@@ -325,6 +330,8 @@ class GlobalViewModel: ObservableObject {
             if portuguesCheck && !user.info.idiomas.contains(.portugues) { return false }
             if alemanCheck && !user.info.idiomas.contains(.aleman) { return false }
             if italianoCheck && !user.info.idiomas.contains(.italiano) { return false }
+            if noCasaCheck && !anuncio.num_hab.isEmpty { return false }
+            if casaCheck && anuncio.num_hab.isEmpty { return false }
 
             // Aplica el filtro de presupuesto solo si presupuestoMaximo no es 0
             if presupuestoMaximo != 0 {
