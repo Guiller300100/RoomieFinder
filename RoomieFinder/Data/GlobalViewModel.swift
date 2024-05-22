@@ -78,7 +78,7 @@ class GlobalViewModel: ObservableObject {
     @Published var correctChecks: Bool = false
 
     func comprobarCheck() {
-        if (hombreCheck && mujerCheck) || (fumadorCheck && noFumadorCheck) || (fiestaCheck && noFiestaCheck) || (estudianteCheck && trabajadorCheck) || (activoCheck && tranquiloCheck && ambosCheck) || (españolCheck && inglesCheck && francesCheck && portuguesCheck && alemanCheck && italianoCheck) || (casaCheck && noCasaCheck) {
+        if (hombreCheck && mujerCheck) || (fumadorCheck && noFumadorCheck) || (fiestaCheck && noFiestaCheck) || (estudianteCheck && trabajadorCheck) || (activoCheck && tranquiloCheck && ambosCheck)  || (casaCheck && noCasaCheck) {
             correctChecks = false
             alertTitle = "Error en filtros"
             alertMessage = "Por favor, no selecciones todas las opciones de una categoria. Si quieres que salgan todas, deja las opciones de esa categoria sin seleccionar."
