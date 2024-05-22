@@ -38,7 +38,7 @@ struct PerfilRow: View {
                     Text("\(usuario?.nombre ?? ""), \(calcularEdad(from: usuario?.fnac ?? "")) años")
                         .customFont(font: .mediumFont, size: 14)
                         .lineLimit(nil)
-                    Text((anuncio.num_hab.isEmpty ? "• Presupuesto:" : "• Precio:") + "\(eliminarUltimoEuro(anuncio.presupuesto))€")
+                    Text((anuncio.num_hab.isEmpty ? "• Presupuesto:" : "• Precio:") + "\(anuncio.presupuesto)€")
                         .customFont(font: .regularFont, size: 12)
                         .padding(.top, 0.5)
                     Text("• Zona \(eliminarZonaOBarrio(from: anuncio.barrio))")
@@ -109,16 +109,6 @@ struct PerfilRow: View {
                 return globalViewModel.favoritos.contains { $0.anuncioID == anuncioID }
             }
 
-}
-
-private func eliminarUltimoEuro(_ cadena: String) -> String {
-    // Verificar si el último carácter es €
-    if cadena.hasSuffix("€") {
-        // Si es así, eliminar el último carácter
-        return String(cadena.dropLast())
-    }
-    // Si no es €, devolver la cadena original
-    return cadena
 }
 
 private func eliminarZonaOBarrio(from cadena: String) -> String {
