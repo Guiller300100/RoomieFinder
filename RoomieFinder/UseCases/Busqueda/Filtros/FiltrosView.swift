@@ -60,7 +60,7 @@ struct FiltrosView: View {
                 Image(systemName: "info.circle")
                     .foregroundStyle(.accent)
 
-                Text("En todos los filtros, si quieres que salgan todos de ese tipo, no selecciones ninguna opción.")
+                Text("No selecciones ninguna opción dentro de la misma categoria, para que salgan ambos casos.")
                     .customFont(font: .regularFont, size: 14)
                     .foregroundStyle(.accent)
             }
