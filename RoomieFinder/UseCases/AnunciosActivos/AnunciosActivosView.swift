@@ -9,6 +9,9 @@ import SwiftUI
 struct AnunciosActivosView: View {
     @StateObject var viewModel: AnunciosActivosViewModel
 
+    //Array de datos
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
+
     init(_ viewModel: AnunciosActivosViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -29,18 +32,26 @@ struct AnunciosActivosView: View {
 
                 textLabel
 
-                AnuncioRow()
-
-                AnuncioRow()
+                anuncios
 
                 buttonNewLabel
 
             }
         }
+        .onAppear() {
+            viewModel.onAppear()
+        }
 
-        .navigationDestination(isPresented: $viewModel.isNavigated) {
-            CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: false)
+        .navigationDestination(isPresented: $viewModel.isNavigatedNew) {
+            CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: false))
                 .navigationBarBackButtonHidden()
+        }
+
+        .navigationDestination(isPresented: $viewModel.isNavigatedModified) {
+            if let anuncio = viewModel.anuncioSelected {
+                CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: false, anuncioSelected: anuncio))
+                    .navigationBarBackButtonHidden()
+            }
         }
     }
 
@@ -52,9 +63,22 @@ struct AnunciosActivosView: View {
 
     }
 
+    private var anuncios: some View {
+
+        ForEach(globalViewModel.misAnuncios) { anuncio in
+
+            AnuncioRow(anuncio: anuncio) {
+                self.viewModel.anuncioSelected = anuncio
+                viewModel.isNavigatedModified = true
+            }
+
+        }
+
+    }
+
     private var buttonNewLabel: some View {
         Button(action: {
-            viewModel.isNavigated = true
+            viewModel.isNavigatedNew = true
 
         }) {
             Text("Nuevo anuncio")

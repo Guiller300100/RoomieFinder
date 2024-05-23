@@ -8,19 +8,35 @@
 import SwiftUI
 
 struct AnuncioRow: View {
+
+    let anuncio: Anuncio
+
+    //Array de datos
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
+    var modifiedCallback: () -> Void
+
+
+
     var body: some View {
         VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Zona Parquesol")
+                    Text("\(anuncio.barrio)")
                         .customFont(font: .mediumFont, size: 18)
 
                     VStack(alignment: .leading) {
-                        Text("• Curso 23-24")
+                        Text("• Tiempo \(anuncio.tiempoEstancia)")
                             .customFont(font: .regularFont, size: 18)
 
-                        Text("• _Presupuesto")
+                        Text(
+                            anuncio.num_hab.isEmpty ? "• Presupuesto \(anuncio.presupuesto)": "• Precio \(anuncio.presupuesto)"
+                        )
                             .customFont(font: .regularFont, size: 18)
+
+                        if !anuncio.num_hab.isEmpty {
+                            Text("• habitaciones: \(anuncio.num_hab)")
+                                .customFont(font: .regularFont, size: 18)
+                        }
                     }
                     .padding(.leading, 5)
 
@@ -33,6 +49,7 @@ struct AnuncioRow: View {
                 .padding(.bottom, 5)
 
             buttonDeletedLabel
+                .padding(.bottom, 5)
 
             Spacer()
         }
@@ -45,7 +62,8 @@ struct AnuncioRow: View {
 
     private var buttonModifiedLabel: some View {
         Button(action: {
-            //
+
+            modifiedCallback()
 
         }) {
             Text("Modificar anuncio")
@@ -59,7 +77,11 @@ struct AnuncioRow: View {
 
     private var buttonDeletedLabel: some View {
         Button(action: {
-            //
+
+            globalViewModel.deleteData(collection: .Anuncios, documentId: anuncio.id)
+
+            globalViewModel.getCurrentUserAd()
+
 
         }) {
             Text("Eliminar anuncio")
@@ -73,5 +95,7 @@ struct AnuncioRow: View {
 }
 
 #Preview {
-    AnuncioRow()
+    AnuncioRow(anuncio: Anuncio(id: "", userID: "", barrio: "Parquesol", tiempoEstancia: "4 meses", presupuesto: "300€", num_hab: "4")) {
+
+    }
 }

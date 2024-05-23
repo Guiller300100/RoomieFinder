@@ -30,8 +30,11 @@ struct PerfilView: View {
             .padding()
 
         }
+        .onAppear() {
+            viewModel.onAppear()
+        }
 
-        .navigationDestination(isPresented: $viewModel.navigationCheck,
+        .navigationDestination(isPresented: $viewModel.navigationAnunciosCheck,
                                destination: {
             withAnimation {
                 AnunciosActivosView(
@@ -41,8 +44,20 @@ struct PerfilView: View {
             }
         })
 
+        .navigationDestination(isPresented: $viewModel.navigationInfoPerfilCheck,
+                               destination: {
+            withAnimation {
+                CreacionPerfilView(
+                    CreacionPerfilViewModel(firstTime: false)
+                )
+                .navigationBarBackButtonHidden(true)
+            }
+        })
+
         .sheet(isPresented: $viewModel.isShowingPhotoPicker, content: {
-            PhotoPicker.init(avatarImage: $viewModel.avatarImage)
+            PhotoPicker.init(avatarImage: $viewModel.avatarImage) {
+                viewModel.uploadPhoto()
+            }
         })
     }
 
@@ -84,7 +99,7 @@ struct PerfilView: View {
 
             //MARK: BOTON EDITAR
             Button(action: {
-
+                viewModel.navigationInfoPerfilCheck = true
             }) {
                 Text("Editar información personal")
                     .customFont(font: .boldFont, size: 15)
@@ -99,7 +114,7 @@ struct PerfilView: View {
 
             //MARK: BOTON ANUNCIOS
             Button(action: {
-                viewModel.navigationCheck = true
+                viewModel.navigationAnunciosCheck = true
             }) {
                 Text("Anuncios activos")
                     .customFont(font: .boldFont, size: 15)
@@ -112,6 +127,19 @@ struct PerfilView: View {
             Spacer()
         }
 
+    }
+
+    private var buttonUploadPhoto: some View {
+        Button(action: {
+            viewModel.uploadPhoto()
+        }) {
+            Text("Aplicar cambios")
+                .customFont(font: .boldFont, size: 15)
+                .frame(width: 217, height: 41)
+                .foregroundStyle(.white)
+                .background(Constants.mainColor)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+        }
     }
 
 }

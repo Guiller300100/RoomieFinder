@@ -16,6 +16,7 @@ struct RoomieFinderApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView(LoginViewModel())
+                .environmentObject(GlobalViewModel.shared)
         }
     }
 }
@@ -25,5 +26,27 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         FirebaseApp.configure()
         return true
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+
+        print("CerrandoApp")
+
+        if Auth.auth().currentUser != nil {
+            DispatchQueue.global(qos: .background).async {
+                do {
+                    try Auth.auth().signOut()
+                    // Cerrar sesión exitosamente
+                    DispatchQueue.main.async {
+                        print("Sesión cerrada exitosamente.")
+                    }
+                } catch let error as NSError {
+                    // Manejar el error
+                    DispatchQueue.main.async {
+                        print("Error al cerrar sesión: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
 }

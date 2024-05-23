@@ -7,8 +7,10 @@
 import SwiftUI
 
 struct CreacionPerfilView: View {
+
     @StateObject var viewModel: CreacionPerfilViewModel
     @FocusState private var focusedField: CreacionType?
+    @Environment(\.presentationMode) var presentationMode
 
     init(_ viewModel: CreacionPerfilViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -20,7 +22,9 @@ struct CreacionPerfilView: View {
             TopBarView()
             ScrollView {
 
-                titleAndPhoto
+                if viewModel.firstTime {
+                    titleAndPhoto
+                }
 
                 formLabel
 
@@ -29,17 +33,22 @@ struct CreacionPerfilView: View {
             }
 
         }
+        .onAppear() {
+            viewModel.onAppear()
+        }
         .alert(isPresented: $viewModel.alertPushCreacionPerfil, content: {
             Alert(title: Text(viewModel.alertTitleCreacionPerfil), message: Text(viewModel.alertMessageCreacionPerfil), dismissButton: .default(Text("Vale")))
         })
 
         .sheet(isPresented: $viewModel.isShowingPhotoPicker, content: {
-            PhotoPicker.init(avatarImage: $viewModel.avatarImage)
+            PhotoPicker.init(avatarImage: $viewModel.avatarImage) {
+                _ = viewModel.uploadPhoto()
+            }
         })
 
         .navigationDestination(isPresented: $viewModel.navigationCheck, destination: {
             withAnimation {
-                CreacionAnuncioView(CreacionAnuncioViewModel(), firstTime: true)
+                CreacionAnuncioView(CreacionAnuncioViewModel(firstTime: true))
                     .navigationBarBackButtonHidden(true)
             }
         })
@@ -101,6 +110,39 @@ struct CreacionPerfilView: View {
                 .frame(height: 1)
                 .overlay(Color.gray.opacity(0.7))
                 .padding(.bottom, 16)
+
+            //MARK: Trabajas
+            Text("¿Trabajas?")
+                .customFont(font: .boldFont, size: 14)
+                .padding(.bottom, 5)
+
+            Button {
+                viewModel.trabaja = true
+
+            } label: {
+                HStack {
+                    Image(systemName: viewModel.trabaja ? "checkmark.circle.fill" : "circle")
+
+                    Text("Si")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+
+            Button {
+                viewModel.trabaja = false
+            } label: {
+                HStack {
+                    Image(systemName: !viewModel.trabaja ? "checkmark.circle.fill" : "circle")
+
+                    Text("No")
+                        .customFont(font: .regularFont, size: 14)
+                        .foregroundStyle(.black)
+                }
+
+            }
+            .padding(.bottom, 16)
 
             //MARK: ¿Que idiomas hablas?
             Text("¿Que idiomas hablas?")
@@ -164,7 +206,6 @@ struct CreacionPerfilView: View {
             Button {
                 viewModel.mujerCheck = true
                 viewModel.hombreCheck = !viewModel.mujerCheck
-
             } label: {
                 HStack {
                     Image(systemName: viewModel.mujerCheck ? "checkmark.circle.fill" : "circle")
@@ -288,12 +329,10 @@ struct CreacionPerfilView: View {
                 .padding(.bottom, 5)
 
             Button {
-                viewModel.fumarSiCheck = true
-                viewModel.fumarNoCheck = !viewModel.fumarSiCheck
-
+                viewModel.fumarCheck = true
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fumarSiCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fumarCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
                         .customFont(font: .regularFont, size: 14)
@@ -303,12 +342,11 @@ struct CreacionPerfilView: View {
             }
 
             Button {
-                viewModel.fumarNoCheck = true
-                viewModel.fumarSiCheck = !viewModel.fumarNoCheck
+                viewModel.fumarCheck = false
 
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fumarNoCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fumarCheck ? "circle" : "checkmark.circle.fill")
 
                     Text("No")
                         .customFont(font: .regularFont, size: 14)
@@ -324,12 +362,10 @@ struct CreacionPerfilView: View {
                 .padding(.bottom, 5)
 
             Button {
-                viewModel.fiestaSiCheck = true
-                viewModel.fiestaNoCheck = !viewModel.fiestaSiCheck
-
+                viewModel.fiestaCheck = true
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fiestaSiCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fiestaCheck ? "checkmark.circle.fill" : "circle")
 
                     Text("Si")
                         .customFont(font: .regularFont, size: 14)
@@ -339,12 +375,10 @@ struct CreacionPerfilView: View {
             }
 
             Button {
-                viewModel.fiestaNoCheck = true
-                viewModel.fiestaSiCheck = !viewModel.fiestaNoCheck
-
+                viewModel.fiestaCheck = false
             } label: {
                 HStack {
-                    Image(systemName: viewModel.fiestaNoCheck ? "checkmark.circle.fill" : "circle")
+                    Image(systemName: viewModel.fiestaCheck ? "circle" : "checkmark.circle.fill")
 
                     Text("No")
                         .customFont(font: .regularFont, size: 14)
@@ -358,11 +392,22 @@ struct CreacionPerfilView: View {
             Text("Descríbete para conocerte más:")
                 .customFont(font: .boldFont, size: 14)
 
-            TextField("", text: $viewModel.descripcion, onCommit: {
-                focusedField = nil
-            })
-            .textFieldStyle(.plain)
-            .focused($focusedField, equals: .descripcion)
+            TextField("", text: $viewModel.descripcion, axis: .vertical)
+                .lineLimit(2)
+                .textFieldStyle(.plain)
+                .focused($focusedField, equals: .descripcion)
+                .toolbar {
+                    if focusedField == .descripcion {
+                        ToolbarItem(placement: .keyboard) {
+                            HStack {
+                                Spacer()
+                                Button("Fin") {
+                                    focusedField = nil
+                                }
+                            }
+                        }
+                    }
+                }
 
             Divider()
                 .frame(height: 1)
@@ -375,10 +420,17 @@ struct CreacionPerfilView: View {
 
     private var buttonLabel: some View {
         //MARK: BOTON GUARDAR
-        //TODO: CAMBIAR ACCION BUTTON
         Button(action: {
-            //viewModel.comprobarField()
-            viewModel.navigationCheck = true
+            viewModel.comprobarFields { success in
+                if success {
+                    if viewModel.firstTime {
+                        viewModel.navigationCheck = true
+                    } else {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+
         }) {
             Text("Guardar")
                 .customFont(font: .boldFont, size: 15)

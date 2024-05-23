@@ -33,7 +33,7 @@ struct RegistroView: View {
 
             .navigationDestination(isPresented: $viewModel.isRegistred, destination: {
                 withAnimation(.easeIn) {
-                    CreacionPerfilView(CreacionPerfilViewModel())
+                    CreacionPerfilView(CreacionPerfilViewModel(firstTime: true))
                         .navigationBarBackButtonHidden(true)
                 }
             })

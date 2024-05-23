@@ -5,18 +5,32 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
+import Firebase
+
 
 public class HomeViewModel: ObservableObject {
-    
+
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
+
+
+    @Published var selection: Int = 3
+
     public func onAppear() {
-        UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor) // Cambia el color de los TabItems no seleccionados
+        if globalViewModel.fromLogin {
+            selection = 1
+            globalViewModel.fromLogin = false
+        }
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Constants.mainColor)
     }
-    
+
+
+
     public func actionFromView() {
         // Example of private method
     }
-    
+
 }
 
 struct HomeDTO {
