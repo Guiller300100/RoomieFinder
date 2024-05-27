@@ -64,6 +64,7 @@ public class LoginViewModel: ObservableObject {
             // El inicio de sesión fue exitoso
             // Establecer correctoLogin en true
             self.globalViewModel.getAllAds()
+            self.globalViewModel.getDataCurrentUser()
             self.globalViewModel.getAllUsers()
             self.globalViewModel.getFav()
             self.correctLogin = true

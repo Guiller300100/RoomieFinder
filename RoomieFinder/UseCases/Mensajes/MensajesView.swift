@@ -7,7 +7,11 @@
 import SwiftUI
 
 struct MensajesView: View {
+    //ARRAYS DE DATOS
+    @ObservedObject var globalViewModel = GlobalViewModel.shared
+
     @StateObject var viewModel: MensajesViewModel
+    
 
     init(_ viewModel: MensajesViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -15,48 +19,80 @@ struct MensajesView: View {
 
 
     var body: some View {
-
-        VStack {
-            TopBarView()
-
-            ScrollView {
-                VStack {
-                    HStack {
-
-                        Spacer()
-                        Text("Mensajes")
-                            .customFont(font: .mediumFont, size: 24)
-                            .offset(x: 40)
-                            .foregroundStyle(Constants.mainColor)
-
-                        Spacer()
-
-                        if viewModel.isToggleOn {
-                            Image(systemName: "star.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25, height: 25, alignment: .trailing)
-                                .foregroundStyle(.yellow)
-                        } else {
-                            Image(systemName: "star.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25, height: 25, alignment: .trailing)
-                                .foregroundStyle(.gray)
+            
+            VStack {
+                TopBarView()
+                
+                headerLabel
+                
+                messageView
+            }
+            .onAppear() {
+                viewModel.onAppear()
+            }
+            .navigationDestination(isPresented: $viewModel.chatNavigation, destination: {
+                if let recentMessage = viewModel.chatSeleccionado {
+                    if let toUser = globalViewModel.users.first(where: { $0.userID == recentMessage.toId }) {
+                        withAnimation {
+                            ChatLogView(toUser: toUser)
                         }
-
-                        Toggle(isOn: $viewModel.isToggleOn){
+                    } else {
+                        if let toUser = globalViewModel.users.first(where: { $0.userID == recentMessage.fromId }) {
+                            withAnimation {
+                                ChatLogView(toUser: toUser)
+                            }
                         }
-                        .toggleStyle(SwitchToggleStyle(tint: Constants.mainColor))
-                        .labelsHidden()
                     }
-                    .padding(.all, 15)
+
+
+
                 }
+            })
+    }
+
+    private var headerLabel: some View {
+        HStack {
+
+            Spacer()
+            Text("Mensajes")
+                .customFont(font: .mediumFont, size: 24)
+                .foregroundStyle(Constants.mainColor)
+
+            Spacer()
+        }
+        .padding(.init(top: 10, leading: 15, bottom: 0, trailing: 15))
+    }
+
+    private var messageView: some View {
+        ScrollView {
+
+
+            ForEach(viewModel.recentMessages) { recentMessage in
+
+                VStack {
+                    ChatRow(recentMessage: recentMessage)
+                        .onTapGesture {
+                            DispatchQueue.main.async {
+                                self.viewModel.chatSeleccionado = recentMessage
+                                self.viewModel.chatNavigation = true
+                            }
+                        }
+
+                    Divider()
+                        .padding(.vertical, 8)
+                }
+                .padding(.init(top: 1, leading: 5, bottom: 0, trailing: 5))
             }
         }
     }
 }
 
-#Preview {
-    MensajesView(MensajesViewModel())
+struct MensajesView_Previews: PreviewProvider {
+
+    static var previews: some View {
+        NavigationStack {
+            MensajesView(MensajesViewModel())
+        }
+    }
+
 }
