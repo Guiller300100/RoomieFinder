@@ -27,7 +27,6 @@
 		B333563F2C04E10800603F9C /* RecentMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B333563E2C04E10800603F9C /* RecentMessageModel.swift */; };
 		B362F99B2BF95E5B0051ED7D /* FavoritosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362F99A2BF95E5B0051ED7D /* FavoritosModel.swift */; };
 		B36401B62BFE38CB00280194 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36401B52BFE38CB00280194 /* DoubleExtension.swift */; };
-		B36401B92BFFD4B200280194 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = B36401B82BFFD4B200280194 /* SDWebImageSwiftUI */; };
 		B365F5962BC181B3004D08F4 /* MultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B365F5952BC181B3004D08F4 /* MultiPicker.swift */; };
 		B385FD382BACDE1C00A82169 /* UsuarioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385FD372BACDE1C00A82169 /* UsuarioModel.swift */; };
 		B39D5F292BBE00DC00F3F561 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B39D5F282BBE00DC00F3F561 /* FirebaseAuth */; };
@@ -131,7 +130,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B36401B92BFFD4B200280194 /* SDWebImageSwiftUI in Frameworks */,
 				B3D0BBDE2BF27AFC004E1AF1 /* FirebaseStorageCombine-Community in Frameworks */,
 				B31E2C652BADC62700A14662 /* FirebaseAnalyticsSwift in Frameworks */,
 				B31E2C672BADC62700A14662 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -491,7 +489,6 @@
 				B3D0BBC32BED31BB004E1AF1 /* FirebaseDatabaseSwift */,
 				B3D0BBDB2BF27AFC004E1AF1 /* FirebaseStorage */,
 				B3D0BBDD2BF27AFC004E1AF1 /* FirebaseStorageCombine-Community */,
-				B36401B82BFFD4B200280194 /* SDWebImageSwiftUI */,
 			);
 			productName = RoomieFinder;
 			productReference = B318D4B72BAB50850099771C /* RoomieFinder.app */;
@@ -855,11 +852,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B31E2C602BADC5FB00A14662 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		B36401B82BFFD4B200280194 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B36401B72BFFD4B200280194 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 		B39D5F282BBE00DC00F3F561 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

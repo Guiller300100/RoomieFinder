@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ChatLogView: View {
-
+    
     //Array de datos
     @ObservedObject var globalViewModel = GlobalViewModel.shared
-
+    
     @ObservedObject var viewModel: ChatLogViewModel
-
+    
     let emptyScrollToString = "Empty"
     let toUser: Usuario
-
+    
     init(
         toUser: Usuario
     ) {
         self.toUser = toUser
         self.viewModel = .init(toUser: toUser)
     }
-
+    
     // MARK: BODY
     var body: some View {
         ZStack {
@@ -33,7 +33,7 @@ struct ChatLogView: View {
         .navigationTitle("\(toUser.nombre) \(toUser.apellido)")
         .navigationBarTitleDisplayMode(.inline)
     }
-
+    
     // MARK: messageView
     private var messagesView: some View {
         ScrollView {
@@ -42,7 +42,7 @@ struct ChatLogView: View {
                     ForEach(viewModel.chatMessages) { message in
                         MessageBubble(message: message)
                     }
-
+                    
                     HStack {
                         Spacer()
                     }
@@ -52,10 +52,9 @@ struct ChatLogView: View {
                     withAnimation(.easeOut(duration: 0.3)) {
                         ScrollViewProxy.scrollTo(emptyScrollToString, anchor: .bottom)
                     }
-
+                    
                 }
             }
-
         }
         .background(Color(.init(white: 0.9, alpha: 1)))
         .safeAreaInset(edge: .bottom) {
@@ -63,16 +62,28 @@ struct ChatLogView: View {
                 .background(.white)
         }
     }
-
+    
     // MARK: BottonBar
     private var chatBottomBar: some View {
         HStack {
-            ZStack {
-                DescriptionPlaceholder()
-                TextEditor(text: $viewModel.message)
-                    .opacity(viewModel.message.isEmpty ? 0.5 : 1)
-            }
-            .frame(height: 35)
+            TextField("Mensaje", text: $viewModel.message)
+                .toolbar(content: {
+                    ToolbarItem(placement: .keyboard) {
+                        HStack {
+                            Spacer()
+                            
+                            Button {
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            } label: {
+                                Text(Image(systemName: "chevron.down"))
+                                
+                            }
+                            
+                        }
+                    }
+                })
+                .opacity(viewModel.message.isEmpty ? 0.5 : 1)
+                .frame(height: 35)
             Button {
                 viewModel.handleSend()
             } label: {
@@ -82,6 +93,9 @@ struct ChatLogView: View {
                     .foregroundStyle(!viewModel.message.isEmpty ? Constants.mainColor : Constants.mainColor.opacity(0.5))
             }
             .disabled(!viewModel.message.isEmpty ? false : true)
+        }
+        .onTapGesture {
+            viewModel.count += 1
         }
         .padding(.horizontal)
         .padding(.vertical, 6)
@@ -101,7 +115,7 @@ private struct DescriptionPlaceholder: View {
 }
 
 struct ChatLogView_Previews: PreviewProvider {
-
+    
     static var previews: some View {
         NavigationStack {
             ChatLogView(
@@ -129,5 +143,5 @@ struct ChatLogView_Previews: PreviewProvider {
             )
         }
     }
-
+    
 }
