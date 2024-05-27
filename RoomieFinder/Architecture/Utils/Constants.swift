@@ -18,6 +18,13 @@ struct Constants {
     static let textFieldColor = Color("TextFieldColor")
     static let inicioSesionColor = Color("inicioSesionColor")
     static let RegistroColor = Color("RegistroColor")
+
+    public enum Firebase {
+        static let fromId = "fromId"
+        static let toId = "toId"
+        static let text = "text"
+        static let timestamp = "timestamp"
+    }
 }
 
 

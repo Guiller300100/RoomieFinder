@@ -13,6 +13,7 @@ public class BusquedaViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     @Published var filtrosNavegacion: Bool = false
+    @Published var chatNavegacion: Bool = false
     @Published var isShowed: Bool = false
     @Published var anuncioSeleccionado: Anuncio?
     @Published var isTapped: Bool = false

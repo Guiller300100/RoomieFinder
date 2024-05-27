@@ -23,47 +23,47 @@ struct BusquedaView: View {
 
             VStack {
                 ScrollView {
-                        HStack {
-                            Button {
+                    HStack {
+                        Button {
 
-                                viewModel.filtrosNavegacion = true
+                            viewModel.filtrosNavegacion = true
 
-                            } label: {
-                                Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundStyle(Constants.mainColor)
-                            }
-
-                            Spacer()
-
-                            Text("Búsqueda")
-                                .customFont(font: .mediumFont, size: 24)
-                                .offset(x: -39)
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
                                 .foregroundStyle(Constants.mainColor)
-
-
-                            if globalViewModel.isToggleOn {
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 25, height: 25, alignment: .trailing)
-                                    .foregroundStyle(.yellow)
-                            } else {
-                                Image(systemName: "star.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 25, height: 25, alignment: .trailing)
-                                    .foregroundStyle(.gray)
-                            }
-
-                            Toggle(isOn: $globalViewModel.isToggleOn){
-                            }
-                            .toggleStyle(SwitchToggleStyle(tint: Constants.mainColor))
-                            .labelsHidden()
                         }
-                        .frame(height: 25)
-                        .padding(.all, 15)
+
+                        Spacer()
+
+                        Text("Búsqueda")
+                            .customFont(font: .mediumFont, size: 24)
+                            .offset(x: -39)
+                            .foregroundStyle(Constants.mainColor)
+
+
+                        if globalViewModel.isToggleOn {
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25, alignment: .trailing)
+                                .foregroundStyle(.yellow)
+                        } else {
+                            Image(systemName: "star.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25, alignment: .trailing)
+                                .foregroundStyle(.gray)
+                        }
+
+                        Toggle(isOn: $globalViewModel.isToggleOn){
+                        }
+                        .toggleStyle(SwitchToggleStyle(tint: Constants.mainColor))
+                        .labelsHidden()
+                    }
+                    .frame(height: 25)
+                    .padding(.all, 15)
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
                         ForEach(globalViewModel.anunciosFiltrados, id: \.id) { anuncio in
@@ -91,7 +91,7 @@ struct BusquedaView: View {
         .sheet(isPresented: $viewModel.isShowed) {
             if let anuncio = viewModel.anuncioSeleccionado {
                 let usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })!
-                PerfilDetailView(usuario: usuario, anuncio: anuncio)
+                PerfilDetailView(usuario: usuario, anuncio: anuncio, shouldNavigation: $viewModel.chatNavegacion, isShowed: $viewModel.isShowed)
                     .presentationDetents([.fraction(0.80)])
             } else {
                 Text("No hay nombre")
@@ -109,6 +109,17 @@ struct BusquedaView: View {
             withAnimation {
                 FiltrosView()
                     .navigationBarBackButtonHidden(true)
+            }
+        })
+
+        .navigationDestination(isPresented: $viewModel.chatNavegacion, destination: {
+            if let anuncio = viewModel.anuncioSeleccionado {
+                let usuario = globalViewModel.users.first(where: { $0.userID == anuncio.userID })!
+                withAnimation {
+                    ChatLogView(toUser: usuario)
+                }
+            } else {
+                Text("No hay nombre")
             }
         })
         .onAppear {
