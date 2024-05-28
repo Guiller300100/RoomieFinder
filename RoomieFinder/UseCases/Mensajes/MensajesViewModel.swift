@@ -12,7 +12,6 @@ public class MensajesViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
     @Published var errorMessage = ""
     @Published var recentMessages = [RecentMessageModel]()
-    @Published var favChats = [RecentMessageModel]()
     @Published var chatNavigation = false
     @Published var chatSeleccionado: RecentMessageModel?
 

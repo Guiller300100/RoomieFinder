@@ -11,7 +11,6 @@ struct ChatLogView: View {
 
     //Array de datos
     @ObservedObject var globalViewModel = GlobalViewModel.shared
-
     @ObservedObject var viewModel: ChatLogViewModel
 
     let emptyScrollToString = "Empty"
@@ -53,30 +52,30 @@ struct ChatLogView: View {
                         withAnimation(.easeOut(duration: 0.3)) {
                             ScrollViewProxy.scrollTo(emptyScrollToString, anchor: .bottom)
                         }
-
+                    }
+                    .onChange(of: viewModel.message) { _ in
+                        if viewModel.message.count == 1 {
+                            withAnimation(.easeOut(duration: 0.3)) {
+                                ScrollViewProxy.scrollTo(emptyScrollToString, anchor: .bottom)
+                            }
+                        }
                     }
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                chatBottomBar
-                    .onTapGesture {
-                        viewModel.count += 1
-                    }
-                    .background(.white)
-            }
+            chatBottomBar
+                .background(.white)
+
 
         }
         .background(Color(.init(white: 0.9, alpha: 1)))
 
     }
 
+
     // MARK: BottonBar
     private var chatBottomBar: some View {
         HStack {
             TextField("Mensaje", text: $viewModel.message)
-                .onTapGesture {
-                    viewModel.scrollDown()
-                }
                 .toolbar(content: {
                     ToolbarItem(placement: .keyboard) {
                         HStack {
