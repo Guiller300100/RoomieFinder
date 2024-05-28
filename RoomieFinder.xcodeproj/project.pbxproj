@@ -150,6 +150,7 @@
 		B318D4AE2BAB50850099771C = {
 			isa = PBXGroup;
 			children = (
+				B318D4BA2BAB50850099771C /* RoomieFinderApp.swift */,
 				B318D4B92BAB50850099771C /* RoomieFinder */,
 				B318D4B82BAB50850099771C /* Products */,
 				B31E2C612BADC62700A14662 /* Frameworks */,
@@ -174,7 +175,6 @@
 				B385FD352BACDE0500A82169 /* Data */,
 				B318D4CB2BAB50CF0099771C /* Info.plist */,
 				B31E2C5E2BADC50700A14662 /* GoogleService-Info.plist */,
-				B318D4BA2BAB50850099771C /* RoomieFinderApp.swift */,
 				B318D4C02BAB50870099771C /* Preview Content */,
 			);
 			path = RoomieFinder;

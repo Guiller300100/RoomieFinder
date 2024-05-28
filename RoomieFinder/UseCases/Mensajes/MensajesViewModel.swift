@@ -44,9 +44,7 @@ public class MensajesViewModel: ObservableObject {
                     self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
                 })
             }
-
     }
-
 
     public func onAppear() {
         fetchRecentMessages()
