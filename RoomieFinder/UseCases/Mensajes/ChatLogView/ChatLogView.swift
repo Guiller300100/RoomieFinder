@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct ChatLogView: View {
-    
+
     //Array de datos
     @ObservedObject var globalViewModel = GlobalViewModel.shared
-    
+
     @ObservedObject var viewModel: ChatLogViewModel
-    
+
     let emptyScrollToString = "Empty"
     let toUser: Usuario
-    
+
     init(
         toUser: Usuario
     ) {
         self.toUser = toUser
         self.viewModel = .init(toUser: toUser)
     }
-    
+
     // MARK: BODY
     var body: some View {
         ZStack {
@@ -33,36 +33,43 @@ struct ChatLogView: View {
         .navigationTitle("\(toUser.nombre) \(toUser.apellido)")
         .navigationBarTitleDisplayMode(.inline)
     }
-    
+
     // MARK: messageView
     private var messagesView: some View {
-        ScrollView {
-            ScrollViewReader { ScrollViewProxy in
-                VStack {
-                    ForEach(viewModel.chatMessages) { message in
-                        MessageBubble(message: message)
+        VStack {
+            ScrollView {
+                ScrollViewReader { ScrollViewProxy in
+                    VStack {
+                        ForEach(viewModel.chatMessages) { message in
+                            MessageBubble(message: message)
+                        }
+
+                        HStack {
+                            Spacer()
+                        }
+                        .id(emptyScrollToString)
                     }
-                    
-                    HStack {
-                        Spacer()
+                    .onReceive(viewModel.$count) { _ in
+                        withAnimation(.easeOut(duration: 0.3)) {
+                            ScrollViewProxy.scrollTo(emptyScrollToString, anchor: .bottom)
+                        }
+
                     }
-                    .id(emptyScrollToString)
-                }
-                .onReceive(viewModel.$count) { _ in
-                    withAnimation(.easeOut(duration: 0.3)) {
-                        ScrollViewProxy.scrollTo(emptyScrollToString, anchor: .bottom)
-                    }
-                    
                 }
             }
+            .safeAreaInset(edge: .bottom) {
+                chatBottomBar
+                    .onTapGesture {
+                        viewModel.count += 1
+                    }
+                    .background(.white)
+            }
+
         }
         .background(Color(.init(white: 0.9, alpha: 1)))
-        .safeAreaInset(edge: .bottom) {
-            chatBottomBar
-                .background(.white)
-        }
+
     }
-    
+
     // MARK: BottonBar
     private var chatBottomBar: some View {
         HStack {
@@ -71,14 +78,14 @@ struct ChatLogView: View {
                     ToolbarItem(placement: .keyboard) {
                         HStack {
                             Spacer()
-                            
+
                             Button {
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             } label: {
                                 Text(Image(systemName: "chevron.down"))
-                                
+
                             }
-                            
+
                         }
                     }
                 })
@@ -115,7 +122,7 @@ private struct DescriptionPlaceholder: View {
 }
 
 struct ChatLogView_Previews: PreviewProvider {
-    
+
     static var previews: some View {
         NavigationStack {
             ChatLogView(
@@ -143,5 +150,5 @@ struct ChatLogView_Previews: PreviewProvider {
             )
         }
     }
-    
+
 }
