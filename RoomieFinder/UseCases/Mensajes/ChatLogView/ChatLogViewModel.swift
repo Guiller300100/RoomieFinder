@@ -100,7 +100,7 @@ class ChatLogViewModel: ObservableObject {
         }
     }
 
-    private func persistRecentMessage() {
+    func persistRecentMessage() {
 
         let uid = globalViewModel.currentUser.userID
 
@@ -151,5 +151,9 @@ class ChatLogViewModel: ObservableObject {
                     return
                 }
             }
+    }
+    
+    func scrollDown() {
+        self.count += 1
     }
 }

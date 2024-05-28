@@ -74,6 +74,9 @@ struct ChatLogView: View {
     private var chatBottomBar: some View {
         HStack {
             TextField("Mensaje", text: $viewModel.message)
+                .onTapGesture {
+                    viewModel.scrollDown()
+                }
                 .toolbar(content: {
                     ToolbarItem(placement: .keyboard) {
                         HStack {
