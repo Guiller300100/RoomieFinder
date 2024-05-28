@@ -153,7 +153,7 @@ class ChatLogViewModel: ObservableObject {
             }
     }
     
-    private func scrollDown() {
+    func scrollDown() {
         self.count += 1
     }
 }
