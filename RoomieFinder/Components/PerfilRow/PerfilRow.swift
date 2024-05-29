@@ -48,7 +48,6 @@ struct PerfilRow: View {
 
 
                 VStack {
-                    //TODO: TENGO QUE MIRAR LO DE FAV
                     Button(action: {
                         if isUserInFavorites(anuncioID: anuncio.id){
                             globalViewModel.deleteFav()

@@ -15,9 +15,8 @@ public class LoginViewModel: ObservableObject {
     @ObservedObject var globalViewModel = GlobalViewModel.shared
 
     //TEXTFIELDS
-    // TODO: CAMBIAR ESTOS VALORES
-    @Published var emailInput: String = "guirodr@gmail.com"
-    @Published var passwordInput: String = "1234567"
+    @Published var emailInput: String = ""
+    @Published var passwordInput: String = ""
     @Published var emailForegroundStyle = Color.black
 
     //BUTTONS

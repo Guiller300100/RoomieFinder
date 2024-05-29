@@ -57,7 +57,7 @@ public class RegistroViewModel: ObservableObject {
                         self.vaciarCampos()
                         self.isRegistred = true
                     }
-            }
+                }
             } else {
                 self.alertTitleRegistro = "Error"
                 self.alertMessageRegistro = "Correo o contraseña incorrectos"
@@ -70,6 +70,7 @@ public class RegistroViewModel: ObservableObject {
     func vaciarCampos() {
         nombre = ""
         apellido = ""
+        fechaNacimiento = Date()
         correoElectronico = ""
         passwordInput = ""
     }

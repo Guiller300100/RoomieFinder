@@ -88,7 +88,7 @@ public class CreacionPerfilViewModel: ObservableObject {
                 print("Added the photo to Storage with path: \(self.photoPath)")
             }
         }
-        
+
         return path
     }
 
@@ -108,6 +108,7 @@ public class CreacionPerfilViewModel: ObservableObject {
                     print(error)
                     completion(false)
                 } else {
+                    self.vaciarCampos()
                     completion(true)
                 }
             }
@@ -246,6 +247,24 @@ public class CreacionPerfilViewModel: ObservableObject {
 
         descripcion = globalViewModel.currentUser.info.descripcion
 
+    }
+
+    func vaciarCampos() {
+        estudios = ""
+        trabaja = false
+        universidad = ""
+        idiomas = Set<Idiomas>()
+        tiempoLibre = ""
+        descripcion = ""
+        hombreCheck = false
+        mujerCheck = false
+        activoCheck = false
+        tranquiloCheck = false
+        ambosCheck = false
+        ambienteSocialCheck = false
+        ambienteTranquiloCheck = false
+        fumarCheck = false
+        fiestaCheck = false
     }
 
     //MARK: ON APPEAR
