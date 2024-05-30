@@ -143,13 +143,16 @@ struct CreacionAnuncioView: View {
                 if focusedField == .presupuesto {
                     ToolbarItem(placement: .keyboard) {
                         HStack {
-                            Button("Fin") {
+                            Button(action: {
                                 if viewModel.pisoCheck {
                                     focusedField = .habitaciones
                                 } else {
                                     focusedField = nil
                                 }
+                            }) {
+                                Image(systemName: "chevron.down")
                             }
+
                             Spacer()
                         }
                     }

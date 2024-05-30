@@ -67,7 +67,7 @@ struct ChatLogView: View {
 
 
         }
-        .background(Color(.init(white: 0.9, alpha: 1)))
+        .background(Constants.fondoChat)
 
     }
 

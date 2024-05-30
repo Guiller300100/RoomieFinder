@@ -71,7 +71,7 @@ struct LoginView: View {
             focusedField = .pass
 
         })
-
+        .keyboardType(.emailAddress)
         .focused($focusedField, equals: .email)
         .padding(.all, 18)
         .frame(width: 330, height: 42)
@@ -85,6 +85,7 @@ struct LoginView: View {
         SecureField("Contraseña", text: $viewModel.passwordInput, onCommit: {
             focusedField = nil
         })
+        .textContentType(.password)
         .focused($focusedField, equals: .pass)
         .padding(.all, 18)
         .frame(width: 330, height: 42)

@@ -27,7 +27,10 @@ struct MessageBubble: View {
                         .padding()
                         .background(Constants.secondaryColor)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
-
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Constants.mainColor, lineWidth: 1)
+                        )
 
                         Text("\(formatTimestamp(message.timestamp))")
                             .customFont(font: .regularFont, size: 12, color: .gray)
@@ -43,6 +46,10 @@ struct MessageBubble: View {
                         .padding()
                         .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16)
+                                .stroke(Constants.mainColor, lineWidth: 1)
+                        )
                         Text("\(formatTimestamp(message.timestamp))")
                             .customFont(font: .regularFont, size: 12, color: .gray)
                     }
@@ -94,7 +101,7 @@ struct MessageBubble_Previews: PreviewProvider {
                 )
             )
         }
-        .background(Color(.white))
+        .background(Constants.fondoChat)
     }
 
 }
