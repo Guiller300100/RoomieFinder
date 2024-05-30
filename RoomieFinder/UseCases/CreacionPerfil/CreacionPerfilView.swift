@@ -312,9 +312,11 @@ struct CreacionPerfilView: View {
             Text("¿Qué te gusta hacer en tu tiempo libre?")
                 .customFont(font: .boldFont, size: 14)
 
-            TextField("", text: $viewModel.tiempoLibre, onCommit: {
+            TextField("", text: $viewModel.tiempoLibre, axis: .vertical)
+            .onSubmit {
                 focusedField = .descripcion
-            })
+            }
+            .lineLimit(2)
             .textFieldStyle(.plain)
             .focused($focusedField, equals: .tiempoLibre)
 
@@ -393,7 +395,7 @@ struct CreacionPerfilView: View {
                 .customFont(font: .boldFont, size: 14)
 
             TextField("", text: $viewModel.descripcion, axis: .vertical)
-                .lineLimit(2)
+                .lineLimit(3)
                 .textFieldStyle(.plain)
                 .focused($focusedField, equals: .descripcion)
                 .toolbar {

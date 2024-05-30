@@ -108,7 +108,6 @@ public class CreacionPerfilViewModel: ObservableObject {
                     print(error)
                     completion(false)
                 } else {
-                    self.vaciarCampos()
                     completion(true)
                 }
             }
