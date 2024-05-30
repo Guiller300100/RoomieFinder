@@ -96,6 +96,7 @@ struct RegistroView: View {
             TextField("Correo electrónico", text: $viewModel.correoElectronico, onCommit: {
                 focusedField = .passwordFirst
             })
+            .keyboardType(.emailAddress)
             .textFieldStyle(.plain)
             .focused($focusedField, equals: .correo)
 
