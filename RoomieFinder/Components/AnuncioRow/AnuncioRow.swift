@@ -13,6 +13,10 @@ struct AnuncioRow: View {
 
     //Array de datos
     @ObservedObject var globalViewModel = GlobalViewModel.shared
+    //ALERTAS
+    @State var alertPush = false
+    @State var alertTitle: String = "¿Borrar anuncio?"
+    @State var alertMessage: String = "¿Estás seguro de que deseas borrar este anuncio? Estos cambios no se pueden revertir."
     var modifiedCallback: () -> Void
 
 
@@ -57,6 +61,21 @@ struct AnuncioRow: View {
         .background(Color.second)
         .clipShape(RoundedRectangle(cornerRadius: 30))
         .padding(.all, 10)
+
+        .alert(isPresented: $alertPush,
+               content: {
+            Alert(
+                title: Text(alertTitle),
+                message: Text(alertMessage),
+                primaryButton: .destructive(Text("Borrar"),
+                                            action: {
+                                                globalViewModel.deleteData(collection: .Anuncios, documentId: anuncio.id)
+
+                                                globalViewModel.getCurrentUserAd()
+                                            }
+                                           ), secondaryButton: .default(Text("Cancelar"))
+            )
+        })
     }
 
 
@@ -77,12 +96,7 @@ struct AnuncioRow: View {
 
     private var buttonDeletedLabel: some View {
         Button(action: {
-
-            globalViewModel.deleteData(collection: .Anuncios, documentId: anuncio.id)
-
-            globalViewModel.getCurrentUserAd()
-
-
+            alertPush.toggle()
         }) {
             Text("Eliminar anuncio")
                 .customFont(font: .boldFont, size: 15)
