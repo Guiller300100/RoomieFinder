@@ -73,7 +73,7 @@ struct FiltrosView: View {
                 Image(systemName: "info.circle")
                     .foregroundStyle(.accent)
                 
-                Text("No selecciones ninguna opción dentro de la misma categoria, para que salgan ambos casos.")
+                Text("No selecciones ninguna opción dentro de la misma categoria, excepto los idiomas, para que salgan todos los casos.")
                     .customFont(font: .regularFont, size: 14)
                     .foregroundStyle(.accent)
             }
