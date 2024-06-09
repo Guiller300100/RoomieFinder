@@ -22,6 +22,15 @@ struct CreacionPerfilView: View {
             TopBarView()
             ScrollView {
 
+                if !viewModel.firstTime {
+                    HStack{
+                        vistaAnteriorButton
+                        Spacer()
+                    }
+                    .padding(.init(top: 13, leading: 15, bottom: 0, trailing: 15))
+                    .frame(maxWidth: .infinity)
+                }
+
                 if viewModel.firstTime {
                     titleAndPhoto
                 }
@@ -59,7 +68,7 @@ struct CreacionPerfilView: View {
             Text("Creación de perfil")
                 .customFont(font: .mediumFont, size: 24)
                 .foregroundStyle(Constants.mainColor)
-                .padding(.init(top: 55, leading: 15, bottom: 15, trailing: 15))
+                .padding(.init(top: 15, leading: 15, bottom: 15, trailing: 15))
 
 
             Image(uiImage: viewModel.avatarImage)
@@ -443,6 +452,16 @@ struct CreacionPerfilView: View {
         }
     }
 
+    private var vistaAnteriorButton: some View {
+        VStack(alignment: .leading) {
+            Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "arrow.left")
+                    .font(.system(size: 30))
+            }
+        }
+    }
 }
 
 #Preview {
