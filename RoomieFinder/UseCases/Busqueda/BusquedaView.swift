@@ -65,18 +65,24 @@ struct BusquedaView: View {
                     .frame(height: 25)
                     .padding(.all, 15)
 
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
-                        ForEach(globalViewModel.anunciosFiltrados, id: \.id) { anuncio in
-                            PerfilRow(anuncio: anuncio)
-                                .onTapGesture {
-                                    DispatchQueue.main.async {
-                                        self.viewModel.anuncioSeleccionado = anuncio
-                                        self.viewModel.isTapped.toggle()
+                    if !globalViewModel.anunciosFiltrados.isEmpty {
+                        LazyVGrid(columns: [GridItem(.flexible(), spacing: 16), GridItem(.flexible(), spacing: 16)], spacing: 16) {
+                            ForEach(globalViewModel.anunciosFiltrados, id: \.id) { anuncio in
+                                PerfilRow(anuncio: anuncio)
+                                    .onTapGesture {
+                                        DispatchQueue.main.async {
+                                            self.viewModel.anuncioSeleccionado = anuncio
+                                            self.viewModel.isTapped.toggle()
+                                        }
                                     }
-                                }
+                            }
                         }
+                        .padding(.horizontal)
+                    } else {
+                        Text("Vaya! no hay ningún anuncio")
+                            .customFont(font: .boldFont, size: 24)
                     }
-                    .padding(.horizontal)
+
                 }
                 .refreshable {
                     // Llama a las funciones para recargar datos
