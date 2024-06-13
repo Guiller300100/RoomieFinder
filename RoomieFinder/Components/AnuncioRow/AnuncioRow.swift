@@ -29,11 +29,11 @@ struct AnuncioRow: View {
                         .customFont(font: .mediumFont, size: 18)
 
                     VStack(alignment: .leading) {
-                        Text("• Tiempo \(anuncio.tiempoEstancia)")
+                        Text("• Tiempo: \(anuncio.tiempoEstancia)")
                             .customFont(font: .regularFont, size: 18)
 
                         Text(
-                            anuncio.num_hab.isEmpty ? "• Presupuesto \(anuncio.presupuesto)": "• Precio \(anuncio.presupuesto)"
+                            anuncio.num_hab.isEmpty ? "• Presupuesto \(anuncio.presupuesto)€": "• Precio \(anuncio.presupuesto)€"
                         )
                             .customFont(font: .regularFont, size: 18)
 
